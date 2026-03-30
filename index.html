@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0;url=coach.html">
+  <meta name="description" content="StableFit — платформа для тренерів і клієнтів.">
+  <meta name="robots" content="index, follow">
   <title>Stablefit</title>
-  <script>window.location.replace("coach.html");</script>
+  <script>
+    (function () {
+      var target = window.location.protocol === "file:" ? "coach/index.html" : "coach/";
+      window.location.replace(target);
+    })();
+  </script>
 </head>
 <body>
-  <p><a href="coach.html">Stablefit</a></p>
+  <p><a href="coach/">Stablefit</a></p>
 </body>
 </html>

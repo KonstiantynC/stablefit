@@ -2,27 +2,16 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
-  const LANDING_STORAGE_KEY = "stablefit-landing";
-  const LANDING_BY_PATH = {
-    "coach.html": "coach",
-    "client.html": "client"
-  };
-  const LANDING_TO_PATH = {
-    coach: "coach.html",
-    client: "client.html"
-  };
+
+  const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');
+  const scriptUrl = scriptEl ? new URL(scriptEl.src, window.location.href) : new URL(window.location.href);
+  const siteBaseUrl = new URL("../", scriptUrl);
 
   const languageButtons = Array.from(document.querySelectorAll(".localisation-item[data-lang]"));
-  const landingLinks = Array.from(document.querySelectorAll(".landing-link[data-landing]"));
   const htmlNode = document.documentElement;
-  const mainNode = document.querySelector("main");
-  const footerNode = document.querySelector("footer");
-  const titleNode = document.querySelector("title");
 
   const dictionaries = {};
-  const landingMarkupCache = {};
   let currentLanguage = DEFAULT_LANG;
-  let currentLanding = "coach";
 
   function getNestedValue(object, keyPath) {
     return keyPath.split(".").reduce((acc, key) => (acc && key in acc ? acc[key] : undefined), object);
@@ -31,7 +20,7 @@
   async function loadDictionary(lang) {
     if (dictionaries[lang]) return dictionaries[lang];
 
-    const response = await fetch(`locales/${lang}.json`);
+    const response = await fetch(new URL(`locales/${lang}.json`, siteBaseUrl));
     if (!response.ok) {
       throw new Error(`Failed to load locale ${lang}`);
     }
@@ -48,9 +37,20 @@
     });
   }
 
-  function paintActiveLanding(landing) {
-    landingLinks.forEach((link) => {
-      const isActive = link.dataset.landing === landing;
+  function paintActiveLandingNav() {
+    const path = window.location.pathname.replace(/\/index\.html$/i, "");
+    const isCoach =
+      /\/coach\/?$/i.test(path) ||
+      /\/coach\.html$/i.test(path) ||
+      /coach\.html$/i.test(window.location.pathname);
+    const isClient =
+      /\/client\/?$/i.test(path) ||
+      /\/client\.html$/i.test(path) ||
+      /client\.html$/i.test(window.location.pathname);
+
+    document.querySelectorAll(".landing-link[data-landing]").forEach((link) => {
+      const landing = link.dataset.landing;
+      const isActive = (landing === "coach" && isCoach) || (landing === "client" && isClient);
       link.classList.toggle("is-active", isActive);
     });
   }
@@ -96,20 +96,16 @@
       const dictionary = await loadDictionary(normalizedLang);
       applyTranslations(dictionary);
       paintActiveLanguage(normalizedLang);
+      paintActiveLandingNav();
       htmlNode.setAttribute("lang", normalizedLang);
       currentLanguage = normalizedLang;
       localStorage.setItem(LANGUAGE_STORAGE_KEY, normalizedLang);
     } catch (error) {
-      // Keep UI stable if locale file loading fails.
       console.error(error);
     }
   }
 
-  function detectInitialLanguage(preferredLanguage) {
-    if (preferredLanguage && SUPPORTED_LANGS.includes(preferredLanguage)) {
-      return preferredLanguage;
-    }
-
+  function detectInitialLanguage() {
     const fromStorage = localStorage.getItem(LANGUAGE_STORAGE_KEY);
     if (fromStorage && SUPPORTED_LANGS.includes(fromStorage)) {
       return fromStorage;
@@ -117,83 +113,6 @@
 
     const browserLang = navigator.language ? navigator.language.slice(0, 2).toLowerCase() : DEFAULT_LANG;
     return SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
-  }
-
-  function normalizeLanding(landing) {
-    return landing in LANDING_TO_PATH ? landing : "coach";
-  }
-
-  function detectLandingFromPath(pathname) {
-    const currentFile = pathname.split("/").pop() || "";
-    return LANDING_BY_PATH[currentFile] || null;
-  }
-
-  function detectInitialLanding() {
-    const fromPath = detectLandingFromPath(window.location.pathname);
-    if (fromPath) return fromPath;
-
-    const fromStorage = localStorage.getItem(LANDING_STORAGE_KEY);
-    return normalizeLanding(fromStorage || "coach");
-  }
-
-  async function loadLandingMarkup(landing) {
-    const normalizedLanding = normalizeLanding(landing);
-    if (landingMarkupCache[normalizedLanding]) {
-      return landingMarkupCache[normalizedLanding];
-    }
-
-    const path = LANDING_TO_PATH[normalizedLanding];
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`Failed to load landing ${normalizedLanding}`);
-    }
-
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    const payload = {
-      main: doc.querySelector("main") ? doc.querySelector("main").innerHTML : "",
-      footer: doc.querySelector("footer") ? doc.querySelector("footer").innerHTML : "",
-      title: doc.querySelector("title") ? doc.querySelector("title").textContent : ""
-    };
-
-    landingMarkupCache[normalizedLanding] = payload;
-    return payload;
-  }
-
-  async function setLanding(landing, options = {}) {
-    const normalizedLanding = normalizeLanding(landing);
-    const { pushHistory = false } = options;
-
-    try {
-      const payload = await loadLandingMarkup(normalizedLanding);
-
-      if (mainNode) {
-        mainNode.innerHTML = payload.main;
-      }
-
-      if (footerNode) {
-        footerNode.innerHTML = payload.footer;
-      }
-
-      if (titleNode && payload.title) {
-        titleNode.textContent = payload.title;
-      }
-
-      currentLanding = normalizedLanding;
-      paintActiveLanding(normalizedLanding);
-      localStorage.setItem(LANDING_STORAGE_KEY, normalizedLanding);
-
-      if (pushHistory) {
-        const targetPath = LANDING_TO_PATH[normalizedLanding];
-        window.history.pushState({ landing: normalizedLanding }, "", targetPath);
-      }
-
-      await setLanguage(currentLanguage);
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   languageButtons.forEach((button) => {
@@ -212,27 +131,6 @@
     });
   });
 
-  landingLinks.forEach((link) => {
-    const activateLink = (event) => {
-      event.preventDefault();
-      const landing = link.dataset.landing;
-      if (!landing || landing === currentLanding) return;
-      setLanding(landing, { pushHistory: true });
-    };
-
-    link.addEventListener("click", activateLink);
-    link.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      activateLink(event);
-    });
-  });
-
-  window.addEventListener("popstate", () => {
-    const nextLanding = detectLandingFromPath(window.location.pathname) || currentLanding;
-    setLanding(nextLanding);
-  });
-
   currentLanguage = detectInitialLanguage();
-  const initialLanding = detectInitialLanding();
-  setLanding(initialLanding);
+  setLanguage(currentLanguage);
 })();
