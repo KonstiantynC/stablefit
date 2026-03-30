@@ -115,6 +115,22 @@
     return SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
   }
 
+  function initFSliderAccordion() {
+    document.querySelectorAll("[data-f-slider-accordion]").forEach((root) => {
+      const items = root.querySelectorAll(".f-slider-accordion-item");
+      items.forEach((item) => {
+        const trigger = item.querySelector(".f-slider-accordion-trigger");
+        if (!trigger) return;
+
+        trigger.addEventListener("click", () => {
+          const willOpen = !item.classList.contains("is-open");
+          item.classList.toggle("is-open", willOpen);
+          trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        });
+      });
+    });
+  }
+
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const lang = button.dataset.lang;
@@ -130,6 +146,8 @@
       setLanguage(lang);
     });
   });
+
+  initFSliderAccordion();
 
   currentLanguage = detectInitialLanguage();
   setLanguage(currentLanguage);

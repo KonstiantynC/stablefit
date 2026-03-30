@@ -4,7 +4,7 @@
   --color-bg: #0A0A0A;
   --color-gradient-primary: #5037C8;
   --color-gradient-secondary: #825BFC;
-  --color-border: #525456;
+  --color-border: rgba(255, 255, 255, 0.08);
   --color-gray-1: #808289;
   --color-gray-2: #55555E;
   --color-card-border: #6341E138;
@@ -12,6 +12,8 @@
   --font-family-primary: 'Urbanist', sans-serif;
   --color-gradient-cl-1: #7926B6;
   --color-gradient-cl-2: #A241E9;
+  --color-red: #9B3131;
+  --color-purple: #755AE9;
 }
 
 * {
@@ -37,9 +39,16 @@ a {
   color: var(--color-white);
 }
 
+ul, li {
+  list-style-type: none;
+}
+
 .container {
   width: 1180px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn {
@@ -47,6 +56,19 @@ a {
   color: var(--color-white);
   border: none;
   border-radius: 40px;
+}
+
+.section-wrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 80px 0;
+  width: 100%;
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 8px #00000073;
 }
 
 
@@ -58,6 +80,7 @@ a {
 .section-title {
   color: var(--color-white);
   white-space: nowrap;
+  margin-bottom: 8px;
 }
 
 .gradient-title {
