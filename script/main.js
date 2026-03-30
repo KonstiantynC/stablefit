@@ -4,12 +4,12 @@
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
   const LANDING_STORAGE_KEY = "stablefit-landing";
   const LANDING_BY_PATH = {
-    "/coach.html": "coach",
-    "/client.html": "client"
+    "coach.html": "coach",
+    "client.html": "client"
   };
   const LANDING_TO_PATH = {
-    coach: "/coach.html",
-    client: "/client.html"
+    coach: "coach.html",
+    client: "client.html"
   };
 
   const languageButtons = Array.from(document.querySelectorAll(".localisation-item[data-lang]"));
@@ -31,7 +31,7 @@
   async function loadDictionary(lang) {
     if (dictionaries[lang]) return dictionaries[lang];
 
-    const response = await fetch(`/locales/${lang}.json`);
+    const response = await fetch(`locales/${lang}.json`);
     if (!response.ok) {
       throw new Error(`Failed to load locale ${lang}`);
     }
@@ -124,7 +124,8 @@
   }
 
   function detectLandingFromPath(pathname) {
-    return LANDING_BY_PATH[pathname] || null;
+    const currentFile = pathname.split("/").pop() || "";
+    return LANDING_BY_PATH[currentFile] || null;
   }
 
   function detectInitialLanding() {
