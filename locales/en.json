@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Stablefit",
+    "brand": "StableFit",
+    "logoAlt": "StableFit logo"
+  },
+  "nav": {
+    "coaches": "For coaches",
+    "clients": "For clients"
+  },
+  "buttons": {
+    "download": "Download"
+  },
+  "aria": {
+    "langUa": "Switch language to Ukrainian",
+    "langEn": "Switch language to English"
+  },
+  "coach": {
+    "hero": {
+      "sectionTitle": "Manage your clients.",
+      "gradientTitle": "Grow with structure.",
+      "description": "StableFit gives fitness coaches one platform to manage clients, build training programs, track nutrition, and monitor progress.",
+      "contentText": "Download the app for coaches:"
+    }
+  },
+  "client": {
+    "hero": {
+      "sectionTitle": "Train with structure.",
+      "gradientTitle": "Track your progress.",
+      "description": "Follow a personalized training plan from your coach, track nutrition with AI, measure body changes, and stay connected — all in one app.",
+      "contentText": "Download the client app:"
+    }
+  },
+  "card": {
+    "footerScan": "scan to download"
+  }
+}

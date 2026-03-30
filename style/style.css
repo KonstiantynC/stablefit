@@ -1,0 +1,240 @@
+/* ============================== 
+            HEADER 
+ ============================= */
+.header {
+  margin: 0 auto;
+}
+
+
+.header-wrp {
+  width: 761px;
+  height: 62px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 24px;
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  border: 1px solid;
+  border-color: var(--color-border);
+  border-radius: 24px;
+  color: var(--color-white);
+  background-color: rgba(10, 10, 10, 0.45);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.header-logo, .header-nav, .localisation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo {
+  gap: 10px;
+}
+
+.header-nav {
+  gap: 8px;
+}
+
+.nav-item {
+  padding: 8px;
+}
+
+.landing-link {
+  color: var(--color-gray-1);
+  cursor: pointer;
+}
+
+.landing-link.is-active {
+  color: var(--color-white);
+}
+
+.localisation {
+  gap: 16px;
+}
+
+.localisation-item {
+  color: var(--color-gray-1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.localisation-item.is-active {
+  color: var(--color-white);
+}
+
+.download-button {
+  padding: 8px 20px;
+}
+
+
+/* ============================== 
+            HERO 
+ ============================= */
+.hero {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 178px;
+}
+
+.hero-wrp {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-inner {
+  width: 50%;
+  min-width: 0;
+}
+
+.section-title-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section-description {
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-gray-1);
+  margin: 20px 0 32px 0;
+  max-width: 528px;
+  width: 100%;
+  padding-right: 28px;
+}
+
+.content-text {
+  line-height: 28px;
+  margin-bottom: 24px;
+}
+
+.card-wrp {
+  gap: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  width: 212px;
+  height: 212px;
+  padding: 14px;
+  border: 1px solid var(--color-card-border);
+  background-color: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.card-icon {
+  gap: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-arrow {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+.card-arrow::before,
+.card-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 1.5px;
+  background-color: var(--color-white);
+  transform-origin: right center;
+}
+
+.card-arrow::before {
+  transform: translateY(-20%) rotate(50deg);
+}
+
+.card-arrow::after {
+  transform: translateY(-80%) rotate(-50deg);
+}
+
+.card-device {
+  color: var(--color-text-primary);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  padding: 2px 6px;
+  background-color: rgba(80, 55, 200, 0.15);
+  border: none;
+  border-radius: 16px;
+}
+
+.card-image-container {
+  padding: 9px;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-footer {
+  font-size: 10px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--color-gray-2);
+}
+
+.image-wrp {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+}
+
+.image-wrp img[alt="inner_hero"] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.image-wrp img[alt="inner_hero"]:first-child {
+  margin-left: 20px;
+  z-index: 2;
+}
+
+.image-wrp img[alt="inner_hero"]:last-child {
+  margin-left: 165px;
+  z-index: 1;
+}
+
