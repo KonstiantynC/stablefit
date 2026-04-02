@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+  <g fill="#ffffff" opacity="0.45">
+    <path d="M0 12V7.5C0 5.5 1.2 3.8 3.5 2.5L5 4C3.8 4.7 3.2 5.6 3.2 6.8V12H0Z"/>
+  </g>
+  <g fill="#ffffff" opacity="0.45" transform="translate(10 0)">
+    <path d="M0 12V7.5C0 5.5 1.2 3.8 3.5 2.5L5 4C3.8 4.7 3.2 5.6 3.2 6.8V12H0Z"/>
+  </g>
+</svg>

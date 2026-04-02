@@ -6,10 +6,13 @@
   },
   "nav": {
     "coaches": "For coaches",
-    "clients": "For clients"
+    "clients": "For clients",
+    "support": "Support"
   },
   "buttons": {
-    "download": "Download"
+    "download": "Download",
+    "tryFree": "Try for free",
+    "tryNow": "Try now"
   },
   "aria": {
     "langUa": "Switch language to Ukrainian",
@@ -20,7 +23,242 @@
       "sectionTitle": "Manage your clients.",
       "gradientTitle": "Grow with structure.",
       "description": "StableFit gives fitness coaches one platform to manage clients, build training programs, track nutrition, and monitor progress.",
-      "contentText": "Download the app for coaches:"
+      "contentText": "Download the app for coaches:",
+      "store": {
+        "apple": "App Store",
+        "ios": "iOS",
+        "google": "Google Play",
+        "android": "Android"
+      }
+    },
+    "features": {
+      "sectionName": "Problems and Solutions",
+      "sectionTitle": "Fitness coaching",
+      "gradientTitle": "needs change",
+      "description": "Most coaches spend hours on administration. Spreadsheets, messengers, and manual tracking instead of working with clients. StableFit fixes this.",
+      "without": "Without StableFit",
+      "withoutTitle": "Chaos at work",
+      "withoutItems": {
+        "item1": "Hours spent on administration",
+        "item2": "Client data scattered across different apps",
+        "item3": "Inconvenient training plans in Excel / Doc",
+        "item4": "Progress tracking on paper or in notes",
+        "item5": "Communication across multiple messengers"
+      },
+      "withTitle": "With StableFit",
+      "withSubtitle": "Everything under control",
+      "withItems": {
+        "item1": "Automation of routine tasks",
+        "item2": "All necessary client info in one place",
+        "item3": "Personalized plans for clients",
+        "item4": "Progress tracking with clear charts",
+        "item5": "Built-in chat"
+      }
+    },
+    "functionality": {
+      "sectionName": "Key features",
+      "gradientTitle": "Everything needed",
+      "sectionTitle": "for a personal trainer",
+      "description": "StableFit combines the functionality of several apps and significantly speeds up and simplifies coaches' work.",
+      "items": {
+        "clients": {
+          "title": "Client management",
+          "description": "Keep all client information in one place and manage it easily. Add new clients, record key data, and keep personal notes.",
+          "points": {
+            "item1": "Full client list",
+            "item2": "Personal information and goals",
+            "item3": "Health and injury data",
+            "item4": "Individual notes"
+          }
+        },
+        "workouts": {
+          "title": "Workout library",
+          "description": "Use ready-made workouts from the app, adapt them to your goals, or create your own from scratch. Build individual plans for clients and track completion.",
+          "points": {
+            "item1": "Ready-made workouts in the app",
+            "item2": "Edit and create your own programs",
+            "item3": "Individual plans for clients",
+            "item4": "View completed workouts"
+          }
+        },
+        "nutrition": {
+          "title": "Progress tracking",
+          "description": "Track clients’ results over time. Review changes in weight and measurements they enter in the app, and the reminder system will help clients update data regularly.",
+          "points": {
+            "item1": "Weight and measurement trends",
+            "item2": "Before/after photos for visual progress tracking",
+            "item3": "Automatic measurement reminders"
+          }
+        },
+        "analytics": {
+          "title": "Nutrition monitoring",
+          "description": "Monitor clients’ diet without extra check-ins. Review meals, analyze calories, and nutrient balance.",
+          "points": {
+            "item1": "Automatic calorie & macros targets based on client data and goals",
+            "item2": "Clients can easily track meals (manual, photo, or barcode)",
+            "item3": "AI-powered calorie and macro calculation for foods",
+            "item4": "Macros monitoring"
+          }
+        },
+        "communication": {
+          "title": "Easy communication",
+          "description": "Chat with clients directly in the app. All communication is in one place — without switching between different messengers.",
+          "points": {
+            "item1": "Chat with clients in one app",
+            "item2": "Fast and convenient communication",
+            "item3": "All conversations at hand"
+          }
+        }
+      }
+    },
+    "progress": {
+      "sectionName": "Real progress",
+      "sectionTitle": "Track every change.",
+      "gradientTitle": "Show results.",
+      "description": {
+        "line1": "Visual measurement charts, before/after comparisons, and complete change history.",
+        "line2": "Show clients how far they've come and motivate them to continue."
+      },
+      "cards": {
+        "measurements": {
+          "title": "Body measurements",
+          "description": "Track changes in volume across all zones"
+        },
+        "numbers": {
+          "title": "Progress in numbers",
+          "description": "Analyze weight dynamics"
+        },
+        "photos": {
+          "title": "Progress photos",
+          "description": "Observe real changes and motivate",
+          "before": "Before",
+          "after": "After"
+        }
+      }
+    },
+    "automatisation": {
+      "sectionName": "Automation and efficiency",
+      "sectionTitle": "Less routine —",
+      "gradientTitle": "more results",
+      "description": "StableFit takes over administrative work so you can focus on coaching, not spreadsheets.",
+      "cards": {
+        "first": {
+          "title": "Efficient training workflow",
+          "description": "Create individual programs in minutes, while the app collects feedback after workouts and helps adjust load without extra messaging.",
+          "mini": {
+            "first": {
+              "title": "Treadmill run x1",
+              "status": "Easy"
+            },
+            "second": {
+              "title": "Booklet x3",
+              "status": "Normal"
+            }
+          }
+        },
+        "second": {
+          "title": "Client motivation support",
+          "description": "The system helps track measurements and workout results, building clear progress visibility. Clients see changes and stay engaged without additional reminders.",
+          "feature": {
+            "title": "Workout completed!",
+            "subtitle": "Shoulders, arms, abs",
+            "point1": "10/11 exercises completed",
+            "point2": "30/33 sets completed"
+          }
+        },
+        "third": {
+          "title": "Automatic reminders for measurements and metrics",
+          "description": {
+            "line1": "The app reminds clients about measurements at the right time.",
+            "line2": "Automation reduces your manual control and helps clients track progress consistently."
+          },
+          "noteTitle": "Reminders active",
+          "noteDescription": "The system automatically notifies clients about measurements and progress checkpoints."
+        },
+        "fourth": {
+          "title": "Tools that make you a pro",
+          "description": "All processes run systematically. This strengthens your expert image, increases client trust, and improves work results."
+        }
+      }
+    },
+    "testimonials": {
+      "sectionName": "Coach reviews",
+      "sectionTitle": "Why coaches",
+      "gradientTitle": "choose StableFit",
+      "description": "Built for the modern fitness professional who wants to scale their business without juggling extra tools.",
+      "marqueeAria": "Scrolling row of coach testimonial cards",
+      "cards": {
+        "first": {
+          "text": "Finally one app instead of Telegram, Excel, and a paper notebook. I recommend it to all my colleagues.",
+          "name": "Vadym Prytula",
+          "role": "Fitness coach, Kyiv"
+        },
+        "second": {
+          "text": "Clients track progress themselves and message with questions. Their motivation went up and churn dropped by half.",
+          "name": "Kateryna Sydorenko",
+          "role": "Fitness coach, Kyiv"
+        },
+        "third": {
+          "text": "I used to spend 3 hours a day on spreadsheets. Now it’s 20 minutes. I took 4 more clients and earn more.",
+          "name": "Oleksii Melnyk",
+          "role": "Personal trainer, Kharkiv"
+        }
+      }
+    },
+    "pricing": {
+      "sectionName": "Pricing",
+      "sectionTitle": "Fair pricing,",
+      "gradientTitle": "no hidden fees",
+      "description": "Start for free. Switch to a paid plan later.",
+      "cards": {
+        "monthly": {
+          "badge": "Optimal",
+          "term": "per month",
+          "price": "₴349",
+          "suffix": "/mo",
+          "noteLine1": "30 days free",
+          "noteLine2": "billed monthly"
+        },
+        "yearly": {
+          "badge": "Save 20%",
+          "term": "per year",
+          "price": "₴279",
+          "suffix": "/mo",
+          "noteLine1": "30 days free",
+          "noteLine2": "₴3,360 billed yearly"
+        }
+      }
+    },
+    "downloadApp": {
+      "sectionName": "Download the app",
+      "headline": {
+        "line1": "Start using",
+        "line2": "StableFit today"
+      },
+      "description": {
+        "line1": "Download the coach app. Try it for free.",
+        "line2": "Your entire fitness workflow in one place."
+      }
+    },
+    "howToStart": {
+      "sectionName": "How it works",
+      "sectionTitle": "Get started in ",
+      "gradientTitle": "3 simple steps",
+      "description": "No lengthy setup. Add your first client right now.",
+      "steps": {
+        "first": {
+          "title": "Sign up and add clients",
+          "description": "Download the app, create your profile, and add clients. They’ll get an invite to register, and both apps stay in sync."
+        },
+        "second": {
+          "title": "Add training programs",
+          "description": "Use the built-in workout library or add your own. Build a personalized program for each client."
+        },
+        "third": {
+          "title": "Coach and motivate",
+          "description": "Clients log workouts and meals. Track progress together and keep them motivated."
+        }
+      }
     }
   },
   "client": {
@@ -28,10 +266,122 @@
       "sectionTitle": "Train with structure.",
       "gradientTitle": "Track your progress.",
       "description": "Follow a personalized training plan from your coach, track nutrition with AI, measure body changes, and stay connected — all in one app.",
-      "contentText": "Download the client app:"
+      "contentText": "Download the client app:",
+      "store": {
+        "apple": "App Store",
+        "ios": "iOS",
+        "google": "Google Play",
+        "android": "Android"
+      }
+    },
+    "progress": {
+      "sectionName": "Real progress",
+      "sectionTitle": "Track every change.",
+      "gradientTitle": "Show results.",
+      "description": {
+        "line1": "Visual measurement charts, before/after comparisons, and complete change history.",
+        "line2": "Show clients how far they've come and motivate them to continue."
+      },
+      "cards": {
+        "measurements": {
+          "title": "Body measurements",
+          "description": "Track changes in volume across all zones"
+        },
+        "numbers": {
+          "title": "Progress in numbers",
+          "description": "Analyze weight dynamics"
+        },
+        "photos": {
+          "title": "Progress photos",
+          "description": "Observe real changes and motivate",
+          "before": "Before",
+          "after": "After"
+        }
+      }
+    },
+    "howToStart": {
+      "sectionName": "How it works",
+      "sectionTitle": "Get started in ",
+      "gradientTitle": "3 simple steps",
+      "description": "No lengthy setup. Connect to your coach and start training now.",
+      "steps": {
+        "first": {
+          "title": "Get an invite and sign up",
+          "description": "Receive an invite, create your profile, and connect to your coach. Data syncs automatically so you can start right away."
+        },
+        "second": {
+          "title": "Train on your plan",
+          "description": "Train with a program built by your coach. Log exercise videos, rate difficulty, and track nutrition — your coach sees it and adjusts your plan."
+        },
+        "third": {
+          "title": "Track your progress",
+          "description": "Log workouts, measurements, and weight over time. The app reminds you when to update so you stay motivated."
+        }
+      }
+    },
+    "testimonials": {
+      "sectionName": "Client reviews",
+      "sectionTitle": "Why clients",
+      "gradientTitle": "choose StableFit",
+      "description": "Built for people who want to train effectively, track progress, and get results without extra hassle.",
+      "marqueeAria": "Scrolling row of client testimonial cards",
+      "cards": {
+        "first": {
+          "text": "Everything in one app: workouts, measurements, nutrition. Saves time and helps me stay motivated.",
+          "name": "Dmytro Kravets",
+          "role": "Odesa"
+        },
+        "second": {
+          "text": "I like logging exercises and meals — my coach sees my results right away.",
+          "name": "Oleksandra Koval",
+          "role": "Lviv"
+        },
+        "third": {
+          "text": "Very convenient! Workouts and measurements are always under control, and I see progress every day.",
+          "name": "Ihor Shevchenko",
+          "role": "Kyiv"
+        },
+        "fourth": {
+          "text": "Thanks to StableFit I really see my progress in charts. It motivates me not to skip workouts!",
+          "name": "Marko Lytvyn",
+          "role": "Kharkiv"
+        }
+      }
+    },
+    "downloadApp": {
+      "sectionName": "Download the app",
+      "headline": {
+        "line1": "Start using",
+        "line2": "StableFit today"
+      },
+      "description": {
+        "line1": "Download the client app. Try it for free.",
+        "line2": "Your entire fitness workflow in one place."
+      }
     }
   },
   "card": {
     "footerScan": "scan to download"
+  },
+  "footer": {
+    "description": "A platform that unites fitness coaches and their clients to achieve outstanding results.",
+    "platform": "Platform",
+    "contacts": {
+      "title": "Contacts",
+      "email": "support@stable-fit.com",
+      "telegram": "t.me/stable_fit"
+    },
+    "company": {
+      "title": "Company details",
+      "name": "SavvaDev - Ihor Savva",
+      "address": "ul. Bobrowiecka 10/6700-728 Warszawa, Poland",
+      "nip": "NIP: 5214103415",
+      "regon": "REGON: 540758121"
+    },
+    "under": {
+      "copy": "© 2026 StableFit Technologies Ltd. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    }
   }
 }

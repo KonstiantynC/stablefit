@@ -2,6 +2,9 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
+  /** Bump when locale JSON shape changes so stale cache is not reused. */
+  const LOCALE_CACHE_VERSION = "1";
+  const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');
   const scriptUrl = scriptEl ? new URL(scriptEl.src, window.location.href) : new URL(window.location.href);
@@ -17,6 +20,24 @@
     return keyPath.split(".").reduce((acc, key) => (acc && key in acc ? acc[key] : undefined), object);
   }
 
+  function readDictionaryFromCache(lang) {
+    try {
+      const raw = localStorage.getItem(localeCacheKey(lang));
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+
+  function writeDictionaryToCache(lang, data) {
+    try {
+      localStorage.setItem(localeCacheKey(lang), JSON.stringify(data));
+    } catch {
+      /* ignore quota / private mode */
+    }
+  }
+
   async function loadDictionary(lang) {
     if (dictionaries[lang]) return dictionaries[lang];
 
@@ -27,6 +48,7 @@
 
     const data = await response.json();
     dictionaries[lang] = data;
+    writeDictionaryToCache(lang, data);
     return data;
   }
 
@@ -115,6 +137,18 @@
     return SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
   }
 
+
+  function applyCachedDictionaryIfAvailable(lang) {
+    const normalizedLang = SUPPORTED_LANGS.includes(lang) ? lang : DEFAULT_LANG;
+    const cached = readDictionaryFromCache(normalizedLang);
+    if (!cached || typeof cached !== "object") return;
+
+    applyTranslations(cached);
+    paintActiveLanguage(normalizedLang);
+    paintActiveLandingNav();
+    htmlNode.setAttribute("lang", normalizedLang);
+  }
+
   function initFSliderAccordion() {
     document.querySelectorAll("[data-f-slider-accordion]").forEach((root) => {
       const items = root.querySelectorAll(".f-slider-accordion-item");
@@ -131,11 +165,91 @@
     });
   }
 
+  function initTestimonialsMarquee() {
+    const marquees = Array.from(document.querySelectorAll(".testimonials-marquee"));
+    if (!marquees.length) return () => {};
+
+    const seedMarkupByMarquee = new Map();
+
+    marquees.forEach((marquee) => {
+      const seedSet = marquee.querySelector(".testimonials-marquee-set");
+      if (seedSet) {
+        seedMarkupByMarquee.set(marquee, seedSet.innerHTML);
+      }
+    });
+
+    const rebuildMarquee = (marquee) => {
+      const track = marquee.querySelector(".testimonials-marquee-track");
+      const seedMarkup = seedMarkupByMarquee.get(marquee);
+      if (!track || !seedMarkup) return;
+
+      const seedSet = document.createElement("div");
+      seedSet.className = "testimonials-marquee-set";
+      seedSet.innerHTML = seedMarkup;
+
+      const seedCards = Array.from(seedSet.children);
+      if (!seedCards.length) return;
+
+      const viewportWidth = marquee.clientWidth || window.innerWidth;
+
+      const measureSet = seedSet.cloneNode(true);
+      track.replaceChildren(measureSet);
+      const baseSetWidth = Math.max(measureSet.scrollWidth, 1);
+
+      const copiesNeeded = Math.max(1, Math.ceil((viewportWidth + baseSetWidth) / baseSetWidth));
+
+      const buildRepeatedSet = () => {
+        const repeatedSet = document.createElement("div");
+        repeatedSet.className = "testimonials-marquee-set";
+
+        for (let copyIndex = 0; copyIndex < copiesNeeded; copyIndex += 1) {
+          for (let cardIndex = 0; cardIndex < seedCards.length; cardIndex += 1) {
+            repeatedSet.appendChild(seedCards[cardIndex].cloneNode(true));
+          }
+        }
+        return repeatedSet;
+      };
+
+      const firstSet = buildRepeatedSet();
+      const secondSet = firstSet.cloneNode(true);
+      secondSet.setAttribute("aria-hidden", "true");
+
+      track.replaceChildren(firstSet, secondSet);
+
+      const shift = Math.max(firstSet.scrollWidth, 1);
+      const speedPxPerSec = 70;
+      const durationSec = Math.max(shift / speedPxPerSec, 18);
+
+      track.style.setProperty("--testimonials-marquee-shift", `${shift}px`);
+      track.style.setProperty("--testimonials-marquee-duration", `${durationSec}s`);
+    };
+
+    const rebuildAll = () => {
+      marquees.forEach((marquee) => rebuildMarquee(marquee));
+    };
+
+    let resizeTimer = null;
+    const onResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(rebuildAll, 120);
+    };
+
+    window.addEventListener("resize", onResize);
+    rebuildAll();
+    return rebuildAll;
+  }
+
+  currentLanguage = detectInitialLanguage();
+  applyCachedDictionaryIfAvailable(currentLanguage);
+  const refreshTestimonialsMarquee = initTestimonialsMarquee();
+
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const lang = button.dataset.lang;
       if (!lang) return;
-      setLanguage(lang);
+      setLanguage(lang).then(() => {
+        refreshTestimonialsMarquee();
+      });
     });
 
     button.addEventListener("keydown", (event) => {
@@ -143,12 +257,15 @@
       event.preventDefault();
       const lang = button.dataset.lang;
       if (!lang) return;
-      setLanguage(lang);
+      setLanguage(lang).then(() => {
+        refreshTestimonialsMarquee();
+      });
     });
   });
 
   initFSliderAccordion();
 
-  currentLanguage = detectInitialLanguage();
-  setLanguage(currentLanguage);
+  setLanguage(currentLanguage).then(() => {
+    refreshTestimonialsMarquee();
+  });
 })();

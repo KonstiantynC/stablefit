@@ -1,19 +1,38 @@
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-light: #D0CAE0;
   --color-bg: #0A0A0A;
   --color-gradient-primary: #5037C8;
   --color-gradient-secondary: #825BFC;
   --color-border: rgba(255, 255, 255, 0.08);
   --color-gray-1: #808289;
   --color-gray-2: #55555E;
+  --color-gray-bg: #141414;
   --color-card-border: #6341E138;
+  --color-card-bg: #6341E1;
   --color-text-primary: #6A49E2;
   --font-family-primary: 'Urbanist', sans-serif;
   --color-gradient-cl-1: #7926B6;
   --color-gradient-cl-2: #A241E9;
   --color-red: #9B3131;
+  --color-red-1: #FF2F00;
   --color-purple: #755AE9;
+  --color-purple-1: #573BD7;
+  --color-purple-2: #7F59F8;
+  --color-purple-3: #4E26FF;
+  --color-purple-4: #FF33FC;
+  --color-purple-5: #7929B6;
+  --color-light-purple: #AFA4DE;
+  --color-system-purple: #322759;
+  --color-bg-text: #171425;
+  --color-sc-name: #7B2BB5;
+  --color-green-1: #295442;
+  --color-green-dark: #13201B;
+  --color-green-light: #9BD3B4;
+  --color-orange: #FFA100;
+  --color-orange-dark: #201B11;
+  --color-orange-light: #C9BEA1;
 }
 
 * {
@@ -51,11 +70,301 @@ ul, li {
   align-items: center;
 }
 
+.hero {
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -178px;
+  width: 100vw;
+  height: 738px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 1351px 738px at 50% 0%,
+    #6341E161 0%,
+    #6341E11F 42%,
+    #00000000 100%
+  );
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero .card-wrp {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero .card-wrp::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  top: -10%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-card-bg) 52%,
+    transparent 88%
+  );
+  filter: blur(88px);
+}
+
+.hero .card-wrp > * {
+  position: relative;
+  z-index: 1;
+}
+
+.how-to-start-cards > .how-to-start-card:first-child {
+  position: relative;
+  isolation: isolate;
+}
+
+.how-to-start-cards > .how-to-start-card:first-child::before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-purple-5) 20%,
+    transparent 58%
+  );
+  filter: blur(88px);
+}
+
+.how-to-start-cards > .how-to-start-card:first-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonials-wrp  {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.testimonials-wrp::before {
+  content: "";
+  position: absolute;
+  left: -25%;
+  bottom: -120%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-purple-5) 32%,
+    transparent 68%
+  );
+  filter: blur(88px);
+}
+
+.testimonials-wrp  > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pricing: glow у нижньому лівому куті обгортки (як .hero .card-wrp::before) */
+.pricing-wrp {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.pricing-wrp::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  bottom: -10%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-purple-5) 32%,
+    transparent 68%
+  );
+  filter: blur(88px);
+}
+
+.pricing-wrp > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Automatisation: той самий glow, що .testimonials-wrp::before — зліва по центру */
+.automatisation-carts {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.automatisation-carts::before {
+  content: "";
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-purple-5) 32%,
+    transparent 68%
+  );
+  filter: blur(88px);
+}
+
+.automatisation-carts > * {
+  position: relative;
+  z-index: 1;
+}
+
+.download-app-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.download-app-card::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-card-bg) 52%,
+    transparent 88%
+  );
+  filter: blur(88px);
+}
+
+.download-app-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero .image-wrp::before {
+  content: "";
+  position: absolute;
+  left: 120%;
+  top: 88%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-card-bg) 22%,
+    transparent 88%
+  );
+  filter: blur(88px);
+}
+
+.progress-wrp > .progress-carts {
+  position: relative;
+  isolation: isolate;
+}
+
+.progress-wrp > .progress-carts::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-card-bg) 1%,
+    transparent 88%
+  );
+  filter: blur(88px);
+}
+
+.progress-wrp > .progress-carts > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+.btn, .btn-cl {
+  border: 1px solid transparent;
+  border-radius: 40px;
+}
+
 .btn {
   background: linear-gradient(90deg, var(--color-gradient-primary) 0%, var(--color-gradient-secondary) 100%);
+  --btn-bg-gradient: linear-gradient(90deg, var(--color-gradient-primary) 0%, var(--color-gradient-secondary) 100%);
+  --btn-hover-color: var(--color-gradient-primary);
   color: var(--color-white);
-  border: none;
-  border-radius: 40px;
+}
+
+.btn-cl {
+  background: linear-gradient(90deg, var(--color-gradient-cl-1) 0%, var(--color-gradient-cl-2) 100%);
+  --btn-bg-gradient: linear-gradient(90deg, var(--color-gradient-cl-1) 0%, var(--color-gradient-cl-2) 100%);
+  --btn-hover-color: var(--color-gradient-cl-1);
+  color: var(--color-white);
+}
+
+.btn-hover-transparent {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-hover-transparent:hover {
+  background: transparent;
+  color: var(--btn-hover-color);
+  border-color: var(--btn-hover-color);
+}
+
+.btn-hover-swap {
+  background: transparent;
+  color: var(--btn-hover-color);
+  border-color: var(--btn-hover-color);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-hover-swap:hover {
+  background: var(--btn-bg-gradient);
+  color: var(--color-white);
+  border-color: transparent;
 }
 
 .section-wrp {
@@ -68,7 +377,7 @@ ul, li {
 }
 
 .shadow-custom {
-  box-shadow: 0 4px 8px #00000073;
+  box-shadow: 0 6px 16px #00000073;
 }
 
 
@@ -95,4 +404,42 @@ ul, li {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.section-name, .section-name-cl {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  padding: 7px 17px;
+  border: none;
+  border-radius: 16px;
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.section-name {
+  color: var(--color-text-primary);
+  background-color: rgba(80, 55, 200, 0.15);
+}
+
+.section-name--nowrap {
+  white-space: nowrap;
+}
+
+.section-name-cl {
+  color: var(--color-sc-name);
+  background-color: color-mix(in srgb, var(--color-sc-name) 12%, transparent);
+}
+
+
+.try-button {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  padding: 13px 24.5px;
+  margin-bottom: 64px;
 }

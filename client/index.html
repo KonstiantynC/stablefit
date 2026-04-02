@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../style/style.css">
   <link rel="stylesheet" href="../style/mobile.css">
 </head>
-<body>
+<body class="page-client">
   <header>
     <div class="header-wrp">
       <div class="header-logo">
@@ -30,12 +30,12 @@
       </div>
       <div class="header-nav">
         <div class="nav-item">
-          <a href="../coach/" class="landing-link" data-landing="coach" data-i18n="nav.coaches">
+          <a href="/coach" class="landing-link" data-landing="coach" data-i18n="nav.coaches">
             Для тренерів
           </a>
         </div>
         <div class="nav-item">
-          <a href="../client/" class="landing-link is-active" data-landing="client" data-i18n="nav.clients">
+          <a href="/client" class="landing-link is-active" data-landing="client" data-i18n="nav.clients">
             Для клієнтів
           </a>
         </div>
@@ -60,7 +60,7 @@
         </div>
         <a
           href="#"
-          class="download-button btn"
+          class="download-button btn-cl btn-hover-transparent"
           data-i18n="buttons.download"
         >
           Завантажити
@@ -69,6 +69,7 @@
 
     </div>
   </header>
+
   <main>
     <section class="hero">
       <div class="container">
@@ -86,17 +87,17 @@
               залишайтесь на зв'язку — все в одному додатку.
             </div>
             <div class="content-text" data-i18n="client.hero.contentText">
-              Завантажуйте додаток для тренерів:
+              Завантажуйте додаток для клієнтів:
             </div>
             <div class="card-wrp">
               <div class="card">
                 <div class="cart-title">
                   <div class="card-icon">
                     <img src="../assets/icons/apple_icon.svg" alt="apple">
-                    <span>App Store</span>
+                    <span data-i18n="client.hero.store.apple">App Store</span>
                     <div class="card-arrow" aria-hidden="true"></div>
                   </div>
-                  <div class="card-device">iOS</div>
+                  <div class="card-device" data-i18n="client.hero.store.ios">iOS</div>
                 </div>
                 <div class="card-image-container">
                   <img src="../assets/images/appStore_download.svg" alt="appStore_download" class="card-image">
@@ -109,10 +110,10 @@
                 <div class="cart-title">
                   <div class="card-icon">
                     <img src="../assets/icons/googlePlay_icon.svg" alt="googlePlay">
-                    <span>Google Play</span>
+                    <span data-i18n="client.hero.store.google">Google Play</span>
                     <div class="card-arrow" aria-hidden="true"></div>
                   </div>
-                  <div class="card-device">Android</div>
+                  <div class="card-device" data-i18n="client.hero.store.android">Android</div>
                 </div>
                 <div class="card-image-container">
                   <img src="../assets/images/googlePlay_download.svg" alt="appStore_download" class="card-image">
@@ -132,9 +133,422 @@
         </div>
       </div>
     </section>
-  </main>
-  <footer>
 
+    <section class="progress">
+      <div class="container">
+        <div class="progress-wrp section-wrp">
+          <div class="section-content">
+            <div class="section-name-cl" data-i18n="client.progress.sectionName">
+              Реальний прогрес
+            </div>
+            <div class="section-title" data-i18n="client.progress.sectionTitle">
+              Відстежуйте кожну зміну. 
+            </div>
+            <div class="gradient_cl-title" data-i18n="client.progress.gradientTitle">
+              Показуйте результат.
+            </div>
+            <div class="section-description description-progress">
+              <p data-i18n="client.progress.description.line1">Візуальні графіки вимірів, порівняння до/після та повна історія змін.</p> 
+              <p data-i18n="client.progress.description.line2">Покажіть клієнтам як далеко вони просунулись та мотивуйте їх продовжувати.</p>
+            </div>
+            <a
+              href="#"
+              class="try-button btn-cl btn-hover-transparent"
+              data-i18n="buttons.tryNow"
+            >
+              Спробувати зараз
+            </a>
+          </div>
+          <div class="progress-carts">
+            <div class="progress-carts">
+              <div class="progress-cart progress-l shadow-custom">
+                <div class="progress-cart-title" data-i18n="client.progress.cards.measurements.title">
+                  Заміри тіла
+                </div>
+                <div class="progress-cart-description" data-i18n="client.progress.cards.measurements.description">
+                  Відстежуйте зміну об’ємів в усіх зонах
+                </div>
+                <div class="progress-cart-image-wrp">
+                  <img src="../assets/images/progress/full-body-img.svg" alt="progress-full-body-img">
+                </div>
+              </div>
+            </div>
+            <div class="progress-r">
+              <div class="progress-cart shadow-custom">
+                <div class="progress-cart-wrp">
+                  <div class="progress-cart-content">
+                    <div class="progress-cart-title" data-i18n="client.progress.cards.numbers.title">
+                      Прогрес у цифрах
+                    </div>
+                    <div class="progress-cart-description pr-description" data-i18n="client.progress.cards.numbers.description">
+                      Аналізуйте динаміку ваги
+                    </div>
+                  </div>
+                  <div class="progress-cart-image">
+                    <img src="../assets/images/progress/table-img.png" alt="progress-table-img">
+                  </div>
+                </div>
+              </div>
+              <div class="progress-cart shadow-custom">
+                <div class="progress-cart-wrp">
+                  <div class="progress-cart-content">
+                    <div class="progress-cart-title" data-i18n="client.progress.cards.photos.title">
+                      Фото прогресу
+                    </div>
+                    <div class="progress-cart-description pr-description" data-i18n="client.progress.cards.photos.description">
+                      Спостерігайте реальні зміни та мотивуйте
+                    </div>
+                  </div>
+                  <div class="progress-cart-image">
+                    <img src="../assets/images/progress/result-img.png" alt="progress-photo-img">
+                    <p class="progress-cart-image-text progress-cart-image-text--before" data-i18n="client.progress.cards.photos.before">До</p>
+                    <p class="progress-cart-image-text progress-cart-image-text--after" data-i18n="client.progress.cards.photos.after">Після</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-to-start">
+      <div class="container">
+        <div class="how-to-start-wrp section-wrp">
+          <div class="section-content">
+            <div class="section-name-cl" data-i18n="client.howToStart.sectionName">
+              Як це працює
+            </div>
+            <div class="section-title" data-i18n="client.howToStart.sectionTitle">
+              Почніть за 
+            </div>
+            <div class="gradient_cl-title" data-i18n="client.howToStart.gradientTitle">
+              3 простих кроки
+            </div>
+            <div class="section-description description-progress">
+              <p data-i18n="client.howToStart.description">Без тривалого налаштування. Підключіться до тренера та почніть тренування вже зараз.</p>
+            </div>
+            <a
+              href="#"
+              class="try-button btn-cl btn-hover-transparent"
+              data-i18n="buttons.tryNow"
+            >
+              Спробувати зараз
+            </a>
+          </div>
+          <div class="how-to-start-cards">
+            <div class="how-to-start-card shadow-custom">
+              <div class="how-to-start-card-head">
+                <div class="how-to-start-card-icon-wrap-cl" aria-hidden="true">
+                  <img src="../assets/icons/manage_clients_icon.svg" alt="" width="24" height="24">
+                </div>
+                <div class="how-to-start-card-number">01</div>
+              </div>
+              <div class="how-to-start-card-content">
+                <div class="progress-cart-title" data-i18n="client.howToStart.steps.first.title">Отримайте запрошення та зареєструйтесь</div>
+                <div class="progress-cart-description" data-i18n="client.howToStart.steps.first.description">
+                  Отримайте запрошення, створіть профіль і підключіться до тренера. 
+                  Дані синхронізуються автоматично — можна одразу починати.
+                </div>
+              </div>
+            </div>
+
+            <div class="how-to-start-card shadow-custom">
+              <div class="how-to-start-card-head">
+                <div class="how-to-start-card-icon-wrap-cl" aria-hidden="true">
+                  <img src="../assets/icons/train-lib-icon.svg" alt="" width="24" height="24">
+                </div>
+                <div class="how-to-start-card-number">02</div>
+              </div>
+              <div class="how-to-start-card-content">
+                <div class="progress-cart-title" data-i18n="client.howToStart.steps.second.title">Тренуйтесь індивідуально</div>
+                <div class="progress-cart-description" data-i18n="client.howToStart.steps.second.description">
+                  Тренуйтеся за індивідуальною програмою, створеною тренером. 
+                  Записуйте відео вправ, оцінюйте складність і фіксуйте харчування — тренер 
+                  одразу бачить ці дані та коригує програму під вас.
+                </div>
+              </div>
+            </div>
+
+            <div class="how-to-start-card shadow-custom">
+              <div class="how-to-start-card-head">
+                <div class="how-to-start-card-icon-wrap-cl" aria-hidden="true">
+                  <img src="../assets/icons/progress-icon.svg" alt="" width="24" height="24">
+                </div>
+                <div class="how-to-start-card-number">03</div>
+              </div>
+              <div class="how-to-start-card-content">
+                <div class="progress-cart-title" data-i18n="client.howToStart.steps.third.title">Відстежуйте свій прогрес</div>
+                <div class="progress-cart-description" data-i18n="client.howToStart.steps.third.description">
+                  Фіксуйте виконані тренування, заміри та вагу, і спостерігайте зміни з часом. 
+                  Додаток нагадає, коли потрібно внести дані, щоб ви регулярно бачили свій прогрес і залишались вмотивованими.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials section-wrp">
+      <div class="container">
+        <div class="testimonials-wrp ">
+          <div class="section-content">
+            <div class="section-name-cl" data-i18n="client.testimonials.sectionName">
+              Відгуки клієнтів
+            </div>
+            <div class="section-title" data-i18n="client.testimonials.sectionTitle">
+              Чому клієнти
+            </div>
+            <div class="gradient_cl-title" data-i18n="client.testimonials.gradientTitle">
+              обирають StableFit
+            </div>
+            <div class="section-description description-testimonials">
+              <p data-i18n="client.testimonials.description">
+                Створено для тих, хто хоче тренуватися ефективно, відстежувати прогрес і досягати результатів без зайвих складнощів.
+              </p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="testimonials-content">
+        <div class="testimonials-marquee" role="region" data-i18n-aria="client.testimonials.marqueeAria">
+          <div class="testimonials-marquee-track">
+            <div class="testimonials-marquee-set">
+              <article class="testimonial-card shadow-custom">
+                <div class="testimonial-card-inner">
+                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
+                  <p class="testimonial-card-text" data-i18n="client.testimonials.cards.first.text">
+                    Все в одному додатку: тренування, заміри, харчування. Дуже економить час і допомагає залишатись мотивованим.
+                  </p>
+                  <div class="testimonial-card-author">
+                    <img class="testimonial-card-avatar" src="../assets/images/cl/profiles/pr-cl-1.svg" alt="" width="44" height="47">
+                    <div class="testimonial-card-meta">
+                      <div class="testimonial-card-name" data-i18n="client.testimonials.cards.first.name">Дмитро Кравець</div>
+                      <div class="testimonial-card-role" data-i18n="client.testimonials.cards.first.role">Одеса</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="testimonial-card shadow-custom">
+                <div class="testimonial-card-inner">
+                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
+                  <p class="testimonial-card-text" data-i18n="client.testimonials.cards.second.text">
+                    Мені подобається, що можна фіксувати вправи та харчування, а тренер одразу бачить мої результати.
+                  </p>
+                  <div class="testimonial-card-author">
+                    <img class="testimonial-card-avatar" src="../assets/images/cl/profiles/pr-cl-2.svg" alt="" width="44" height="47">
+                    <div class="testimonial-card-meta">
+                      <div class="testimonial-card-name" data-i18n="client.testimonials.cards.second.name">Олександра Коваль</div>
+                      <div class="testimonial-card-role" data-i18n="client.testimonials.cards.second.role">Львів</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="testimonial-card shadow-custom">
+                <div class="testimonial-card-inner">
+                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
+                  <p class="testimonial-card-text" data-i18n="client.testimonials.cards.third.text">
+                    Додаток дуже зручний! Тренування та заміри тепер завжди під контролем, а прогрес видно щодня.
+                  </p>
+                  <div class="testimonial-card-author">
+                    <img class="testimonial-card-avatar" src="../assets/images/cl/profiles/pr-cl-3.svg" alt="" width="44" height="47">
+                    <div class="testimonial-card-meta">
+                      <div class="testimonial-card-name" data-i18n="client.testimonials.cards.third.name">Ігор Шевченко</div>
+                      <div class="testimonial-card-role" data-i18n="client.testimonials.cards.third.role">Київ</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="testimonial-card shadow-custom">
+                <div class="testimonial-card-inner">
+                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
+                  <p class="testimonial-card-text" data-i18n="client.testimonials.cards.fourth.text">
+                    Завдяки StableFit я реально бачу свій прогрес у графіках. Це мотивує не пропускати тренування!
+                  </p>
+                  <div class="testimonial-card-author">
+                    <img class="testimonial-card-avatar" src="../assets/images/cl/profiles/pr-cl-4.svg" alt="" width="44" height="47">
+                    <div class="testimonial-card-meta">
+                      <div class="testimonial-card-name" data-i18n="client.testimonials.cards.fourth.name">Марко Литвин</div>
+                      <div class="testimonial-card-role" data-i18n="client.testimonials.cards.fourth.role">Харків</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-app">
+      <div class="container">
+        <div class="download-app-wrp section-wrp">
+          <article class="download-app-card pc-cy shadow-custom">
+            <div class="download-app-inner">
+              <div class="section-name-cl" data-i18n="client.downloadApp.sectionName">
+                Завантажуйте додаток
+              </div>
+              <div class="download-app-headline">
+                <span data-i18n="client.downloadApp.headline.line1">Почніть користуватись</span><br>
+                <span data-i18n="client.downloadApp.headline.line2">StableFit вже сьогодні</span>
+              </div>
+              <div class="section-description download-app-description">
+                <span data-i18n="client.downloadApp.description.line1">Завантажте додаток для клієнтів. Спробуйте безкоштовно.</span><br>
+                <span data-i18n="client.downloadApp.description.line2">Весь ваш фітнес-процес в одному місці.</span>
+              </div>
+              <div class="card-wrp">
+                <div class="card shadow-custom">
+                  <div class="cart-title">
+                    <div class="card-icon">
+                      <img src="../assets/icons/apple_icon.svg" alt="apple">
+                      <span data-i18n="client.hero.store.apple">App Store</span>
+                      <div class="card-arrow" aria-hidden="true"></div>
+                    </div>
+                    <div class="card-device" data-i18n="client.hero.store.ios">iOS</div>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="../assets/images/appStore_download.svg" alt="appStore_download" class="card-image">
+                  </div>
+                  <div class="card-footer">
+                    <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                  </div>
+                </div>
+                <div class="card shadow-custom">
+                  <div class="cart-title">
+                    <div class="card-icon">
+                      <img src="../assets/icons/googlePlay_icon.svg" alt="googlePlay">
+                      <span data-i18n="client.hero.store.google">Google Play</span>
+                      <div class="card-arrow" aria-hidden="true"></div>
+                    </div>
+                    <div class="card-device" data-i18n="client.hero.store.android">Android</div>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="../assets/images/googlePlay_download.svg" alt="googlePlay_download" class="card-image">
+                  </div>
+                  <div class="card-footer">
+                    <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-wrp">
+        <div class="footer-content">
+          <div class="content-item">
+            <div class="footer-title">
+              <div class="logo">
+                <img src="../assets/images/Logo.svg" alt="logo" data-i18n-alt="meta.logoAlt">
+              </div>
+              <div class="title" data-i18n="meta.brand">
+                StableFit
+              </div>
+            </div>
+              <p class="footer-list-item footer-description" >
+                Платформа, що об'єднує фітнес-тренерів та їхніх клієнтів для досягнення видатних результатів.
+              </p>
+              <div class="localisation footerlocalisation">
+                <div
+                  class="localisation-item is-active"
+                  data-lang="ua" role="button"
+                  tabindex="0"
+                  data-i18n-aria="aria.langUa"
+                >
+                  UA
+                </div>
+                <div
+                  class="localisation-item"
+                  data-lang="en"
+                  role="button"
+                  tabindex="0"
+                  data-i18n-aria="aria.langEn"
+                >
+                  EN
+                </div>
+              </div>
+          </div>
+          <div class="content-item">
+            <div class="footer-title">
+              Платформа
+            </div>
+            <ul class="footer-list">
+              <li class="footer-list-item">
+                <a href="/coach" 
+                  class="landing-link" 
+                  data-landing="coach" 
+                  data-i18n="nav.coaches"
+                >
+                  Для тренерів
+                </a>
+              </li>
+              <li class="footer-list-item">
+                <a 
+                  href="/client" 
+                  class="landing-link is-active" 
+                  data-landing="client" 
+                  data-i18n="nav.clients"
+                >
+                  Для клієнтів
+                </a>
+              </li>
+              <li class="footer-list-item">
+                <a 
+                  href="/support" 
+                  class="landing-link" 
+                  data-landing="support" 
+                  data-i18n="nav.support"
+                >
+                  Підтримка
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="content-item">
+            <div class="footer-title">
+              Контакти
+            </div>
+            <ul class="footer-list">
+              <li class="footer-list-item">
+                <img src="../assets/icons/mail-icon.svg" alt="email_icon"><p>support@stable-fit.com</p>
+              </li>
+              <li class="footer-list-item">
+                <img src="../assets/icons/tg-icon.svg" alt="telegram_icon"><p>t.me/stable_fit</p>
+              </li>
+            </ul>
+          </div>
+          <div class="content-item">
+            <div class="footer-title">
+              Деталі компанії
+            </div>
+            <ul class="footer-list">
+              <li class="footer-list-item">SavvaDev - Ihor Savva</li>
+              <li class="footer-list-item">ul. Bobrowiecka 10/6700-728 Warszawa, Poland</li>
+              <li class="footer-list-item">NIP: 5214103415</li>
+              <li class="footer-list-item">REGON: 540758121</li>
+            </ul>
+          </div>
+        </div>
+        <div class="underfooter">
+          <div class="underfooter-item">© 2026 StableFit Technologies Ltd. Усі права захищені.</div>
+          <div class="underfooter-content">
+            <a href="../privacy-policy/" class="underfooter-item">Політика конфіденційності</a>
+            <a href="../terms-and-conditions/" class="underfooter-item">Умови використання</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
   </footer>
   <script src="../script/main.js"></script>
 </body>
