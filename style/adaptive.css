@@ -1,3 +1,8 @@
+/*
+ * ≤1023px: phone layout (burger, stacked sections, f-slider carousel).
+ * 1024px–1360px: desktop layout from style.css + optional tablet tweaks below.
+ * ≥1361px: full desktop.
+ */
 :root {
   --sf-header-break: 1023px;
   --sf-carousel-break: 1023px;
@@ -374,7 +379,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     margin: 16px 0 24px 0;
   }
 
-  /* Hero phones: larger + tighter — only below 1024px; desktop stays in style.css */
+  /* Hero phones: larger + tighter — only ≤1023px; desktop stays in style.css */
   .hero .image-wrp {
     min-height: auto;
     aspect-ratio: 4 / 5;
@@ -447,12 +452,24 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     align-items: stretch;
   }
 
+  .features-carts {
+    gap: 20px;
+  }
+
+  .automation-mini-cards {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
   .features-cart {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
   }
+
 
   /* Progress: desktop uses fixed 580×635px — must fluid on small screens */
   .progress .progress-carts {
@@ -654,6 +671,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     top: auto;
   }
 
+  .content-right {
+    overflow: hidden;
+  }
+
   .f-slider-item[data-f-slider-scroll-sync] .content-right {
     display: flex;
     flex-direction: row;
@@ -701,7 +722,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .f-slider-item[data-f-slider-scroll-sync]
     .content-right-image-wrp:has(> img:only-child)
     img[alt="manage_clients_image"] {
-    max-width: 72%;
+    max-width: 52%;
   }
 
   .f-slider-item[data-f-slider-scroll-sync]
@@ -796,14 +817,108 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
 }
 
 /* ----------------------------------------------------------------------------- 
+   Tablet / small laptop: 1024px–1360px — desktop row layouts from style.css;
+   slightly tighter spacing and smaller slider images.
+   ----------------------------------------------------------------------------- */
+@media (min-width: 1024px) and (max-width: 1360px) {
+  .header-wrp {
+    width: min(720px, calc(100% - 40px));
+    padding: 11px 20px;
+  }
+
+  .section-content {
+    max-width: min(720px, 92vw);
+  }
+
+  .features-carts {
+    gap: 18px;
+  }
+
+  .features-cart {
+    padding: 22px;
+  }
+
+  .progress-cart {
+    max-width: min(520px, 46vw) !important;
+  }
+
+  .how-to-start-card {
+    padding: 24px;
+  }
+
+  .pricing-cards {
+    gap: 18px;
+  }
+
+  .pricing-card {
+    padding: 22px;
+    height: auto;
+    min-height: 280px;
+  }
+
+  .download-app-card {
+    max-width: min(700px, 94vw);
+    padding: 44px 40px;
+  }
+
+  .download-app-headline {
+    font-size: clamp(28px, 2.8vw, 36px);
+    line-height: 1.2;
+  }
+
+  .footer-container {
+    padding-left: var(--sf-header-pad-x);
+    padding-right: var(--sf-header-pad-x);
+  }
+
+  .footer-content {
+    gap: 40px;
+  }
+
+  .f-slider-wrp {
+    margin-top: 64px;
+  }
+
+  .f-slider-wrp .content-right {
+    gap: 48px;
+  }
+
+  .f-slider-wrp .content-right-image-wrp:has(> img:only-child) img[alt="manage_clients_image"] {
+    max-width: min(58%, 380px);
+  }
+
+  .f-slider-wrp .content-right-image-wrp:has(> img:nth-child(2):last-child) img[alt="manage_clients_image"] {
+    max-width: calc((100% - 21px) / 2 * 0.9);
+  }
+
+  .automatisation-carts {
+    gap: 28px;
+    padding-block: 20px 36px;
+  }
+
+  .automatisation-card {
+    gap: 24px;
+  }
+
+  .automatisation-card-frame {
+    width: min(500px, 100%);
+    max-width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------------------------- 
    Laptop (MacBook-class): breathing room without mobile chrome
    ----------------------------------------------------------------------------- */
-@media (max-width: 1440px) and (min-width: 1024px) {
+@media (max-width: 1440px) and (min-width: 1361px) {
   .header-wrp {
     width: min(761px, calc(100% - 48px));
   }
 
   .hero {
     margin-top: 160px;
+  }
+
+  .how-to-start-card.shadow-custom {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
   }
 }
