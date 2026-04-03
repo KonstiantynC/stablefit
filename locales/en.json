@@ -274,13 +274,68 @@
         "android": "Android"
       }
     },
+    "functionality": {
+      "sectionName": "Key features",
+      "headlineLine1": "Everything you need for",
+      "headlineLine2": "effective training",
+      "description": "StableFit combines the features of several apps in one place, simplifying your whole training flow and helping you reach results faster.",
+      "items": {
+        "program": {
+          "title": "Training program",
+          "description": "Get personalized plans and follow them with ease. Log exercises, track results, and stay on track toward your goals.",
+          "points": {
+            "item1": "Individual plans from your coach",
+            "item2": "Easy exercise logging",
+            "item3": "Record videos and add notes"
+          }
+        },
+        "feedback": {
+          "title": "Feedback",
+          "description": "Talk to your coach quickly and easily. Send videos of your exercises and get comments so every session counts.",
+          "points": {
+            "item1": "Ready-made workouts in the app",
+            "item2": "Difficulty ratings for exercises",
+            "item3": "Training videos",
+            "item4": "Program adjustments in real time"
+          }
+        },
+        "nutrition": {
+          "title": "Nutrition monitoring",
+          "description": "Log meals and track your diet. Your coach sees your entries and gives recommendations to maximize results.",
+          "points": {
+            "item1": "Easy logging with AI",
+            "item2": "Calorie and macro tracking",
+            "item3": "Recommendations from your coach"
+          }
+        },
+        "progressTracking": {
+          "title": "Progress tracking",
+          "description": "Follow changes in weight and body measurements. Clear charts help you see results and stay motivated.",
+          "points": {
+            "item1": "Measurement and weight charts",
+            "item2": "Before/after comparisons",
+            "item3": "Full history of changes",
+            "item4": "Reminders to update your data"
+          }
+        },
+        "communication": {
+          "title": "Easy communication",
+          "description": "Stay in touch with your coach anytime. Get important messages, tips, and support without messy threads.",
+          "points": {
+            "item1": "Instant messages",
+            "item2": "Support and tips from your coach",
+            "item3": "Everything in one app"
+          }
+        }
+      }
+    },
     "progress": {
       "sectionName": "Real progress",
       "sectionTitle": "Track every change.",
       "gradientTitle": "Show results.",
       "description": {
         "line1": "Visual measurement charts, before/after comparisons, and complete change history.",
-        "line2": "Show clients how far they've come and motivate them to continue."
+        "line2": "See your progress over time and stay motivated every day."
       },
       "cards": {
         "measurements": {
@@ -293,7 +348,7 @@
         },
         "photos": {
           "title": "Progress photos",
-          "description": "Observe real changes and motivate",
+          "description": "See real changes and stay motivated",
           "before": "Before",
           "after": "After"
         }
