@@ -149,20 +149,90 @@
     htmlNode.setAttribute("lang", normalizedLang);
   }
 
+  function setFSliderAccordionIndex(root, activeIndex) {
+    const items = root.querySelectorAll(".f-slider-accordion-item");
+    items.forEach((other, i) => {
+      const t = other.querySelector(".f-slider-accordion-trigger");
+      const isActive = i === activeIndex;
+      other.classList.toggle("is-open", isActive);
+      if (t) t.setAttribute("aria-expanded", isActive ? "true" : "false");
+    });
+  }
+
   function initFSliderAccordion() {
     document.querySelectorAll("[data-f-slider-accordion]").forEach((root) => {
       const items = root.querySelectorAll(".f-slider-accordion-item");
-      items.forEach((item) => {
+      items.forEach((item, itemIndex) => {
         const trigger = item.querySelector(".f-slider-accordion-trigger");
         if (!trigger) return;
 
         trigger.addEventListener("click", () => {
-          const willOpen = !item.classList.contains("is-open");
-          item.classList.toggle("is-open", willOpen);
-          trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          const opening = !item.classList.contains("is-open");
+          if (opening) {
+            setFSliderAccordionIndex(root, itemIndex);
+          } else {
+            item.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+          }
         });
       });
     });
+  }
+
+  function initFSliderScrollSync() {
+    const row = document.querySelector(".f-slider-item[data-f-slider-scroll-sync]");
+    if (!row) return;
+
+    const accordion = row.querySelector("[data-f-slider-accordion]");
+    const leftContent = row.querySelector(".content-left");
+    const wraps = row.querySelectorAll(".content-right-image-wrp");
+    if (!accordion || !leftContent || wraps.length === 0) return;
+
+    let lastSyncedIndex = -1;
+    let ticking = false;
+
+    function getLeftColumnViewportCenterY() {
+      const r = leftContent.getBoundingClientRect();
+      const top = Math.max(0, r.top);
+      const bottom = Math.min(window.innerHeight, r.bottom);
+      if (bottom <= top) return window.innerHeight / 2;
+      return (top + bottom) / 2;
+    }
+
+    function syncFromScroll() {
+      ticking = false;
+
+      const rowRect = row.getBoundingClientRect();
+      if (rowRect.bottom < 0 || rowRect.top > window.innerHeight) return;
+
+      const refY = getLeftColumnViewportCenterY();
+      let bestIdx = 0;
+      let bestDist = Infinity;
+
+      wraps.forEach((wrap, i) => {
+        const r = wrap.getBoundingClientRect();
+        const cy = r.top + r.height / 2;
+        const d = Math.abs(cy - refY);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      });
+
+      if (bestIdx === lastSyncedIndex) return;
+      lastSyncedIndex = bestIdx;
+      setFSliderAccordionIndex(accordion, bestIdx);
+    }
+
+    function requestSync() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(syncFromScroll);
+    }
+
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
+    syncFromScroll();
   }
 
   function initTestimonialsMarquee() {
@@ -264,6 +334,7 @@
   });
 
   initFSliderAccordion();
+  initFSliderScrollSync();
 
   setLanguage(currentLanguage).then(() => {
     refreshTestimonialsMarquee();
