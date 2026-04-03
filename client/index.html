@@ -28,45 +28,107 @@
           StableFit
         </div>
       </div>
-      <div class="header-nav">
-        <div class="nav-item">
-          <a href="/coach" class="landing-link" data-landing="coach" data-i18n="nav.coaches">
-            Для тренерів
-          </a>
+      <button
+        type="button"
+        class="header-burger"
+        aria-expanded="false"
+        aria-controls="header-drawer"
+        data-i18n-aria="aria.openMenu"
+      >
+        <span class="header-burger-line"></span>
+        <span class="header-burger-line"></span>
+        <span class="header-burger-line"></span>
+      </button>
+      <div class="header-desktop">
+        <div class="header-nav">
+          <div class="nav-item">
+            <a href="../coach/" class="landing-link" data-landing="coach" data-i18n="nav.coaches">
+              Для тренерів
+            </a>
+          </div>
+          <div class="nav-item">
+            <a href="../client/" class="landing-link is-active" data-landing="client" data-i18n="nav.clients">
+              Для клієнтів
+            </a>
+          </div>
         </div>
-        <div class="nav-item">
-          <a href="/client" class="landing-link is-active" data-landing="client" data-i18n="nav.clients">
-            Для клієнтів
+        <div class="localisation">
+          <div
+            class="localisation-item is-active"
+            data-lang="ua" role="button"
+            tabindex="0"
+            data-i18n-aria="aria.langUa"
+          >
+            UA
+          </div>
+          <div
+            class="localisation-item"
+            data-lang="en"
+            role="button"
+            tabindex="0"
+            data-i18n-aria="aria.langEn"
+          >
+            EN
+          </div>
+          <a
+            href="#"
+            class="download-button btn-cl btn-hover-transparent"
+            data-i18n="buttons.download"
+          >
+            Завантажити
           </a>
         </div>
       </div>
-      <div class="localisation">
-        <div
-          class="localisation-item is-active"
-          data-lang="ua" role="button"
-          tabindex="0"
-          data-i18n-aria="aria.langUa"
-        >
-          UA
+    </div>
+    <div
+      class="header-drawer"
+      id="header-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="header-drawer-inner">
+        <div class="header-drawer-top">
+          <div class="header-logo">
+            <div class="logo">
+              <img src="../assets/images/Logo.svg" alt="" data-i18n-alt="meta.logoAlt">
+            </div>
+            <div class="title" data-i18n="meta.brand">StableFit</div>
+          </div>
+          <button type="button" class="header-drawer-close" data-i18n-aria="aria.closeMenu">&times;</button>
         </div>
-        <div
-          class="localisation-item"
-          data-lang="en"
-          role="button"
-          tabindex="0"
-          data-i18n-aria="aria.langEn"
-        >
-          EN
+        <nav class="header-drawer-nav" aria-label="Навігація">
+          <a href="../coach/" class="landing-link" data-landing="coach" data-i18n="nav.coaches">Для тренерів</a>
+          <a href="../client/" class="landing-link" data-landing="client" data-i18n="nav.clients">Для клієнтів</a>
+          <a href="../support/" class="landing-link" data-landing="support" data-i18n="nav.support">Підтримка</a>
+        </nav>
+        <div class="header-drawer-lang localisation">
+          <div
+            class="localisation-item is-active"
+            data-lang="ua" role="button"
+            tabindex="0"
+            data-i18n-aria="aria.langUa"
+          >
+            UA
+          </div>
+          <div
+            class="localisation-item"
+            data-lang="en"
+            role="button"
+            tabindex="0"
+            data-i18n-aria="aria.langEn"
+          >
+            EN
+          </div>
         </div>
         <a
           href="#"
-          class="download-button btn-cl btn-hover-transparent"
+          class="download-button header-drawer-cta btn-cl btn-hover-transparent"
           data-i18n="buttons.download"
         >
           Завантажити
         </a>
       </div>
-
     </div>
   </header>
 

@@ -406,6 +406,19 @@
   gap: 21px;
 }
 
+/* Slider: manage_clients_image — одне 72%; два в рядку: половина слоту × 1.08 (було ×0.72, +50%) */
+.f-slider-wrp .content-right-image-wrp:has(> img:only-child) img[alt="manage_clients_image"] {
+  max-width: 72%;
+  width: auto;
+  height: auto;
+}
+
+.f-slider-wrp .content-right-image-wrp:has(> img:nth-child(2):last-child) img[alt="manage_clients_image"] {
+  max-width: calc((100% - 21px) / 2 * 1.08);
+  width: auto;
+  height: auto;
+}
+
 .f-slider-title {
   display: flex;
   flex-direction: row;
@@ -1305,7 +1318,6 @@
 }
 
 .automation-note-card-parent {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

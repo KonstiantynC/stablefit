@@ -61,18 +61,29 @@
 
   function paintActiveLandingNav() {
     const path = window.location.pathname.replace(/\/index\.html$/i, "");
+    const segments = path.split("/").filter(Boolean);
+    const lastSegment = segments[segments.length - 1] || "";
+
     const isCoach =
       /\/coach\/?$/i.test(path) ||
       /\/coach\.html$/i.test(path) ||
-      /coach\.html$/i.test(window.location.pathname);
+      /coach\.html$/i.test(window.location.pathname) ||
+      lastSegment === "coach";
+
     const isClient =
       /\/client\/?$/i.test(path) ||
       /\/client\.html$/i.test(path) ||
-      /client\.html$/i.test(window.location.pathname);
+      /client\.html$/i.test(window.location.pathname) ||
+      lastSegment === "client";
+
+    const isSupport = /\/support\/?$/i.test(path) || lastSegment === "support";
 
     document.querySelectorAll(".landing-link[data-landing]").forEach((link) => {
       const landing = link.dataset.landing;
-      const isActive = (landing === "coach" && isCoach) || (landing === "client" && isClient);
+      const isActive =
+        (landing === "coach" && isCoach) ||
+        (landing === "client" && isClient) ||
+        (landing === "support" && isSupport);
       link.classList.toggle("is-active", isActive);
     });
   }
@@ -185,12 +196,15 @@
 
     const accordion = row.querySelector("[data-f-slider-accordion]");
     const leftContent = row.querySelector(".content-left");
+    const contentRight = row.querySelector(".content-right");
     const wraps = row.querySelectorAll(".content-right-image-wrp");
     const accordionItems = accordion ? accordion.querySelectorAll(".f-slider-accordion-item") : [];
-    if (!accordion || !leftContent || wraps.length === 0) return;
+    if (!accordion || !leftContent || !contentRight || wraps.length === 0) return;
 
+    const mq = window.matchMedia("(max-width: 1023px)");
     let lastSyncedIndex = -1;
-    let ticking = false;
+    let desktopTicking = false;
+    let carouselTicking = false;
     let ignoreScrollSync = false;
 
     function getLeftColumnViewportCenterY() {
@@ -222,10 +236,38 @@
       setTimeout(unlock, 750);
     }
 
-    function syncFromScroll() {
-      ticking = false;
+    function scrollCarouselToIndex(index) {
+      const wrap = wraps[index];
+      if (!wrap) return;
+      ignoreScrollSync = true;
+      lastSyncedIndex = index;
+      contentRight.scrollTo({ left: wrap.offsetLeft, behavior: "smooth" });
+      const unlock = () => {
+        ignoreScrollSync = false;
+      };
+      setTimeout(unlock, 500);
+    }
 
-      if (ignoreScrollSync) return;
+    function getCarouselActiveIndex() {
+      const cr = contentRight.getBoundingClientRect();
+      const mid = cr.left + cr.width / 2;
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      wraps.forEach((wrap, i) => {
+        const r = wrap.getBoundingClientRect();
+        const c = r.left + r.width / 2;
+        const d = Math.abs(c - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      });
+      return bestIdx;
+    }
+
+    function syncFromScrollDesktop() {
+      desktopTicking = false;
+      if (ignoreScrollSync || mq.matches) return;
 
       const rowRect = row.getBoundingClientRect();
       if (rowRect.bottom < 0 || rowRect.top > window.innerHeight) return;
@@ -249,10 +291,38 @@
       setFSliderAccordionIndex(accordion, bestIdx);
     }
 
-    function requestSync() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(syncFromScroll);
+    function syncFromCarouselScroll() {
+      carouselTicking = false;
+      if (ignoreScrollSync || !mq.matches) return;
+
+      const idx = getCarouselActiveIndex();
+      if (idx === lastSyncedIndex) return;
+      lastSyncedIndex = idx;
+      setFSliderAccordionIndex(accordion, idx);
+    }
+
+    function requestDesktopSync() {
+      if (mq.matches) return;
+      if (desktopTicking) return;
+      desktopTicking = true;
+      requestAnimationFrame(syncFromScrollDesktop);
+    }
+
+    function requestCarouselSync() {
+      if (!mq.matches) return;
+      if (carouselTicking) return;
+      carouselTicking = true;
+      requestAnimationFrame(syncFromCarouselScroll);
+    }
+
+    function onWindowScroll() {
+      if (!mq.matches) requestDesktopSync();
+    }
+
+    function runInitialSync() {
+      lastSyncedIndex = -1;
+      if (mq.matches) syncFromCarouselScroll();
+      else syncFromScrollDesktop();
     }
 
     accordionItems.forEach((item, itemIndex) => {
@@ -262,14 +332,64 @@
         queueMicrotask(() => {
           if (!item.classList.contains("is-open")) return;
           if (itemIndex >= wraps.length) return;
-          scrollToImageForIndex(itemIndex);
+          if (mq.matches) {
+            scrollCarouselToIndex(itemIndex);
+          } else {
+            scrollToImageForIndex(itemIndex);
+          }
         });
       });
     });
 
-    window.addEventListener("scroll", requestSync, { passive: true });
-    window.addEventListener("resize", requestSync);
-    syncFromScroll();
+    window.addEventListener("scroll", onWindowScroll, { passive: true });
+    window.addEventListener("resize", runInitialSync);
+    contentRight.addEventListener("scroll", requestCarouselSync, { passive: true });
+    mq.addEventListener("change", runInitialSync);
+
+    runInitialSync();
+  }
+
+  function initMobileNav() {
+    const burger = document.querySelector(".header-burger");
+    const drawer = document.querySelector(".header-drawer");
+    const closeBtn = document.querySelector(".header-drawer-close");
+    if (!burger || !drawer) return;
+
+    function open() {
+      document.body.classList.add("nav-open");
+      burger.setAttribute("aria-expanded", "true");
+      drawer.setAttribute("aria-hidden", "false");
+    }
+
+    function closeNav() {
+      document.body.classList.remove("nav-open");
+      burger.setAttribute("aria-expanded", "false");
+      drawer.setAttribute("aria-hidden", "true");
+    }
+
+    function toggle() {
+      if (document.body.classList.contains("nav-open")) closeNav();
+      else open();
+    }
+
+    burger.addEventListener("click", toggle);
+    closeBtn?.addEventListener("click", closeNav);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.classList.contains("nav-open")) closeNav();
+    });
+
+    drawer.querySelectorAll("a[href]").forEach((anchor) => {
+      anchor.addEventListener("click", () => {
+        closeNav();
+      });
+    });
+
+    drawer.querySelectorAll(".localisation-item[data-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        closeNav();
+      });
+    });
   }
 
   function initTestimonialsMarquee() {
@@ -372,6 +492,7 @@
 
   initFSliderAccordion();
   initFSliderScrollSync();
+  initMobileNav();
 
   setLanguage(currentLanguage).then(() => {
     refreshTestimonialsMarquee();

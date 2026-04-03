@@ -16,7 +16,9 @@
   },
   "aria": {
     "langUa": "Switch language to Ukrainian",
-    "langEn": "Switch language to English"
+    "langEn": "Switch language to English",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "coach": {
     "hero": {
