@@ -186,10 +186,12 @@
     const accordion = row.querySelector("[data-f-slider-accordion]");
     const leftContent = row.querySelector(".content-left");
     const wraps = row.querySelectorAll(".content-right-image-wrp");
+    const accordionItems = accordion ? accordion.querySelectorAll(".f-slider-accordion-item") : [];
     if (!accordion || !leftContent || wraps.length === 0) return;
 
     let lastSyncedIndex = -1;
     let ticking = false;
+    let ignoreScrollSync = false;
 
     function getLeftColumnViewportCenterY() {
       const r = leftContent.getBoundingClientRect();
@@ -199,8 +201,31 @@
       return (top + bottom) / 2;
     }
 
+    function scrollToImageForIndex(index) {
+      const wrap = wraps[index];
+      if (!wrap || index < 0 || index >= wraps.length) return;
+
+      const refY = getLeftColumnViewportCenterY();
+      const r = wrap.getBoundingClientRect();
+      const cy = r.top + r.height / 2;
+      const delta = cy - refY;
+      if (Math.abs(delta) < 3) return;
+
+      lastSyncedIndex = index;
+      ignoreScrollSync = true;
+      window.scrollBy({ top: delta, behavior: "smooth" });
+
+      const unlock = () => {
+        ignoreScrollSync = false;
+      };
+      window.addEventListener("scrollend", unlock, { once: true });
+      setTimeout(unlock, 750);
+    }
+
     function syncFromScroll() {
       ticking = false;
+
+      if (ignoreScrollSync) return;
 
       const rowRect = row.getBoundingClientRect();
       if (rowRect.bottom < 0 || rowRect.top > window.innerHeight) return;
@@ -229,6 +254,18 @@
       ticking = true;
       requestAnimationFrame(syncFromScroll);
     }
+
+    accordionItems.forEach((item, itemIndex) => {
+      const trigger = item.querySelector(".f-slider-accordion-trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", () => {
+        queueMicrotask(() => {
+          if (!item.classList.contains("is-open")) return;
+          if (itemIndex >= wraps.length) return;
+          scrollToImageForIndex(itemIndex);
+        });
+      });
+    });
 
     window.addEventListener("scroll", requestSync, { passive: true });
     window.addEventListener("resize", requestSync);
