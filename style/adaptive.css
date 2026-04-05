@@ -424,6 +424,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     max-width: 100%;
     margin: 0 auto;
   }
+
+  .download-app .card-wrp {
+    min-height: calc(212px * 2 + 16px);
+  }
 }
 
 /* ----------------------------------------------------------------------------- 
@@ -553,6 +557,11 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .download-app-headline {
     font-size: clamp(24px, 6vw, 34px);
     line-height: 1.25;
+    min-height: clamp(88px, 24vw, 120px);
+  }
+
+  .download-app-description {
+    min-height: clamp(56px, 14vw, 80px);
   }
 
   .download-app-inner {
@@ -1115,6 +1124,11 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .download-app-headline {
     font-size: clamp(20px, 2.8vw, 28px);
     line-height: 1.2;
+    min-height: clamp(72px, 12vw, 104px);
+  }
+
+  .download-app-description {
+    min-height: clamp(52px, 8vw, 78px);
   }
 
   .f-slider-wrp .cart-list-item {

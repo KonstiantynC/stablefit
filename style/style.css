@@ -1502,17 +1502,46 @@
   font-size: 40px;
   line-height: 64px;
   font-weight: 700;
+
+  min-height: 128px;
+  box-sizing: border-box;
 }
 
 .download-app-description {
   margin: 0;
   text-align: center;
   width: 100%;
+  min-height: 56px;
+  box-sizing: border-box;
 }
 
 .download-app .card-wrp {
   justify-content: center;
   flex-wrap: wrap;
+  align-items: stretch;
+  min-height: 212px;
+}
+
+.download-app .cart-title {
+  min-height: 40px;
+  align-items: center;
+}
+
+.download-app .card-image-container {
+  width: 126px;
+  min-width: 126px;
+  min-height: 126px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+}
+
+.download-app .card-image {
+  width: 108px;
+  height: 108px;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 /* ============================== 
