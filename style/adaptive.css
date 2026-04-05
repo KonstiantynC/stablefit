@@ -693,7 +693,13 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--sf-header-pad-x);
-    scrollbar-width: thin;
+    /* Свайп / scrollTo из JS сохраняются, полоса прокрутки скрыта */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .f-slider-item[data-f-slider-scroll-sync] .content-right::-webkit-scrollbar {
+    display: none;
   }
 
   .f-slider-item[data-f-slider-scroll-sync] .content-right-image-wrp {
@@ -818,16 +824,78 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
 
 /* ----------------------------------------------------------------------------- 
    Tablet / small laptop: 1024px–1360px — desktop row layouts from style.css;
-   slightly tighter spacing and smaller slider images.
+   container 980px; titles −8px / descriptions −4px; hero & functionality images −25%.
    ----------------------------------------------------------------------------- */
 @media (min-width: 1024px) and (max-width: 1360px) {
+  .container {
+    max-width: 980px;
+  }
+
   .header-wrp {
     width: min(720px, calc(100% - 40px));
     padding: 11px 20px;
   }
 
+  /* Base desktop: title 44px / description 16px → 36px / 12px */
+  .section-title,
+  .gradient-title,
+  .gradient_cl-title {
+    font-size: 36px;
+    line-height: 56px;
+  }
+
+  .section-description {
+    font-size: 12px;
+    line-height: 22px;
+  }
+
+  .content-text {
+    line-height: 24px;
+  }
+
+  .f-slider-title-text {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .f-slider-description-text {
+    font-size: 12px;
+    line-height: 22px;
+  }
+
   .section-content {
-    max-width: min(720px, 92vw);
+    width: min(620px, 100%);
+    max-width: 620px;
+  }
+
+  .description {
+    max-width: min(439px, 100%);
+  }
+
+  .description-functionality {
+    padding-left: 71px;
+    padding-right: 71px;
+  }
+
+  /* Hero: images −25% (scale поверх існуючого 0.95) */
+  .hero .image-wrp {
+    min-height: 465px;
+  }
+
+  .hero .image-wrp img[alt="inner_hero"] {
+    transform: translate(-50%, -50%) scale(calc(0.95 * 0.75));
+  }
+
+  .hero .image-wrp img[alt="inner_hero"]:first-child {
+    margin-left: 15px;
+  }
+
+  .hero .image-wrp img[alt="inner_hero"]:last-child {
+    margin-left: 124px;
+  }
+
+  .content-left {
+    max-width: 360px;
   }
 
   .features-carts {
@@ -838,12 +906,165 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     padding: 22px;
   }
 
-  .progress-cart {
-    max-width: min(520px, 46vw) !important;
+  /* Progress: дві колонки на ширину контейнера, компактні картки та типографіка */
+  section.progress .progress-wrp > .progress-carts {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 14px;
+    width: 100%;
   }
 
-  .how-to-start-card {
-    padding: 24px;
+  section.progress .progress-wrp > .progress-carts > .progress-carts,
+  section.progress .progress-wrp > .progress-carts > .progress-r {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
+
+  section.progress .progress-l,
+  section.progress .progress-r {
+    height: auto !important;
+    min-height: 0;
+  }
+
+  section.progress .progress-r {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  section.progress .progress-cart {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0;
+    padding: 26px;
+    box-sizing: border-box;
+  }
+
+  section.progress .progress-r .progress-cart {
+    flex: 1 1 auto;
+  }
+
+  section.progress .progress-l.progress-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  section.progress .progress-l .progress-cart-image-wrp {
+    flex: 1 1 auto;
+    min-height: 200px;
+  }
+
+  section.progress .progress-cart-wrp {
+    gap: 10px;
+  }
+
+  section.progress .progress-cart-content {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+
+  section.progress .progress-cart-title {
+    font-size: 13px;
+    line-height: 19px;
+    margin-bottom: 6px;
+  }
+
+  section.progress .progress-cart-description {
+    font-size: 12px;
+    line-height: 17px;
+    max-width: none !important;
+  }
+
+  section.progress .pr-description {
+    max-width: none !important;
+  }
+
+  section.progress .progress-cart-image img,
+  section.progress .progress-cart-image-wrp img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  section.progress .progress-cart-image-wrp {
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+
+  section.progress .progress-cart-image-text {
+    font-size: 8.5px;
+    line-height: 14px;
+    padding: 1px 6px;
+  }
+
+  section.progress .progress-cart-image-text--before {
+    left: 8px;
+    bottom: 8px;
+  }
+
+  section.progress .progress-cart-image-text--after {
+    right: 62px;
+    bottom: 8px;
+  }
+
+  /* How to start: три картки в один ряд на ширину контейнера */
+  .how-to-start .how-to-start-cards {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+    padding: 18px 14px;
+    gap: 14px;
+    box-sizing: border-box;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-head {
+    gap: 8px;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-icon-wrap,
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-icon-wrap-cl {
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-icon-wrap img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-number {
+    font-size: 30px;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .how-to-start-card-content {
+    min-width: 0;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .progress-cart-title {
+    font-size: 13px;
+    line-height: 19px;
+    margin-bottom: 6px;
+  }
+
+  .how-to-start .how-to-start-cards > .how-to-start-card .progress-cart-description {
+    font-size: 12px;
+    line-height: 17px;
+    max-width: none;
   }
 
   .pricing-cards {
@@ -862,8 +1083,13 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   .download-app-headline {
-    font-size: clamp(28px, 2.8vw, 36px);
+    font-size: clamp(20px, 2.8vw, 28px);
     line-height: 1.2;
+  }
+
+  .f-slider-wrp .cart-list-item {
+    font-size: 10px;
+    line-height: 20px;
   }
 
   .footer-container {
@@ -883,12 +1109,13 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 48px;
   }
 
+  /* Functionality: slider images −25% від поточних обмежень цього діапазону */
   .f-slider-wrp .content-right-image-wrp:has(> img:only-child) img[alt="manage_clients_image"] {
-    max-width: min(58%, 380px);
+    max-width: calc((100% - 21px) / 2 * 1.4);
   }
 
   .f-slider-wrp .content-right-image-wrp:has(> img:nth-child(2):last-child) img[alt="manage_clients_image"] {
-    max-width: calc((100% - 21px) / 2 * 0.9);
+    max-width: calc((100% - 21px) / 2 * 0.675);
   }
 
   .automatisation-carts {
@@ -903,6 +1130,18 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .automatisation-card-frame {
     width: min(500px, 100%);
     max-width: 100%;
+  }
+}
+
+/* Progress: дві колонки — обмежити висоту таблиці, щоб вирівняти з лівою карткою */
+@media (min-width: 1024px) {
+  section.progress .progress-cart-image img[alt="progress-table-img"] {
+    max-height: clamp(148px, 18vw, 220px);
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center bottom;
   }
 }
 

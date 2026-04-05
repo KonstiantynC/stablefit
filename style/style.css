@@ -772,7 +772,8 @@
 }
 
 .how-to-start-card {
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   padding: 30px;
   border: 1px solid var(--color-border);
   border-radius: 16px;
