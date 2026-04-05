@@ -21,6 +21,15 @@
     "closeMenu": "Close menu"
   },
   "coach": {
+    "meta": {
+      "title": "StableFit — for coaches | Client, workout & nutrition platform",
+      "description": "StableFit for coaches: manage clients, training plans, nutrition and progress in one app. Automate admin, exercise library, chat and analytics.",
+      "keywords": "StableFit, fitness coach, personal trainer, client management, workout plans, progress tracking, nutrition, fitness app",
+      "ogTitle": "StableFit — for coaches",
+      "ogDescription": "One platform for fitness coaches: clients, workouts, nutrition and progress.",
+      "twitterTitle": "StableFit — for coaches",
+      "twitterDescription": "One platform for fitness coaches: clients, workouts, nutrition and progress."
+    },
     "hero": {
       "sectionTitle": "Manage your clients.",
       "gradientTitle": "Grow with structure.",
@@ -264,6 +273,15 @@
     }
   },
   "client": {
+    "meta": {
+      "title": "StableFit — for clients | Training, progress & nutrition",
+      "description": "StableFit for clients: personalized training, progress tracking, nutrition and your coach — in one app.",
+      "keywords": "StableFit, fitness client, personal training, progress, nutrition, body measurements, fitness app",
+      "ogTitle": "StableFit — for clients",
+      "ogDescription": "Train with structure, track progress and nutrition with your coach in StableFit.",
+      "twitterTitle": "StableFit — for clients",
+      "twitterDescription": "Train with structure, track progress and nutrition with your coach in StableFit."
+    },
     "hero": {
       "sectionTitle": "Train with structure.",
       "gradientTitle": "Track your progress.",

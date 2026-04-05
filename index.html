@@ -3,18 +3,428 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="StableFit — платформа для тренерів і клієнтів.">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="description" content="StableFit — платформа для фітнес-тренерів і клієнтів: тренування, прогрес, харчування та зв'язок у одному додатку.">
   <meta name="robots" content="index, follow">
-  <title>StableFit</title>
+  <link rel="canonical" href="https://stable-fit.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="StableFit">
+  <meta property="og:url" content="https://stable-fit.com/">
+  <meta property="og:title" content="StableFit">
+  <meta property="og:description" content="Платформа для тренерів і клієнтів: керуйте тренуваннями та прогресом в одному місці.">
+  <meta property="og:image" content="https://stable-fit.com/assets/images/Logo.svg">
+  <meta property="og:locale" content="uk_UA">
+  <title>StableFit — платформа для тренерів і клієнтів</title>
   <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="assets/favicon/favicon.svg">
+  <style>
+    :root {
+      --sf-bg: #0a0a0a;
+      --sf-border: rgba(255, 255, 255, 0.08);
+      --sf-text: #ffffff;
+      --sf-muted: #808289;
+      --sf-coach-1: #5037c8;
+      --sf-coach-2: #825bfc;
+      --sf-client-1: #7926b6;
+      --sf-client-2: #a241e9;
+      --sf-glow: #6341e161;
+      --sf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body.sf-landing {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sf-font);
+      color: var(--sf-text);
+      background: var(--sf-bg);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Фон як у hero тренерської сторінки: темний + фіолетове світіння */
+    .sf-landing-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse 1351px 738px at 50% 0%,
+        var(--sf-glow) 0%,
+        #6341e11f 42%,
+        transparent 70%
+      );
+    }
+
+    .sf-landing-bg::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 20%;
+      transform: translate(-50%, -50%);
+      width: min(90vw, 640px);
+      height: min(90vw, 640px);
+      border-radius: 50%;
+      background: radial-gradient(circle, #6341e138 0%, transparent 65%);
+      filter: blur(60px);
+      opacity: 0.9;
+    }
+
+    .sf-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(10, 10, 10, 0.65);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      animation: sf-overlay-in 0.4s ease forwards;
+    }
+
+    .sf-modal-overlay[hidden] {
+      display: none !important;
+    }
+
+    @keyframes sf-overlay-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes sf-modal-in {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes sf-choice-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .sf-modal {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 420px);
+      padding: 32px 28px 28px;
+      border-radius: 24px;
+      border: 1px solid var(--sf-border);
+      background: linear-gradient(
+        165deg,
+        rgba(20, 20, 20, 0.95) 0%,
+        rgba(10, 10, 10, 0.92) 100%
+      );
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(99, 65, 225, 0.12) inset;
+      animation: sf-modal-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .sf-modal-logo {
+      display: block;
+      width: 120px;
+      height: auto;
+      margin: 0 auto 20px;
+      animation: sf-modal-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+    }
+
+    .sf-modal-title {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .sf-modal-lead {
+      margin: 0 0 24px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--sf-muted);
+      text-align: center;
+    }
+
+    .sf-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sf-choice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 13px 24px;
+      border-radius: 40px;
+      font-size: 1rem;
+      line-height: 1.375;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid transparent;
+      cursor: pointer;
+      /* як .btn + .btn-hover-transparent у normalize.css */
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+        box-shadow 0.25s ease, transform 0.2s ease;
+      animation: sf-choice-in 0.45s ease backwards;
+    }
+
+    .sf-choice--coach {
+      background: linear-gradient(90deg, var(--sf-coach-1) 0%, var(--sf-coach-2) 100%);
+      --sf-choice-hover-accent: var(--sf-coach-1);
+      box-shadow: 0 8px 28px rgba(80, 55, 200, 0.35);
+      animation-delay: 0.12s;
+    }
+
+    .sf-choice--coach:hover {
+      background: transparent;
+      color: var(--sf-choice-hover-accent);
+      border-color: var(--sf-choice-hover-accent);
+      box-shadow: none;
+    }
+
+    .sf-choice--client {
+      background: linear-gradient(90deg, var(--sf-client-1) 0%, var(--sf-client-2) 100%);
+      --sf-choice-hover-accent: var(--sf-client-1);
+      box-shadow: 0 8px 28px rgba(121, 38, 182, 0.32);
+      animation-delay: 0.2s;
+    }
+
+    .sf-choice--client:hover {
+      background: transparent;
+      color: var(--sf-choice-hover-accent);
+      border-color: var(--sf-choice-hover-accent);
+      box-shadow: none;
+    }
+
+    .sf-choice--coach:hover,
+    .sf-choice--client:hover {
+      transform: translateY(-2px);
+    }
+
+    .sf-choice:active {
+      transform: translateY(0);
+    }
+
+    .sf-choice:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 3px;
+    }
+
+    .sf-fallback {
+      position: relative;
+      z-index: 5;
+      max-width: 420px;
+      margin: 48px auto;
+      padding: 0 24px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--sf-muted);
+    }
+
+    .sf-fallback a {
+      color: var(--sf-coach-2);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sf-modal-overlay,
+      .sf-modal,
+      .sf-modal-logo,
+      .sf-choice {
+        animation: none !important;
+      }
+      .sf-choice {
+        transition: none;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "StableFit",
+        "url": "https://stable-fit.com/",
+        "logo": "https://stable-fit.com/assets/images/Logo.svg",
+        "email": "support@stable-fit.com"
+      },
+      {
+        "@type": "WebSite",
+        "name": "StableFit",
+        "url": "https://stable-fit.com/",
+        "inLanguage": ["uk-UA", "en-US"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://stable-fit.com/#webpage",
+        "url": "https://stable-fit.com/",
+        "name": "StableFit",
+        "description": "Платформа для фітнес-тренерів і клієнтів.",
+        "inLanguage": "uk-UA",
+        "isPartOf": { "@type": "WebSite", "@id": "https://stable-fit.com/#website" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "StableFit",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS, Android",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    ]
+  }
+  </script>
   <script>
     (function () {
-      var target = window.location.protocol === "file:" ? "client/index.html" : "client/";
-      window.location.replace(target);
+      function isFileProtocol() {
+        return document.URL.indexOf("file:") === 0;
+      }
+
+      var coachUrl = isFileProtocol() ? "coach/index.html" : "coach/";
+      var clientUrl = isFileProtocol() ? "client/index.html" : "client/";
+
+      function redirectByMeta(url) {
+        var meta = document.createElement("meta");
+        meta.setAttribute("http-equiv", "refresh");
+        meta.setAttribute("content", "0;url=" + url);
+        document.head.appendChild(meta);
+      }
+
+      function getParam(name) {
+        var q = document.URL.indexOf("?") === -1 ? "" : document.URL.slice(document.URL.indexOf("?") + 1);
+        return new URLSearchParams(q).get(name);
+      }
+
+      function save(role) {
+        try {
+          localStorage.setItem("sf_role", role);
+        } catch (e) {}
+      }
+
+      function loadRole() {
+        try {
+          return localStorage.getItem("sf_role");
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function resolveAuto() {
+        var r = (getParam("role") || "").toLowerCase();
+        if (r === "coach" || r === "trainer") {
+          save("coach");
+          return coachUrl;
+        }
+        if (r === "client") {
+          save("client");
+          return clientUrl;
+        }
+        var stored = loadRole();
+        if (stored === "coach") return coachUrl;
+        if (stored === "client") return clientUrl;
+        return null;
+      }
+
+      function openModal() {
+        var el = document.getElementById("sf-modal-overlay");
+        if (el) el.removeAttribute("hidden");
+      }
+
+      function wireLinks() {
+        var aCoach = document.getElementById("sf-choice-coach");
+        var aClient = document.getElementById("sf-choice-client");
+        if (aCoach) {
+          aCoach.setAttribute("href", coachUrl);
+          aCoach.addEventListener("click", function () {
+            save("coach");
+          });
+        }
+        if (aClient) {
+          aClient.setAttribute("href", clientUrl);
+          aClient.addEventListener("click", function () {
+            save("client");
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        wireLinks();
+        var auto = resolveAuto();
+        if (auto) {
+          redirectByMeta(auto);
+        } else {
+          openModal();
+        }
+      });
     })();
   </script>
 </head>
-<body>
-  <p><a href="client/">Stablefit</a></p>
+<body class="sf-landing">
+  <div class="sf-landing-bg" aria-hidden="true"></div>
+
+  <div
+    id="sf-modal-overlay"
+    class="sf-modal-overlay"
+    hidden
+    role="presentation"
+  >
+    <div
+      class="sf-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="sf-modal-title"
+    >
+      <img
+        class="sf-modal-logo"
+        src="assets/images/Logo.svg"
+        width="120"
+        height="60"
+        alt="StableFit"
+      />
+      <h1 class="sf-modal-title" id="sf-modal-title">Оберіть свій формат</h1>
+      <p class="sf-modal-lead">
+        Платформа для тренерів і клієнтів. Куди перейти далі?
+      </p>
+      <div class="sf-modal-actions">
+        <a class="sf-choice sf-choice--coach" id="sf-choice-coach" href="#">
+          Для тренерів
+        </a>
+        <a class="sf-choice sf-choice--client" id="sf-choice-client" href="#">
+          Для клієнтів
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <p class="sf-fallback">
+      Увімкніть JavaScript або перейдіть:
+      <a href="coach/">для тренерів</a>
+      ·
+      <a href="client/">для клієнтів</a>
+    </p>
+  </noscript>
 </body>
 </html>
