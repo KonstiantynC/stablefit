@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,6 @@
       overflow-x: hidden;
     }
 
-    /* Фон як у hero тренерської сторінки: темний + фіолетове світіння */
     .sf-landing-bg {
       position: fixed;
       inset: 0;
@@ -298,6 +297,8 @@
   </script>
   <script>
     (function () {
+      var LANGUAGE_STORAGE_KEY = "stablefit-language";
+
       function isFileProtocol() {
         return document.URL.indexOf("file:") === 0;
       }
@@ -329,6 +330,42 @@
         } catch (e) {
           return null;
         }
+      }
+
+      function detectLang() {
+        try {
+          var s = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+          if (s === "en" || s === "ua") return s;
+        } catch (e) {}
+        var nav = (navigator.language || "").slice(0, 2).toLowerCase();
+        return nav === "en" ? "en" : "ua";
+      }
+
+      function getNested(obj, path) {
+        return path.split(".").reduce(function (acc, key) {
+          return acc && acc[key] !== undefined ? acc[key] : undefined;
+        }, obj);
+      }
+
+      function applyModalI18n(dict) {
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          var v = getNested(dict, key);
+          if (typeof v === "string") el.textContent = v;
+        });
+        document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-alt");
+          var v = getNested(dict, key);
+          if (typeof v === "string") el.setAttribute("alt", v);
+        });
+      }
+
+      function loadLocaleJson(lang) {
+        var url = new URL("locales/" + lang + ".json", window.location.href);
+        return fetch(url.href).then(function (res) {
+          if (!res.ok) throw new Error("locale");
+          return res.json();
+        });
       }
 
       function resolveAuto() {
@@ -369,7 +406,8 @@
         }
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
+      function runAfterLocale(dict) {
+        if (dict) applyModalI18n(dict);
         wireLinks();
         var auto = resolveAuto();
         if (auto) {
@@ -377,6 +415,18 @@
         } else {
           openModal();
         }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var lang = detectLang();
+        document.documentElement.lang = lang === "en" ? "en" : "uk";
+        loadLocaleJson(lang)
+          .then(function (dict) {
+            runAfterLocale(dict);
+          })
+          .catch(function () {
+            runAfterLocale(null);
+          });
       });
     })();
   </script>
@@ -402,16 +452,17 @@
         width="120"
         height="60"
         alt="StableFit"
+        data-i18n-alt="meta.logoAlt"
       />
-      <h1 class="sf-modal-title" id="sf-modal-title">Оберіть свій формат</h1>
-      <p class="sf-modal-lead">
+      <h1 class="sf-modal-title" id="sf-modal-title" data-i18n="root.modal.title">Оберіть свій формат</h1>
+      <p class="sf-modal-lead" data-i18n="root.modal.lead">
         Платформа для тренерів і клієнтів. Куди перейти далі?
       </p>
       <div class="sf-modal-actions">
-        <a class="sf-choice sf-choice--coach" id="sf-choice-coach" href="#">
+        <a class="sf-choice sf-choice--coach" id="sf-choice-coach" href="#" data-i18n="root.modal.coachBtn">
           Для тренерів
         </a>
-        <a class="sf-choice sf-choice--client" id="sf-choice-client" href="#">
+        <a class="sf-choice sf-choice--client" id="sf-choice-client" href="#" data-i18n="root.modal.clientBtn">
           Для клієнтів
         </a>
       </div>
@@ -420,10 +471,11 @@
 
   <noscript>
     <p class="sf-fallback">
-      Увімкніть JavaScript або перейдіть:
-      <a href="coach/">для тренерів</a>
-      ·
-      <a href="client/">для клієнтів</a>
+      Увімкніть JavaScript або перейдіть: /
+      <span lang="en">Enable JavaScript or open:</span>
+      <a href="coach/">для тренерів</a> · <span lang="en">for coaches</span>
+      —
+      <a href="client/">для клієнтів</a> · <span lang="en">for clients</span>
     </p>
   </noscript>
 </body>

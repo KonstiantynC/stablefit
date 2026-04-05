@@ -3,7 +3,7 @@
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
   /** Bump when locale JSON shape changes so stale cache is not reused. */
-  const LOCALE_CACHE_VERSION = "3";
+  const LOCALE_CACHE_VERSION = "4";
   const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');

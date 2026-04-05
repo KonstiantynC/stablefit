@@ -20,6 +20,19 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "root": {
+    "modal": {
+      "title": "Choose your experience",
+      "lead": "A platform for coaches and clients. Where would you like to go?",
+      "coachBtn": "For coaches",
+      "clientBtn": "For clients"
+    },
+    "noscript": {
+      "lead": "Enable JavaScript or open:",
+      "coach": "for coaches",
+      "client": "for clients"
+    }
+  },
   "coach": {
     "meta": {
       "title": "StableFit — for coaches | Client, workout & nutrition platform",
