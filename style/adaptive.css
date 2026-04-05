@@ -501,10 +501,25 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 16px;
   }
 
-  .progress-cart-image img,
   .progress-cart-image-wrp img {
     max-width: 100%;
     height: auto;
+    aspect-ratio: 296 / 403;
+    display: block;
+  }
+
+  .progress-cart-image img[alt="progress-table-img"] {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 275 / 280;
+    display: block;
+  }
+
+  .progress-cart-image img[alt="progress-photo-img"] {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 276 / 203;
+    display: block;
   }
 
   .progress-cart-description,
@@ -720,6 +735,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .f-slider-item[data-f-slider-scroll-sync] .content-right-image-wrp img {
     max-width: 100%;
     height: auto;
+    aspect-ratio: 280 / 570;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -985,10 +1001,24 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     max-width: none !important;
   }
 
-  section.progress .progress-cart-image img,
   section.progress .progress-cart-image-wrp img {
     max-width: 100%;
     height: auto;
+    aspect-ratio: 296 / 403;
+    display: block;
+  }
+
+  section.progress .progress-cart-image img[alt="progress-table-img"] {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 275 / 280;
+    display: block;
+  }
+
+  section.progress .progress-cart-image img[alt="progress-photo-img"] {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 276 / 203;
     display: block;
   }
 

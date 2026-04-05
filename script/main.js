@@ -418,8 +418,17 @@
 
     const rebuildMarquee = (marquee) => {
       const track = marquee.querySelector(".testimonials-marquee-track");
-      const seedMarkup = seedMarkupByMarquee.get(marquee);
-      if (!track || !seedMarkup) return;
+      if (!track) return;
+
+      const liveFirstSet = track.querySelector(".testimonials-marquee-set");
+      const seedMarkup = liveFirstSet
+        ? liveFirstSet.innerHTML
+        : seedMarkupByMarquee.get(marquee);
+      if (!seedMarkup) return;
+
+      if (liveFirstSet) {
+        seedMarkupByMarquee.set(marquee, seedMarkup);
+      }
 
       const seedSet = document.createElement("div");
       seedSet.className = "testimonials-marquee-set";
@@ -431,8 +440,12 @@
       const viewportWidth = marquee.clientWidth || window.innerWidth;
 
       const measureSet = seedSet.cloneNode(true);
-      track.replaceChildren(measureSet);
+      measureSet.setAttribute("aria-hidden", "true");
+      measureSet.style.cssText =
+        "position:fixed;left:-10000px;top:0;visibility:hidden;pointer-events:none;width:max-content;";
+      document.body.appendChild(measureSet);
       const baseSetWidth = Math.max(measureSet.scrollWidth, 1);
+      document.body.removeChild(measureSet);
 
       const copiesNeeded = Math.max(1, Math.ceil((viewportWidth + baseSetWidth) / baseSetWidth));
 
