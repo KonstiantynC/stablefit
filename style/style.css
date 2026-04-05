@@ -1041,6 +1041,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 1024px) {
+  .testimonials-marquee {
+    min-height: 260px;
+  }
+}
+
 .testimonials-marquee-track {
   display: flex;
   width: max-content;

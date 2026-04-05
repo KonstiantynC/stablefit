@@ -2,7 +2,6 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
-  /** Bump when locale JSON shape changes so stale cache is not reused. */
   const LOCALE_CACHE_VERSION = "4";
   const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
@@ -14,6 +13,7 @@
   const htmlNode = document.documentElement;
 
   const dictionaries = {};
+  let lastAppliedDictionary = null;
   let currentLanguage = DEFAULT_LANG;
 
   function getNestedValue(object, keyPath) {
@@ -34,7 +34,6 @@
     try {
       localStorage.setItem(localeCacheKey(lang), JSON.stringify(data));
     } catch {
-      /* ignore quota / private mode */
     }
   }
 
@@ -135,7 +134,10 @@
 
     try {
       const dictionary = await loadDictionary(normalizedLang);
-      applyTranslations(dictionary);
+      if (lastAppliedDictionary !== dictionary) {
+        lastAppliedDictionary = dictionary;
+        applyTranslations(dictionary);
+      }
       paintActiveLanguage(normalizedLang);
       paintActiveLandingNav();
       htmlNode.setAttribute("lang", normalizedLang);
@@ -162,6 +164,8 @@
     const cached = readDictionaryFromCache(normalizedLang);
     if (!cached || typeof cached !== "object") return;
 
+    dictionaries[normalizedLang] = cached;
+    lastAppliedDictionary = cached;
     applyTranslations(cached);
     paintActiveLanguage(normalizedLang);
     paintActiveLandingNav();
@@ -354,7 +358,6 @@
     contentRight.addEventListener("scroll", requestCarouselSync, { passive: true });
     mq.addEventListener("change", runInitialSync);
 
-    runInitialSync();
   }
 
   function initMobileNav() {
@@ -470,7 +473,6 @@
     };
 
     window.addEventListener("resize", onResize);
-    rebuildAll();
     return rebuildAll;
   }
 
@@ -502,7 +504,11 @@
   initFSliderScrollSync();
   initMobileNav();
 
-  setLanguage(currentLanguage).then(() => {
-    refreshTestimonialsMarquee();
-  });
+  setLanguage(currentLanguage)
+    .then(() => {
+      refreshTestimonialsMarquee();
+    })
+    .catch(() => {
+      refreshTestimonialsMarquee();
+    });
 })();

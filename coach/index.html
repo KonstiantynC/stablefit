@@ -29,55 +29,83 @@
   <title data-i18n="coach.meta.title">StableFit — для тренерів | Платформа для фітнес-клієнтів і програм</title>
   <link rel="icon" href="../assets/favicon/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="../assets/favicon/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=optional" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var lang = localStorage.getItem("stablefit-language");
+        if (lang !== "en" && lang !== "ua") {
+          var br = (navigator.language || "ua").slice(0, 2).toLowerCase();
+          lang = br === "en" ? "en" : "ua";
+        }
+        var link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "fetch";
+        link.href = "../locales/" + lang + ".json";
+        document.head.appendChild(link);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="../style/normalize.css">
   <link rel="stylesheet" href="../style/style.css">
   <link rel="stylesheet" href="../style/adaptive.css">
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "name": "StableFit",
-          "url": "https://stable-fit.com/",
-          "logo": "https://stable-fit.com/assets/images/Logo.svg",
-          "email": "support@stable-fit.com"
-        },
-        {
-          "@type": "WebSite",
-          "name": "StableFit",
-          "url": "https://stable-fit.com/",
-          "inLanguage": ["uk-UA", "en-US"]
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://stable-fit.com/client/#webpage",
-          "url": "https://stable-fit.com/client/",
-          "name": "StableFit — для клієнтів",
-          "description": "StableFit для клієнтів: персональні тренування, відстеження прогресу та харчування з тренером в одному додатку.",
-          "inLanguage": "uk-UA",
-          "isPartOf": { "@type": "WebSite", "@id": "https://stable-fit.com/#website" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "StableFit",
-          "applicationCategory": "HealthApplication",
-          "operatingSystem": "iOS, Android",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-        }
-      ]
-    }
-    </script>
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "StableFit",
+        "url": "https://stable-fit.com/",
+        "logo": "https://stable-fit.com/assets/images/Logo.svg",
+        "email": "support@stable-fit.com"
+      },
+      {
+        "@type": "WebSite",
+        "name": "StableFit",
+        "url": "https://stable-fit.com/",
+        "inLanguage": ["uk-UA", "en-US"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://stable-fit.com/coach/#webpage",
+        "url": "https://stable-fit.com/coach/",
+        "name": "StableFit — для тренерів",
+        "description": "StableFit для тренерів: керуйте клієнтами, програмами тренувань, харчуванням і прогресом в одному додатку.",
+        "inLanguage": "uk-UA",
+        "isPartOf": { "@type": "WebSite", "@id": "https://stable-fit.com/#website" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "StableFit",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS, Android",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    ]
+  }
+  </script>
 </head>
-<body>
-
+<body class="page-coach">
   <header>
     <div class="header-wrp">
       <div class="header-logo">
         <div class="logo">
-          <img src="../assets/images/Logo.svg" alt="logo" data-i18n-alt="meta.logoAlt">
+          <img
+            loading="lazy"
+            src="../assets/images/Logo.svg"
+            alt="header logo"
+            data-i18n-alt="meta.logoAlt"
+            width="57"
+            height="28"
+          >
         </div>
-        <div class="title" data-i18n="meta.brand">
+        <div 
+          class="title" 
+          data-i18n="meta.brand"
+        >
           StableFit
         </div>
       </div>
@@ -118,7 +146,8 @@
         <div class="localisation">
           <div
             class="localisation-item is-active"
-            data-lang="ua" role="button"
+            data-lang="ua" 
+            role="button"
             tabindex="0"
             data-i18n-aria="aria.langUa"
           >
@@ -135,7 +164,7 @@
           </div>
           <a
             href="#"
-            class="download-button btn btn-hover-transparent"
+            class="download-button btn-cl btn-hover-transparent"
             data-i18n="buttons.download"
           >
             Завантажити
@@ -154,21 +183,64 @@
         <div class="header-drawer-top">
           <div class="header-logo">
             <div class="logo">
-              <img src="../assets/images/Logo.svg" alt="" data-i18n-alt="meta.logoAlt">
+              <img
+                loading="lazy"
+                src="../assets/images/Logo.svg"
+                alt=""
+                data-i18n-alt="meta.logoAlt"
+                width="57"
+                height="28"
+              >
             </div>
-            <div class="title" data-i18n="meta.brand">StableFit</div>
+            <div
+              class="title"
+              data-i18n="meta.brand"
+            >
+              StableFit
+            </div>
           </div>
-          <button type="button" class="header-drawer-close" data-i18n-aria="aria.closeMenu">&times;</button>
+          <button
+            type="button"
+            class="header-drawer-close"
+            data-i18n-aria="aria.closeMenu"
+          >
+            &times;
+          </button>
         </div>
-        <nav class="header-drawer-nav" aria-label="Навігація">
-          <a href="../coach/" class="landing-link" data-landing="coach" data-i18n="nav.coaches">Для тренерів</a>
-          <a href="../client/" class="landing-link" data-landing="client" data-i18n="nav.clients">Для клієнтів</a>
-          <a href="../support/" class="landing-link" data-landing="support" data-i18n="nav.support">Підтримка</a>
+        <nav
+          class="header-drawer-nav"
+          aria-label="Навігація"
+        >
+          <a
+            href="../coach/"
+            class="landing-link is-active"
+            data-landing="coach"
+            data-i18n="nav.coaches"
+          >
+            Для тренерів
+          </a>
+          <a
+            href="../client/"
+            class="landing-link"
+            data-landing="client"
+            data-i18n="nav.clients"
+          >
+            Для клієнтів
+          </a>
+          <a
+            href="../support/"
+            class="landing-link"
+            data-landing="support"
+            data-i18n="nav.support"
+          >
+            Підтримка
+          </a>
         </nav>
         <div class="header-drawer-lang localisation">
           <div
             class="localisation-item is-active"
-            data-lang="ua" role="button"
+            data-lang="ua" 
+            role="button"
             tabindex="0"
             data-i18n-aria="aria.langUa"
           >
@@ -186,7 +258,7 @@
         </div>
         <a
           href="#"
-          class="download-button header-drawer-cta btn btn-hover-transparent"
+          class="download-button header-drawer-cta btn-cl btn-hover-transparent"
           data-i18n="buttons.download"
         >
           Завантажити
@@ -196,64 +268,136 @@
   </header>
 
   <main>
-
     <section class="hero">
       <div class="container">
         <div class="hero-wrp">
           <div class="content-inner">
-            <div class="section-title" data-i18n="coach.hero.sectionTitle">
+            <div
+              class="section-title"
+              data-i18n="coach.hero.sectionTitle"
+            >
               Управляйте клієнтами.
             </div>
-            <div class="gradient-title" data-i18n="coach.hero.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.hero.gradientTitle"
+            >
               Зростайте організовно.
             </div>
-            <div class="section-description description" data-i18n="coach.hero.description">
+            <div
+              class="section-description description"
+              data-i18n="coach.hero.description"
+            >
               StableFit дає фітнес-тренерам єдину платформу для управління
               клієнтами, створення тренувальних програм, відстеження
               харчування і моніторингу прогресу.
             </div>
-            <div class="content-text" data-i18n="coach.hero.contentText">
+            <div
+              class="content-text"
+              data-i18n="coach.hero.contentText"
+            >
               Завантажуйте додаток для тренерів:
             </div>
             <div class="card-wrp">
               <div class="card shadow-custom">
                 <div class="cart-title">
                   <div class="card-icon">
-                    <img src="../assets/icons/apple_icon.svg" alt="apple">
-                    <span data-i18n="coach.hero.store.apple">App Store</span>
-                    <div class="card-arrow" aria-hidden="true"></div>
+                    <img
+                      loading="lazy"
+                      src="../assets/icons/apple_icon.svg"
+                      alt="apple"
+                      width="18"
+                      height="18"
+                    >
+                    <span data-i18n="coach.hero.store.apple">
+                      App Store
+                    </span>
+                    <div
+                      class="card-arrow"
+                      aria-hidden="true"
+                    ></div>
                   </div>
-                  <div class="card-device" data-i18n="coach.hero.store.ios">iOS</div>
+                  <div
+                    class="card-device"
+                    data-i18n="coach.hero.store.ios"
+                  >
+                    iOS
+                  </div>
                 </div>
                 <div class="card-image-container">
-                  <img src="../assets/images/appStore_download.svg" alt="appStore_download" class="card-image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/appStore_download.svg"
+                    alt="appStore_download"
+                    class="card-image"
+                    width="108"
+                    height="108"
+                  >
                 </div>
                 <div class="card-footer">
-                  <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                  <span data-i18n="card.footerScan">
+                    скануйте для завантаження
+                  </span>
                 </div>
               </div>
               <div class="card shadow-custom">
                 <div class="cart-title">
                   <div class="card-icon">
-                    <img src="../assets/icons/googlePlay_icon.svg" alt="googlePlay">
-                    <span data-i18n="coach.hero.store.google">Google Play</span>
-                    <div class="card-arrow" aria-hidden="true"></div>
+                    <img
+                      src="../assets/icons/googlePlay_icon.svg"
+                      alt="googlePlay"
+                      width="12"
+                      height="13"
+                    >
+                    <span data-i18n="coach.hero.store.google">
+                      Google Play
+                    </span>
+                    <div
+                      class="card-arrow"
+                      aria-hidden="true"
+                    ></div>
                   </div>
-                  <div class="card-device" data-i18n="coach.hero.store.android">Android</div>
+                  <div
+                    class="card-device"
+                    data-i18n="coach.hero.store.android"
+                  >
+                    Android
+                  </div>
                 </div>
                 <div class="card-image-container">
-                  <img src="../assets/images/googlePlay_download.svg" alt="appStore_download" class="card-image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/googlePlay_download.svg"
+                    alt="appStore_download"
+                    class="card-image"
+                    width="108"
+                    height="108"
+                  >
                 </div>
                 <div class="card-footer">
-                  <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                  <span data-i18n="card.footerScan">
+                    скануйте для завантаження
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div class="content-inner">
             <div class="image-wrp">
-              <img src="../assets/images/ch/hero_left_iPhone.png" alt="inner_hero">
-              <img src="../assets/images/ch/hero_right_iPhone.png" alt="inner_hero">
+              <img
+                loading="lazy"
+                src="../assets/images/ch/hero_left_iPhone.png"
+                alt="inner_hero"
+                width="537"
+                height="659"
+              >
+              <img
+                loading="lazy"
+                src="../assets/images/ch/hero_right_iPhone.png"
+                alt="inner_hero"
+                width="490"
+                height="620"
+              >
             </div>
           </div>
         </div>
@@ -264,49 +408,123 @@
       <div class="container">
         <div class="features-wrp section-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.features.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.features.sectionName"
+            >
               Проблеми та Рішення
             </div>
-            <div class="section-title" data-i18n="coach.features.sectionTitle">
+            <div
+              class="section-title"
+              data-i18n="coach.features.sectionTitle"
+            >
               Фітнес-коучинг
             </div>
-            <div class="gradient-title" data-i18n="coach.features.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.features.gradientTitle"
+            >
               потребує змін
             </div>
-            <div class="section-description description-features" data-i18n="coach.features.description">
-              Більшість тренерів витрачають години на адміністрування. Таблиці, месенджери, та ручний 
+            <div
+              class="section-description description-features"
+              data-i18n="coach.features.description"
+            >
+              Більшість тренерів витрачають години на адміністрування. Таблиці, месенджери, та ручний
               облік замість роботи з клієнтами. StableFit це виправить.
             </div>
           </div>
           <div class="features-carts">
             <div class="features-cart shadow-custom">
-              <div class="cart-name red-name" data-i18n="coach.features.without">
+              <div
+                class="cart-name red-name"
+                data-i18n="coach.features.without"
+              >
                 Без StableFit
               </div>
-              <div class="f-cart-title" data-i18n="coach.features.withoutTitle">
+              <div
+                class="f-cart-title"
+                data-i18n="coach.features.withoutTitle"
+              >
                 Хаос у роботі
               </div>
               <ul class="cart-list">
-                <li class="cart-list-item" data-i18n="coach.features.withoutItems.item1">Години витрачені на адміністрування</li>
-                <li class="cart-list-item" data-i18n="coach.features.withoutItems.item2">Клієнтські дані розпорошені по різних додатках</li>
-                <li class="cart-list-item" data-i18n="coach.features.withoutItems.item3">Незручні тренувальні програми в Excel / Doc</li>
-                <li class="cart-list-item" data-i18n="coach.features.withoutItems.item4">Відстеження прогресу на папері чи в нотатках</li>
-                <li class="cart-list-item" data-i18n="coach.features.withoutItems.item5">Комунікація у різних месенджерах</li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withoutItems.item1"
+                >
+                  Години витрачені на адміністрування
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withoutItems.item2"
+                >
+                  Клієнтські дані розпорошені по різних додатках
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withoutItems.item3"
+                >
+                  Незручні тренувальні програми в Excel / Doc
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withoutItems.item4"
+                >
+                  Відстеження прогресу на папері чи в нотатках
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withoutItems.item5"
+                >
+                  Комунікація у різних месенджерах
+                </li>
               </ul>
             </div>
             <div class="features-cart shadow-custom">
-              <div class="cart-name prpl-name" data-i18n="coach.features.withTitle">
+              <div
+                class="cart-name prpl-name"
+                data-i18n="coach.features.withTitle"
+              >
                 Із StableFit
               </div>
-              <div class="f-cart-title" data-i18n="coach.features.withSubtitle">
+              <div
+                class="f-cart-title"
+                data-i18n="coach.features.withSubtitle"
+              >
                 Усе під контролем
               </div>
               <ul class="cart-list cart-list--checks">
-                <li class="cart-list-item" data-i18n="coach.features.withItems.item1">Автоматизація рутинних задач</li>
-                <li class="cart-list-item" data-i18n="coach.features.withItems.item2">Уся необхідна інформація про клієнта в одному місці</li>
-                <li class="cart-list-item" data-i18n="coach.features.withItems.item3">Персональні програми для клієнтів</li>
-                <li class="cart-list-item" data-i18n="coach.features.withItems.item4">Відстеження прогресу з чіткими графіками</li>
-                <li class="cart-list-item" data-i18n="coach.features.withItems.item5">Вбудований чат</li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withItems.item1"
+                >
+                  Автоматизація рутинних задач
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withItems.item2"
+                >
+                  Уся необхідна інформація про клієнта в одному місці
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withItems.item3"
+                >
+                  Персональні програми для клієнтів
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withItems.item4"
+                >
+                  Відстеження прогресу з чіткими графіками
+                </li>
+                <li
+                  class="cart-list-item"
+                  data-i18n="coach.features.withItems.item5"
+                >
+                  Вбудований чат
+                </li>
               </ul>
             </div>
           </div>
@@ -318,96 +536,251 @@
       <div class="container">
         <div class="functionality-wrp section-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.functionality.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.functionality.sectionName"
+            >
               Ключові функції
             </div>
-            <div class="gradient-title" data-i18n="coach.functionality.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.functionality.gradientTitle"
+            >
               Все, що потрібно
             </div>
-            <div class="section-title" data-i18n="coach.functionality.sectionTitle">
+            <div
+              class="section-title"
+              data-i18n="coach.functionality.sectionTitle"
+            >
               персональному тренеру
             </div>
-            <div class="section-description description-functionality" data-i18n="coach.functionality.description">
-              StableFit поєднює у собі функції кількох різних додатків і суттєво 
+            <div
+              class="section-description description-functionality"
+              data-i18n="coach.functionality.description"
+            >
+              StableFit поєднює у собі функції кількох різних додатків і суттєво
               пришвидшує та спрощує роботу тренерів.
             </div>
           </div>
           <div class="f-slider-wrp">
-            <div class="f-slider-item" data-f-slider-scroll-sync>
+            <div
+              class="f-slider-item"
+              data-f-slider-scroll-sync
+            >
               <div class="content-left">
-                <div class="f-slider-accordion" data-f-slider-accordion>
+                <div
+                  class="f-slider-accordion"
+                  data-f-slider-accordion
+                >
                   <div class="f-slider-accordion-item is-open">
-                    <button type="button" class="f-slider-accordion-trigger" aria-expanded="true" id="f-acc-trigger-1" aria-controls="f-acc-panel-1">
+                    <button
+                      type="button"
+                      class="f-slider-accordion-trigger"
+                      aria-expanded="true"
+                      id="f-acc-trigger-1"
+                      aria-controls="f-acc-panel-1"
+                    >
                       <span class="f-slider-title">
-                        <img class="f-slider-title-icon" src="../assets/icons/manage_clients_icon.svg" alt="" width="20" height="20">
-                        <span class="f-slider-title-text" data-i18n="coach.functionality.items.clients.title">Управління клієнтами</span>
+                        <img
+                          loading="lazy"
+                          class="f-slider-title-icon"
+                          src="../assets/icons/manage_clients_icon.svg"
+                          alt="manage_clients_icon"
+                          width="20"
+                          height="20"
+                        >
+                        <span
+                          class="f-slider-title-text"
+                          data-i18n="coach.functionality.items.clients.title"
+                        >
+                          Управління клієнтами
+                        </span>
                       </span>
-                      <span class="f-slider-accordion-chevron" aria-hidden="true"></span>
+                      <span
+                        class="f-slider-accordion-chevron"
+                        aria-hidden="true"
+                      ></span>
                     </button>
-                    <div class="f-slider-accordion-panel" id="f-acc-panel-1" role="region" aria-labelledby="f-acc-trigger-1">
+                    <div
+                      class="f-slider-accordion-panel"
+                      id="f-acc-panel-1"
+                      role="region"
+                      aria-labelledby="f-acc-trigger-1"
+                    >
                       <div class="f-slider-accordion-panel-inner">
                         <div class="f-slider-description">
-                          <div class="f-slider-description-text" data-i18n="coach.functionality.items.clients.description">
+                          <div
+                            class="f-slider-description-text"
+                            data-i18n="coach.functionality.items.clients.description"
+                          >
                             Зберігайте всю інформацію про клієнтів в одному місці та легко керуйте нею.
                             Додавайте нових клієнтів, фіксуйте ключові дані та ведіть персональні нотатки.
                           </div>
                           <ul class="cart-list cart-list--checks">
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.clients.points.item1">Повний список клієнтів</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.clients.points.item2">Особиста інформація та цілі</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.clients.points.item3">Дані про стан здоров’я і травми</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.clients.points.item4">Індивідуальні нотатки</li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.clients.points.item1"
+                            >
+                              Повний список клієнтів
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.clients.points.item2"
+                            >
+                              Особиста інформація та цілі
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.clients.points.item3"
+                            >
+                              Дані про стан здоров’я і травми
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.clients.points.item4"
+                            >
+                              Індивідуальні нотатки
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="f-slider-accordion-item">
-                    <button type="button" class="f-slider-accordion-trigger" aria-expanded="false" id="f-acc-trigger-2" aria-controls="f-acc-panel-2">
+                    <button
+                      type="button"
+                      class="f-slider-accordion-trigger"
+                      aria-expanded="false"
+                      id="f-acc-trigger-2"
+                      aria-controls="f-acc-panel-2"
+                    >
                       <span class="f-slider-title">
-                        <img class="f-slider-title-icon" src="../assets/icons/train-lib-icon.svg" alt="" width="20" height="20">
-                        <span class="f-slider-title-text" data-i18n="coach.functionality.items.workouts.title">Бібліотека тренувань</span>
+                        <img
+                          loading="lazy"
+                          class="f-slider-title-icon"
+                          src="../assets/icons/train-lib-icon.svg"
+                          alt="train-lib-icon"
+                          width="20"
+                          height="20"
+                        >
+                        <span
+                          class="f-slider-title-text"
+                          data-i18n="coach.functionality.items.workouts.title"
+                        >
+                          Бібліотека тренувань
+                        </span>
                       </span>
-                      <span class="f-slider-accordion-chevron" aria-hidden="true"></span>
+                      <span
+                        class="f-slider-accordion-chevron"
+                        aria-hidden="true"
+                      ></span>
                     </button>
-                    <div class="f-slider-accordion-panel" id="f-acc-panel-2" role="region" aria-labelledby="f-acc-trigger-2">
+                    <div
+                      class="f-slider-accordion-panel"
+                      id="f-acc-panel-2"
+                      role="region"
+                      aria-labelledby="f-acc-trigger-2"
+                    >
                       <div class="f-slider-accordion-panel-inner">
                         <div class="f-slider-description">
-                          <div class="f-slider-description-text" data-i18n="coach.functionality.items.workouts.description">
-                            Використовуйте готові тренування з додатку, адаптуйте їх під свої задачі або 
+                          <div
+                            class="f-slider-description-text"
+                            data-i18n="coach.functionality.items.workouts.description"
+                          >
+                            Використовуйте готові тренування з додатку, адаптуйте їх під свої задачі або
                             створюйте власні з нуля. Формуйте індивідуальні плани для клієнтів і відстежуйте їх виконання.
                           </div>
                           <ul class="cart-list cart-list--checks">
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.workouts.points.item1">Готові тренування в додатку</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.workouts.points.item2">
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.workouts.points.item1"
+                            >
+                              Готові тренування в додатку
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.workouts.points.item2"
+                            >
                               Редагування та створення власних програм
                             </li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.workouts.points.item3">Індивідуальні плани для клієнтів</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.workouts.points.item4">Перегляд пройдених тренувань</li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.workouts.points.item3"
+                            >
+                              Індивідуальні плани для клієнтів
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.workouts.points.item4"
+                            >
+                              Перегляд пройдених тренувань
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="f-slider-accordion-item">
-                    <button type="button" class="f-slider-accordion-trigger" aria-expanded="false" id="f-acc-trigger-3" aria-controls="f-acc-panel-3">
+                    <button
+                      type="button"
+                      class="f-slider-accordion-trigger"
+                      aria-expanded="false"
+                      id="f-acc-trigger-3"
+                      aria-controls="f-acc-panel-3"
+                    >
                       <span class="f-slider-title">
-                        <img class="f-slider-title-icon" src="../assets/icons/progress-icon.svg" alt="" width="20" height="20">
-                        <span class="f-slider-title-text" data-i18n="coach.functionality.items.nutrition.title">Відстежування прогресу</span>
+                        <img
+                          loading="lazy"
+                          class="f-slider-title-icon"
+                          src="../assets/icons/progress-icon.svg"
+                          alt="progress-icon"
+                          width="20"
+                          height="20"
+                        >
+                        <span
+                          class="f-slider-title-text"
+                          data-i18n="coach.functionality.items.nutrition.title"
+                        >
+                          Відстежування прогресу
+                        </span>
                       </span>
-                      <span class="f-slider-accordion-chevron" aria-hidden="true"></span>
+                      <span
+                        class="f-slider-accordion-chevron"
+                        aria-hidden="true"
+                      ></span>
                     </button>
-                    <div class="f-slider-accordion-panel" id="f-acc-panel-3" role="region" aria-labelledby="f-acc-trigger-3">
+                    <div
+                      class="f-slider-accordion-panel"
+                      id="f-acc-panel-3"
+                      role="region"
+                      aria-labelledby="f-acc-trigger-3"
+                    >
                       <div class="f-slider-accordion-panel-inner">
                         <div class="f-slider-description">
-                          <div class="f-slider-description-text" data-i18n="coach.functionality.items.nutrition.description">
-                            Відстежуйте результати клієнтів у динаміці. Переглядайте зміни ваги та замірів, 
+                          <div
+                            class="f-slider-description-text"
+                            data-i18n="coach.functionality.items.nutrition.description"
+                          >
+                            Відстежуйте результати клієнтів у динаміці. Переглядайте зміни ваги та замірів,
                             які вони вносять у додатку, а система нагадувань допоможе клієнтам регулярно оновлювати дані.
                           </div>
                           <ul class="cart-list cart-list--checks">
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.nutrition.points.item1">Динаміка ваги та замірів</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.nutrition.points.item2">
-                              Фото До/Після для візуального відстеження прогресу</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.nutrition.points.item3">
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.nutrition.points.item1"
+                            >
+                              Динаміка ваги та замірів
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.nutrition.points.item2"
+                            >
+                              Фото До/Після для візуального відстеження прогресу
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.nutrition.points.item3"
+                            >
                               Автоматичні нагадування про заміри
                             </li>
                           </ul>
@@ -416,52 +789,142 @@
                     </div>
                   </div>
                   <div class="f-slider-accordion-item">
-                    <button type="button" class="f-slider-accordion-trigger" aria-expanded="false" id="f-acc-trigger-4" aria-controls="f-acc-panel-4">
+                    <button
+                      type="button"
+                      class="f-slider-accordion-trigger"
+                      aria-expanded="false"
+                      id="f-acc-trigger-4"
+                      aria-controls="f-acc-panel-4"
+                    >
                       <span class="f-slider-title">
-                        <img class="f-slider-title-icon" src="../assets/icons/monitoring-icon.svg" alt="" width="20" height="20">
-                        <span class="f-slider-title-text" data-i18n="coach.functionality.items.analytics.title">Моніторинг харчування</span>
+                        <img
+                          loading="lazy"
+                          class="f-slider-title-icon"
+                          src="../assets/icons/monitoring-icon.svg"
+                          alt="monitoring-icon"
+                          width="20"
+                          height="20"
+                        >
+                        <span
+                          class="f-slider-title-text"
+                          data-i18n="coach.functionality.items.analytics.title"
+                        >
+                          Моніторинг харчування
+                        </span>
                       </span>
-                      <span class="f-slider-accordion-chevron" aria-hidden="true"></span>
+                      <span
+                        class="f-slider-accordion-chevron"
+                        aria-hidden="true"
+                      ></span>
                     </button>
-                    <div class="f-slider-accordion-panel" id="f-acc-panel-4" role="region" aria-labelledby="f-acc-trigger-4">
+                    <div
+                      class="f-slider-accordion-panel"
+                      id="f-acc-panel-4"
+                      role="region"
+                      aria-labelledby="f-acc-trigger-4"
+                    >
                       <div class="f-slider-accordion-panel-inner">
                         <div class="f-slider-description">
-                          <div class="f-slider-description-text" data-i18n="coach.functionality.items.analytics.description">
-                            Контролюйте раціон клієнтів без зайвих запитів. Переглядайте харчування, аналізуйте калорійність і баланс нутрієнтів.
+                          <div
+                            class="f-slider-description-text"
+                            data-i18n="coach.functionality.items.analytics.description"
+                          >
+                            Контролюйте раціон клієнтів без зайвих запитів. Переглядайте харчування, 
+                            аналізуйте калорійність і баланс нутрієнтів.
                           </div>
                           <ul class="cart-list cart-list--checks">
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.analytics.points.item1">Автоматичний розрахунок КБЖВ на основі даних і цілей клієнта</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.analytics.points.item2">
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.analytics.points.item1"
+                            >
+                              Автоматичний розрахунок КБЖВ на основі даних і цілей клієнта
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.analytics.points.item2"
+                            >
                               Можливість для клієнта легко відстежувати харчування (вручну, за фото або штрихкодом)
                             </li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.analytics.points.item3">
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.analytics.points.item3"
+                            >
                               Розрахунок калорій та КБЖВ продуктів за допомогою ШІ
                             </li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.analytics.points.item4">Моніторинг КБЖВ</li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.analytics.points.item4"
+                            >
+                              Моніторинг КБЖВ
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="f-slider-accordion-item">
-                    <button type="button" class="f-slider-accordion-trigger" aria-expanded="false" id="f-acc-trigger-5" aria-controls="f-acc-panel-5">
+                    <button
+                      type="button"
+                      class="f-slider-accordion-trigger"
+                      aria-expanded="false"
+                      id="f-acc-trigger-5"
+                      aria-controls="f-acc-panel-5"
+                    >
                       <span class="f-slider-title">
-                        <img class="f-slider-title-icon" src="../assets/icons/communicate-icon.svg" alt="" width="20" height="20">
-                        <span class="f-slider-title-text" data-i18n="coach.functionality.items.communication.title">Легка комунікація</span>
+                        <img
+                          loading="lazy"
+                          class="f-slider-title-icon"
+                          src="../assets/icons/communicate-icon.svg"
+                          alt="communicate-icon"
+                          width="20"
+                          height="20"
+                        >
+                        <span
+                          class="f-slider-title-text"
+                          data-i18n="coach.functionality.items.communication.title"
+                        >
+                          Легка комунікація
+                        </span>
                       </span>
-                      <span class="f-slider-accordion-chevron" aria-hidden="true"></span>
+                      <span
+                        class="f-slider-accordion-chevron"
+                        aria-hidden="true"
+                      ></span>
                     </button>
-                    <div class="f-slider-accordion-panel" id="f-acc-panel-5" role="region" aria-labelledby="f-acc-trigger-5">
+                    <div
+                      class="f-slider-accordion-panel"
+                      id="f-acc-panel-5"
+                      role="region"
+                      aria-labelledby="f-acc-trigger-5"
+                    >
                       <div class="f-slider-accordion-panel-inner">
                         <div class="f-slider-description">
-                          <div class="f-slider-description-text" data-i18n="coach.functionality.items.communication.description">
-                            Спілкуйтесь із клієнтами напряму в додатку. 
+                          <div
+                            class="f-slider-description-text"
+                            data-i18n="coach.functionality.items.communication.description"
+                          >
+                            Спілкуйтесь із клієнтами напряму в додатку.
                             Вся комунікація зібрана в одному місці — без переходів між різними месенджерами.
                           </div>
                           <ul class="cart-list cart-list--checks">
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.communication.points.item1">Чат із клієнтами в одному додатку</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.communication.points.item2">Швидка та зручна комунікація</li>
-                            <li class="cart-list-item" data-i18n="coach.functionality.items.communication.points.item3">Всі діалоги під рукою</li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.communication.points.item1"
+                            >
+                              Чат із клієнтами в одному додатку
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.communication.points.item2"
+                            >
+                              Швидка та зручна комунікація
+                            </li>
+                            <li
+                              class="cart-list-item"
+                              data-i18n="coach.functionality.items.communication.points.item3"
+                            >
+                              Всі діалоги під рукою
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -471,22 +934,70 @@
               </div>
               <div class="content-right">
                 <div class="content-right-image-wrp">
-                  <img src="../assets/images/ch/slider/sl-1-l.png" alt="manage_clients_image">
-                  <img src="../assets/images/ch/slider/sl-1-r.png" alt="manage_clients_image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-1-l.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-1-r.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
                 </div>
                 <div class="content-right-image-wrp">
-                  <img src="../assets/images/ch/slider/sl-2-l.png" alt="manage_clients_image">
-                  <img src="../assets/images/ch/slider/sl-2-r.png" alt="manage_clients_image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-2-l.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-2-r.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
                 </div>
                 <div class="content-right-image-wrp">
-                  <img src="../assets/images/ch/slider/sl-3-l.png" alt="manage_clients_image">
-                  <img src="../assets/images/ch/slider/sl-3-r.png" alt="manage_clients_image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-3-l.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-3-r.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
                 </div>
                 <div class="content-right-image-wrp">
-                  <img src="../assets/images/ch/slider/sl-4.png" alt="manage_clients_image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-4.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
                 </div>
                 <div class="content-right-image-wrp">
-                  <img src="../assets/images/ch/slider/sl-5.png" alt="manage_clients_image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/ch/slider/sl-5.png"
+                    alt="manage_clients_image"
+                    width="280"
+                    height="570"
+                  >
                 </div>
               </div>
             </div>
@@ -499,22 +1010,35 @@
       <div class="container">
         <div class="progress-wrp section-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.progress.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.progress.sectionName"
+            >
               Реальний прогрес
             </div>
-            <div class="section-title" data-i18n="coach.progress.sectionTitle">
-              Відстежуйте кожну зміну. 
+            <div
+              class="section-title"
+              data-i18n="coach.progress.sectionTitle"
+            >
+              Відстежуйте кожну зміну.
             </div>
-            <div class="gradient-title" data-i18n="coach.progress.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.progress.gradientTitle"
+            >
               Показуйте результат.
             </div>
             <div class="section-description description-progress">
-              <p data-i18n="coach.progress.description.line1">Візуальні графіки вимірів, порівняння до/після та повна історія змін.</p> 
-              <p data-i18n="coach.progress.description.line2">Покажіть клієнтам як далеко вони просунулись та мотивуйте їх продовжувати.</p>
+              <p data-i18n="coach.progress.description.line1">
+                Візуальні графіки вимірів, порівняння до/після та повна історія змін.
+              </p>
+              <p data-i18n="coach.progress.description.line2">
+                Покажіть клієнтам як далеко вони просунулись та мотивуйте їх продовжувати.
+              </p>
             </div>
             <a
               href="#"
-              class="try-button btn btn-hover-transparent"
+              class="try-button btn-cl btn-hover-transparent"
               data-i18n="buttons.tryFree"
             >
               Спробувати безкоштовно
@@ -523,14 +1047,26 @@
           <div class="progress-carts">
             <div class="progress-carts">
               <div class="progress-cart progress-l shadow-custom">
-                <div class="progress-cart-title" data-i18n="coach.progress.cards.measurements.title">
+                <div
+                  class="progress-cart-title"
+                  data-i18n="coach.progress.cards.measurements.title"
+                >
                   Заміри тіла
                 </div>
-                <div class="progress-cart-description" data-i18n="coach.progress.cards.measurements.description">
+                <div
+                  class="progress-cart-description"
+                  data-i18n="coach.progress.cards.measurements.description"
+                >
                   Відстежуйте зміну об’ємів в усіх зонах
                 </div>
                 <div class="progress-cart-image-wrp">
-                  <img src="../assets/images/progress/full-body-img.svg" alt="progress-full-body-img">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/progress/full-body-img.svg"
+                    alt="progress-full-body-img"
+                    width="296"
+                    height="403"
+                  >
                 </div>
               </div>
             </div>
@@ -538,32 +1074,66 @@
               <div class="progress-cart shadow-custom">
                 <div class="progress-cart-wrp">
                   <div class="progress-cart-content">
-                    <div class="progress-cart-title" data-i18n="coach.progress.cards.numbers.title">
+                    <div
+                      class="progress-cart-title"
+                      data-i18n="coach.progress.cards.numbers.title"
+                    >
                       Прогрес у цифрах
                     </div>
-                    <div class="progress-cart-description pr-description" data-i18n="coach.progress.cards.numbers.description">
+                    <div
+                      class="progress-cart-description pr-description"
+                      data-i18n="coach.progress.cards.numbers.description"
+                    >
                       Аналізуйте динаміку ваги
                     </div>
                   </div>
                   <div class="progress-cart-image">
-                    <img src="../assets/images/progress/table-img.png" alt="progress-table-img">
+                    <img
+                      loading="lazy"
+                      src="../assets/images/progress/table-img.png"
+                      alt="progress-table-img"
+                      width="275"
+                      height="280"
+                    >
                   </div>
                 </div>
               </div>
               <div class="progress-cart shadow-custom">
                 <div class="progress-cart-wrp">
                   <div class="progress-cart-content">
-                    <div class="progress-cart-title" data-i18n="coach.progress.cards.photos.title">
+                    <div
+                      class="progress-cart-title"
+                      data-i18n="coach.progress.cards.photos.title"
+                    >
                       Фото прогресу
                     </div>
-                    <div class="progress-cart-description pr-description" data-i18n="coach.progress.cards.photos.description">
+                    <div
+                      class="progress-cart-description pr-description"
+                      data-i18n="coach.progress.cards.photos.description"
+                    >
                       Спостерігайте реальні зміни та мотивуйте
                     </div>
                   </div>
                   <div class="progress-cart-image">
-                    <img src="../assets/images/progress/result-img.png" alt="progress-photo-img">
-                    <p class="progress-cart-image-text progress-cart-image-text--before" data-i18n="coach.progress.cards.photos.before">До</p>
-                    <p class="progress-cart-image-text progress-cart-image-text--after" data-i18n="coach.progress.cards.photos.after">Після</p>
+                    <img
+                      loading="lazy"
+                      src="../assets/images/progress/result-img.png"
+                      alt="progress-photo-img"
+                      width="276"
+                      height="203"
+                    >
+                    <p
+                      class="progress-cart-image-text progress-cart-image-text--before"
+                      data-i18n="coach.progress.cards.photos.before"
+                    >
+                      До
+                    </p>
+                    <p
+                      class="progress-cart-image-text progress-cart-image-text--after"
+                      data-i18n="coach.progress.cards.photos.after"
+                    >
+                      Після
+                    </p>
                   </div>
                 </div>
               </div>
@@ -578,25 +1148,42 @@
         <div class="automatisation-wrp section-wrp">
           <div class="section-content">
             <div class="section-name section-name--nowrap">
-              <span data-i18n="coach.automatisation.sectionName">Автоматизація і ефективність</span>
+              <span data-i18n="coach.automatisation.sectionName">
+                Автоматизація і ефективність
+              </span>
             </div>
             <div class="section-title">
-              <span data-i18n="coach.automatisation.sectionTitle">Менше рутини —</span>
+              <span data-i18n="coach.automatisation.sectionTitle">
+                Менше рутини —
+              </span>
             </div>
             <div class="gradient-title">
-              <span data-i18n="coach.automatisation.gradientTitle">більше результату</span>
+              <span data-i18n="coach.automatisation.gradientTitle">
+                більше результату
+              </span>
             </div>
             <div class="section-description description-progress">
-              <p data-i18n="coach.automatisation.description">StableFit бере на себе адміністративну роботу, щоб ви фокусувались на процесі, а не на таблицях.</p>
+              <p data-i18n="coach.automatisation.description">
+                StableFit бере на себе адміністративну роботу, 
+                щоб ви фокусувались на процесі, а не на таблицях.
+              </p>
             </div>
           </div>
           <div class="automatisation-carts">
             <div class="automatisation-card">
               <div class="automatisation-card-frame">
                 <div class="automatisation-card-content">
-                  <div class="progress-cart-title" data-i18n="coach.automatisation.cards.first.title">Ефективний тренувальний процес</div>
-                  <div class="progress-cart-description" data-i18n="coach.automatisation.cards.first.description">
-                    Створюйте індивідуальні програми за лічені хвилини, а додаток збиратиме 
+                  <div
+                    class="progress-cart-title"
+                    data-i18n="coach.automatisation.cards.first.title"
+                  >
+                    Ефективний тренувальний процес
+                  </div>
+                  <div
+                    class="progress-cart-description"
+                    data-i18n="coach.automatisation.cards.first.description"
+                  >
+                    Створюйте індивідуальні програми за лічені хвилини, а додаток збиратиме
                     фідбек після тренувань і допомагатиме коригувати навантаження без зайвої комунікації.
                   </div>
                 </div>
@@ -604,27 +1191,65 @@
                   <div class="automation-mini-cards">
                     <div class="automation-mini-card">
                       <div class="automation-mini-card-icon-wrap automation-mini-card-icon-wrap--heart">
-                        <img src="../assets/icons/hearth-Icon.svg" alt="heart icon">
+                        <img
+                          loading="lazy"
+                          src="../assets/icons/hearth-Icon.svg"
+                          alt="heart icon"
+                          width="17"
+                          height="17"
+                        >
                         <span class="automation-mini-card-check" aria-hidden="true"></span>
                       </div>
                       <div class="automation-mini-card-info">
-                        <div class="automation-mini-card-title" data-i18n="coach.automatisation.cards.first.mini.first.title">Біг на біговій доріжці x1</div>
+                        <div
+                          class="automation-mini-card-title"
+                          data-i18n="coach.automatisation.cards.first.mini.first.title"
+                        >
+                          Біг на біговій доріжці x1
+                        </div>
                         <div class="automation-mini-card-status automation-mini-card-status--easy">
-                          <img src="../assets/icons/easy-icon.svg" alt="easy icon">
-                          <span data-i18n="coach.automatisation.cards.first.mini.first.status">Легко</span>
+                          <img
+                            loading="lazy"
+                            src="../assets/icons/easy-icon.svg"
+                            alt="easy icon"
+                            width="11"
+                            height="11"
+                          >
+                          <span data-i18n="coach.automatisation.cards.first.mini.first.status">
+                            Легко
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div class="automation-mini-card">
                       <div class="automation-mini-card-icon-wrap automation-mini-card-icon-wrap--book">
-                        <img src="../assets/icons/book-Icon.svg" alt="book icon">
+                        <img
+                          loading="lazy"
+                          src="../assets/icons/book-Icon.svg"
+                          alt="book icon"
+                          width="17"
+                          height="17"
+                        >
                         <span class="automation-mini-card-check" aria-hidden="true"></span>
                       </div>
                       <div class="automation-mini-card-info">
-                        <div class="automation-mini-card-title" data-i18n="coach.automatisation.cards.first.mini.second.title">Книжечка x3</div>
+                        <div
+                          class="automation-mini-card-title"
+                          data-i18n="coach.automatisation.cards.first.mini.second.title"
+                        >
+                          Книжечка x3
+                        </div>
                         <div class="automation-mini-card-status automation-mini-card-status--normal">
-                          <img src="../assets/icons/nrm-icon.svg" alt="normal icon">
-                          <span data-i18n="coach.automatisation.cards.first.mini.second.status">Нормально</span>
+                          <img
+                            loading="lazy"
+                            src="../assets/icons/nrm-icon.svg"
+                            alt="normal icon"
+                            width="11"
+                            height="11"
+                          >
+                          <span data-i18n="coach.automatisation.cards.first.mini.second.status">
+                            Нормально
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -635,20 +1260,55 @@
             <div class="automatisation-card">
               <div class="automatisation-card-frame">
                 <div class="automatisation-card-content">
-                  <div class="progress-cart-title" data-i18n="coach.automatisation.cards.second.title">Підтримка мотивації клієнтів</div>
-                  <div class="progress-cart-description" data-i18n="coach.automatisation.cards.second.description">
-                    Система допомагає фіксувати заміри та результати тренувань, формуючи наочний 
+                  <div
+                    class="progress-cart-title"
+                    data-i18n="coach.automatisation.cards.second.title"
+                  >
+                    Підтримка мотивації клієнтів
+                  </div>
+                  <div
+                    class="progress-cart-description"
+                    data-i18n="coach.automatisation.cards.second.description"
+                  >
+                    Система допомагає фіксувати заміри та результати тренувань, формуючи наочний
                     прогрес. Клієнти бачать зміни й <br>залишаються залученими без додаткових нагадувань.
                   </div>
                 </div>
                 <div class="automatisation-card-image">
                   <div class="automation-feature-card">
-                    <img src="../assets/icons/medal-icon.svg" alt="medal icon" class="automation-feature-icon">
-                    <div class="automation-feature-title" data-i18n="coach.automatisation.cards.second.feature.title">Тренування завершено!</div>
-                    <div class="automation-feature-subtitle" data-i18n="coach.automatisation.cards.second.feature.subtitle">Плечі, руки, прес</div>
+                    <img
+                      loading="lazy"
+                      src="../assets/icons/medal-icon.svg"
+                      alt="medal icon"
+                      class="automation-feature-icon"
+                      width="45"
+                      height="53"
+                    >
+                    <div
+                      class="automation-feature-title"
+                      data-i18n="coach.automatisation.cards.second.feature.title"
+                    >
+                      Тренування завершено!
+                    </div>
+                    <div
+                      class="automation-feature-subtitle"
+                      data-i18n="coach.automatisation.cards.second.feature.subtitle"
+                    >
+                      Плечі, руки, прес
+                    </div>
                     <ul class="automation-feature-points">
-                      <li class="automation-feature-points-item" data-i18n="coach.automatisation.cards.second.feature.point1">10/11 вправ виконано</li>
-                      <li class="automation-feature-points-item" data-i18n="coach.automatisation.cards.second.feature.point2">30/33 підходів виконано</li>
+                      <li
+                        class="automation-feature-points-item"
+                        data-i18n="coach.automatisation.cards.second.feature.point1"
+                      >
+                        10/11 вправ виконано
+                      </li>
+                      <li
+                        class="automation-feature-points-item"
+                        data-i18n="coach.automatisation.cards.second.feature.point2"
+                      >
+                        30/33 підходів виконано
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -657,18 +1317,44 @@
             <div class="automatisation-card">
               <div class="automatisation-card-frame">
                 <div class="automatisation-card-content">
-                  <div class="progress-cart-title" data-i18n="coach.automatisation.cards.third.title">Автоматичні нагадування про заміри та показники</div>
+                  <div
+                    class="progress-cart-title"
+                    data-i18n="coach.automatisation.cards.third.title"
+                  >
+                    Автоматичні нагадування про заміри та показники
+                  </div>
                   <div class="progress-cart-description">
-                    <span data-i18n="coach.automatisation.cards.third.description.line1">Додаток сам нагадує клієнтам про заміри у потрібний час.</span><br><span data-i18n="coach.automatisation.cards.third.description.line2">Автоматизація зменшує контроль з вашого боку та допомагає клієнтам стабільно відстежувати прогрес.</span>
+                    <span data-i18n="coach.automatisation.cards.third.description.line1">
+                      Додаток сам нагадує клієнтам про заміри у потрібний час.
+                    </span>
+                    <br>
+                    <span data-i18n="coach.automatisation.cards.third.description.line2">
+                      Автоматизація зменшує контроль з вашого боку та допомагає клієнтам стабільно відстежувати прогрес.
+                    </span>
                   </div>
                 </div>
                 <div class="automatisation-card-image automation-note-card-parent">
                   <div class="automation-note-card">
                     <div class="automation-note-card-head">
-                      <img src="../assets/icons/remember-Icon.svg" alt="note icon" class="automation-note-card-icon">
-                      <div class="automation-note-card-title" data-i18n="coach.automatisation.cards.third.noteTitle">Нагадування активні</div>
+                      <img
+                        loading="lazy"
+                        src="../assets/icons/remember-Icon.svg"
+                        alt="note icon"
+                        class="automation-note-card-icon"
+                        width="14"
+                        height="14"
+                      >
+                      <div
+                        class="automation-note-card-title"
+                        data-i18n="coach.automatisation.cards.third.noteTitle"
+                      >
+                        Нагадування активні
+                      </div>
                     </div>
-                    <div class="automation-note-card-description" data-i18n="coach.automatisation.cards.third.noteDescription">
+                    <div
+                      class="automation-note-card-description"
+                      data-i18n="coach.automatisation.cards.third.noteDescription"
+                    >
                       Система автоматично повідомляє клієнтів про заміри та контрольні точки прогресу.
                     </div>
                   </div>
@@ -678,14 +1364,29 @@
             <div class="automatisation-card">
               <div class="automatisation-card-frame">
                 <div class="automatisation-card-content">
-                  <div class="progress-cart-title" data-i18n="coach.automatisation.cards.fourth.title">Інструменти, що роблять тебе професіоналом</div>
-                  <div class="progress-cart-description" data-i18n="coach.automatisation.cards.fourth.description">
+                  <div
+                    class="progress-cart-title"
+                    data-i18n="coach.automatisation.cards.fourth.title"
+                  >
+                    Інструменти, що роблять тебе професіоналом
+                  </div>
+                  <div
+                    class="progress-cart-description"
+                    data-i18n="coach.automatisation.cards.fourth.description"
+                  >
                     Усі процеси працюють системно. Це підсилює ваш експертний образ,
                     підвищує довіру клієнтів і покращує результати роботи.
                   </div>
                 </div>
                 <div class="automatisation-card-image">
-                  <img src="../assets/images/graf-result-img.png" alt="automation-efficiency-image" class="automation-efficiency-image">
+                  <img
+                    loading="lazy"
+                    src="../assets/images/graf-result-img.png"
+                    alt="automation-efficiency-image"
+                    class="automation-efficiency-image"
+                    width="218"
+                    height="170"
+                  >
                 </div>
               </div>
             </div>
@@ -698,21 +1399,32 @@
       <div class="container">
         <div class="how-to-start-wrp section-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.howToStart.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.howToStart.sectionName"
+            >
               Як це працює
             </div>
-            <div class="section-title" data-i18n="coach.howToStart.sectionTitle">
-              Почніть за 
+            <div
+              class="section-title"
+              data-i18n="coach.howToStart.sectionTitle"
+            >
+              Почніть за
             </div>
-            <div class="gradient-title" data-i18n="coach.howToStart.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.howToStart.gradientTitle"
+            >
               3 простих кроки
             </div>
             <div class="section-description description-progress">
-              <p data-i18n="coach.howToStart.description">Без тривалого налаштування. Додай першого клієнта вже зараз.</p>
+              <p data-i18n="coach.howToStart.description">
+                Без тривалого налаштування. Додай першого клієнта вже зараз.
+              </p>
             </div>
             <a
               href="#"
-              class="try-button btn btn-hover-transparent"
+              class="try-button btn-cl btn-hover-transparent"
               data-i18n="buttons.tryFree"
             >
               Спробувати безкоштовно
@@ -722,45 +1434,85 @@
             <div class="how-to-start-card shadow-custom">
               <div class="how-to-start-card-head">
                 <div class="how-to-start-card-icon-wrap" aria-hidden="true">
-                  <img src="../assets/icons/manage_clients_icon.svg" alt="" width="24" height="24">
+                  <img
+                    loading="lazy"
+                    src="../assets/icons/manage_clients_icon.svg"
+                    alt=""
+                    width="24"
+                    height="24"
+                  >
                 </div>
                 <div class="how-to-start-card-number">01</div>
               </div>
               <div class="how-to-start-card-content">
-                <div class="progress-cart-title" data-i18n="coach.howToStart.steps.first.title">Реєструйтесь та додавайте клієнтів</div>
-                <div class="progress-cart-description" data-i18n="coach.howToStart.steps.first.description">
+                <div
+                  class="progress-cart-title"
+                  data-i18n="coach.howToStart.steps.first.title"
+                >
+                  Реєструйтесь та додавайте клієнтів
+                </div>
+                <div
+                  class="progress-cart-description"
+                  data-i18n="coach.howToStart.steps.first.description"
+                >
                   Завантажуйте додаток, створюйте профіль та додавайте клієнтів. Клієнт отримає запрошення
                   зареєструватися, і обидва додатки синхронізуються.
                 </div>
               </div>
             </div>
-
             <div class="how-to-start-card shadow-custom">
               <div class="how-to-start-card-head">
                 <div class="how-to-start-card-icon-wrap" aria-hidden="true">
-                  <img src="../assets/icons/train-lib-icon.svg" alt="" width="24" height="24">
+                  <img
+                    loading="lazy"
+                    src="../assets/icons/train-lib-icon.svg"
+                    alt=""
+                    width="24"
+                    height="24"
+                  >
                 </div>
                 <div class="how-to-start-card-number">02</div>
               </div>
               <div class="how-to-start-card-content">
-                <div class="progress-cart-title" data-i18n="coach.howToStart.steps.second.title">Додавайте програми тренувань</div>
-                <div class="progress-cart-description" data-i18n="coach.howToStart.steps.second.description">
+                <div
+                  class="progress-cart-title"
+                  data-i18n="coach.howToStart.steps.second.title"
+                >
+                  Додавайте програми тренувань
+                </div>
+                <div
+                  class="progress-cart-description"
+                  data-i18n="coach.howToStart.steps.second.description"
+                >
                   Користуйтесь готовою бібліотекою тренувань або додавайте власні. Складайте персональну програму
                   тренувань для кожного клієнта.
                 </div>
               </div>
             </div>
-
             <div class="how-to-start-card shadow-custom">
               <div class="how-to-start-card-head">
                 <div class="how-to-start-card-icon-wrap" aria-hidden="true">
-                  <img src="../assets/icons/progress-icon.svg" alt="" width="24" height="24">
+                  <img
+                    loading="lazy"
+                    src="../assets/icons/progress-icon.svg"
+                    alt=""
+                    width="24"
+                    height="24"
+                  >
                 </div>
                 <div class="how-to-start-card-number">03</div>
               </div>
               <div class="how-to-start-card-content">
-                <div class="progress-cart-title" data-i18n="coach.howToStart.steps.third.title">Тренуйте та мотивуйте</div>
-                <div class="progress-cart-description" data-i18n="coach.howToStart.steps.third.description">
+                <div
+                  class="progress-cart-title"
+                  data-i18n="coach.howToStart.steps.third.title"
+                >
+                  Тренуйте та мотивуйте
+                </div>
+                <div
+                  class="progress-cart-description"
+                  data-i18n="coach.howToStart.steps.third.description"
+                >
                   Клієнт тренується та заповнює дані про виконані активності, вносить прийоми їжі. Спостерігайте
                   прогрес разом та мотивуйте своїх клієнтів.
                 </div>
@@ -773,73 +1525,172 @@
 
     <section class="testimonials section-wrp">
       <div class="container">
-        <div class="testimonials-wrp ">
+        <div class="testimonials-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.testimonials.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.testimonials.sectionName"
+            >
               Відгуки тренерів
             </div>
-            <div class="section-title" data-i18n="coach.testimonials.sectionTitle">
+            <div
+              class="section-title"
+              data-i18n="coach.testimonials.sectionTitle"
+            >
               Чому тренери
             </div>
-            <div class="gradient-title" data-i18n="coach.testimonials.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.testimonials.gradientTitle"
+            >
               обирають StableFit
             </div>
             <div class="section-description description-testimonials">
-              <p data-i18n="coach.testimonials.description">Створено для сучасного фітнес-фахівця, який хоче масштабувати свій бізнес без додаткових інструментів.</p>
+              <p data-i18n="coach.testimonials.description">
+                Створено для сучасного фітнес-фахівця, який хоче масштабувати 
+                свій бізнес без додаткових інструментів.
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div class="testimonials-content">
-        <div class="testimonials-marquee" role="region" data-i18n-aria="coach.testimonials.marqueeAria">
+        <div
+          class="testimonials-marquee"
+          role="region"
+          data-i18n-aria="coach.testimonials.marqueeAria"
+        >
           <div class="testimonials-marquee-track">
             <div class="testimonials-marquee-set">
               <article class="testimonial-card shadow-custom">
                 <div class="testimonial-card-inner">
-                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
-                  <p class="testimonial-card-text" data-i18n="coach.testimonials.cards.first.text">
-                    Нарешті маю один додаток замість Telegram, Excel і паперового зошита. Рекомендую всім колегам.
+                  <img
+                    loading="lazy"
+                    class="testimonial-card-quote"
+                    src="../assets/icons/marks-icon.svg"
+                    alt=""
+                    width="20"
+                    height="12"
+                  >
+                  <p
+                    class="testimonial-card-text"
+                    data-i18n="coach.testimonials.cards.first.text"
+                  >
+                    Нарешті маю один додаток замість Telegram, Excel і паперового зошита. 
+                    Рекомендую всім колегам.
                   </p>
                   <div class="testimonial-card-author">
-                    <img class="testimonial-card-avatar" src="../assets/images/ch/profiles/pr-ch-1.svg" alt="" width="44" height="47">
+                    <img
+                      loading="lazy"
+                      class="testimonial-card-avatar"
+                      src="../assets/images/ch/profiles/pr-ch-1.svg"
+                      alt=""
+                      width="44"
+                      height="47"
+                    >
                     <div class="testimonial-card-meta">
-                      <div class="testimonial-card-name" data-i18n="coach.testimonials.cards.first.name">Вадим Притула</div>
-                      <div class="testimonial-card-role" data-i18n="coach.testimonials.cards.first.role">Фітнес-тренер, Київ</div>
+                      <div
+                        class="testimonial-card-name"
+                        data-i18n="coach.testimonials.cards.first.name"
+                      >
+                        Вадим Притула
+                      </div>
+                      <div
+                        class="testimonial-card-role"
+                        data-i18n="coach.testimonials.cards.first.role"
+                      >
+                        Фітнес-тренер, Київ
+                      </div>
                     </div>
                   </div>
                 </div>
               </article>
               <article class="testimonial-card shadow-custom">
                 <div class="testimonial-card-inner">
-                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
-                  <p class="testimonial-card-text" data-i18n="coach.testimonials.cards.second.text">
-                    Клієнти самі моніторять прогрес і пишуть з питаннями. Мотивація у них виросла, відтік зменшився вдвічі.
+                  <img
+                    loading="lazy"
+                    class="testimonial-card-quote"
+                    src="../assets/icons/marks-icon.svg"
+                    alt=""
+                    width="20"
+                    height="12"
+                  >
+                  <p
+                    class="testimonial-card-text"
+                    data-i18n="coach.testimonials.cards.second.text"
+                  >
+                    Клієнти самі моніторять прогрес і пишуть з питаннями. 
+                    Мотивація у них виросла, відтік зменшився вдвічі.
                   </p>
                   <div class="testimonial-card-author">
-                    <img class="testimonial-card-avatar" src="../assets/images/ch/profiles/pr-ch-2.svg" alt="" width="44" height="47">
+                    <img
+                      loading="lazy"
+                      class="testimonial-card-avatar"
+                      src="../assets/images/ch/profiles/pr-ch-2.svg"
+                      alt=""
+                      width="44"
+                      height="47"
+                    >
                     <div class="testimonial-card-meta">
-                      <div class="testimonial-card-name" data-i18n="coach.testimonials.cards.second.name">Катерина Сидоренко</div>
-                      <div class="testimonial-card-role" data-i18n="coach.testimonials.cards.second.role">Фітнес-тренер, Київ</div>
+                      <div
+                        class="testimonial-card-name"
+                        data-i18n="coach.testimonials.cards.second.name"
+                      >
+                        Катерина Сидоренко
+                      </div>
+                      <div
+                        class="testimonial-card-role"
+                        data-i18n="coach.testimonials.cards.second.role"
+                      >
+                        Фітнес-тренер, Київ
+                      </div>
                     </div>
                   </div>
                 </div>
               </article>
               <article class="testimonial-card shadow-custom">
                 <div class="testimonial-card-inner">
-                  <img class="testimonial-card-quote" src="../assets/icons/marks-icon.svg" alt="" width="20" height="12">
-                  <p class="testimonial-card-text" data-i18n="coach.testimonials.cards.third.text">
-                    Раніше витрачав 3 години на день на таблиці. Зараз — 20 хвилин. Взяв ще 4 клієнти і заробляю більше.
+                  <img
+                    loading="lazy"
+                    class="testimonial-card-quote"
+                    src="../assets/icons/marks-icon.svg"
+                    alt=""
+                    width="20"
+                    height="12"
+                  >
+                  <p
+                    class="testimonial-card-text"
+                    data-i18n="coach.testimonials.cards.third.text"
+                  >
+                    Раніше витрачав 3 години на день на таблиці. Зараз — 20 хвилин. 
+                    Взяв ще 4 клієнти і заробляю більше.
                   </p>
                   <div class="testimonial-card-author">
-                    <img class="testimonial-card-avatar" src="../assets/images/ch/profiles/pr-ch-3.svg" alt="" width="44" height="47">
+                    <img
+                      loading="lazy"
+                      class="testimonial-card-avatar"
+                      src="../assets/images/ch/profiles/pr-ch-3.svg"
+                      alt=""
+                      width="44"
+                      height="47"
+                    >
                     <div class="testimonial-card-meta">
-                      <div class="testimonial-card-name" data-i18n="coach.testimonials.cards.third.name">Олексій Мельник</div>
-                      <div class="testimonial-card-role" data-i18n="coach.testimonials.cards.third.role">Персональний тренер, Харків</div>
+                      <div
+                        class="testimonial-card-name"
+                        data-i18n="coach.testimonials.cards.third.name"
+                      >
+                        Олексій Мельник
+                      </div>
+                      <div
+                        class="testimonial-card-role"
+                        data-i18n="coach.testimonials.cards.third.role"
+                      >
+                        Персональний тренер, Харків
+                      </div>
                     </div>
                   </div>
                 </div>
               </article>
-              
             </div>
           </div>
         </div>
@@ -850,13 +1701,22 @@
       <div class="container">
         <div class="pricing-wrp section-wrp">
           <div class="section-content">
-            <div class="section-name" data-i18n="coach.pricing.sectionName">
+            <div
+              class="section-name"
+              data-i18n="coach.pricing.sectionName"
+            >
               Тарифи
             </div>
-            <div class="section-title" data-i18n="coach.pricing.sectionTitle">
+            <div
+              class="section-title"
+              data-i18n="coach.pricing.sectionTitle"
+            >
               Чесна ціна,
             </div>
-            <div class="gradient-title" data-i18n="coach.pricing.gradientTitle">
+            <div
+              class="gradient-title"
+              data-i18n="coach.pricing.gradientTitle"
+            >
               без прихованих платежів
             </div>
             <div class="section-description description-testimonials">
@@ -868,21 +1728,44 @@
           <div class="pricing-cards">
             <article class="pricing-card pc-cd shadow-custom">
               <div class="pricing-card-content">
-                <div class="pricing-card-badge pcb-cd" data-i18n="coach.pricing.cards.monthly.badge">
+                <div
+                  class="pricing-card-badge pcb-cd"
+                  data-i18n="coach.pricing.cards.monthly.badge"
+                >
                   Оптимальний
                 </div>
-                <div class="pricing-card-term pct-cd" data-i18n="coach.pricing.cards.monthly.term">на місяць</div>
+                <div
+                  class="pricing-card-term pct-cd"
+                  data-i18n="coach.pricing.cards.monthly.term"
+                >
+                  на місяць
+                </div>
                 <div class="pricing-card-price-row">
-                  <span class="pricing-card-price pcp-cd" data-i18n="coach.pricing.cards.monthly.price">₴349</span>
-                  <span class="pricing-card-price-suffix pcps-cd" data-i18n="coach.pricing.cards.monthly.suffix">/міс</span>
+                  <span
+                    class="pricing-card-price pcp-cd"
+                    data-i18n="coach.pricing.cards.monthly.price"
+                  >
+                    ₴349
+                  </span>
+                  <span
+                    class="pricing-card-price-suffix pcps-cd"
+                    data-i18n="coach.pricing.cards.monthly.suffix"
+                  >
+                    /міс
+                  </span>
                 </div>
                 <div class="pricing-card-note pcn-cd">
-                  <span data-i18n="coach.pricing.cards.monthly.noteLine1">30 днів безкоштовно</span><br>
-                  <span data-i18n="coach.pricing.cards.monthly.noteLine2">платіж стягується щомісяця</span>
+                  <span data-i18n="coach.pricing.cards.monthly.noteLine1">
+                    30 днів безкоштовно
+                  </span>
+                  <br>
+                  <span data-i18n="coach.pricing.cards.monthly.noteLine2">
+                    платіж стягується щомісяця
+                  </span>
                 </div>
                 <a
                   href="#"
-                  class="try-button btn btn-hover-swap pricing-card-button"
+                  class="try-button btn-cl btn-hover-swap pricing-card-button"
                   data-i18n="buttons.tryFree"
                 >
                   Спробувати безкоштовно
@@ -892,21 +1775,44 @@
 
             <article class="pricing-card pc-cy shadow-custom">
               <div class="pricing-card-content">
-                <div class="pricing-card-badge pcb-cy" data-i18n="coach.pricing.cards.yearly.badge">
+                <div
+                  class="pricing-card-badge pcb-cy"
+                  data-i18n="coach.pricing.cards.yearly.badge"
+                >
                   Заощадь 20%
                 </div>
-                <div class="pricing-card-term pct-cd" data-i18n="coach.pricing.cards.yearly.term">На рік</div>
+                <div
+                  class="pricing-card-term pct-cd"
+                  data-i18n="coach.pricing.cards.yearly.term"
+                >
+                  На рік
+                </div>
                 <div class="pricing-card-price-row">
-                  <span class="pricing-card-price pcp-cd" data-i18n="coach.pricing.cards.yearly.price">₴279</span>
-                  <span class="pricing-card-price-suffix pcps-cd" data-i18n="coach.pricing.cards.yearly.suffix">/міс</span>
+                  <span
+                    class="pricing-card-price pcp-cd"
+                    data-i18n="coach.pricing.cards.yearly.price"
+                  >
+                    ₴279
+                  </span>
+                  <span
+                    class="pricing-card-price-suffix pcps-cd"
+                    data-i18n="coach.pricing.cards.yearly.suffix"
+                  >
+                    /міс
+                  </span>
                 </div>
                 <div class="pricing-card-note pcn-cd">
-                  <span data-i18n="coach.pricing.cards.yearly.noteLine1">30 днів безкоштовно</span><br>
-                  <span data-i18n="coach.pricing.cards.yearly.noteLine2">платіж ₴3,360 стягується щороку</span>
+                  <span data-i18n="coach.pricing.cards.yearly.noteLine1">
+                    30 днів безкоштовно
+                  </span>
+                  <br>
+                  <span data-i18n="coach.pricing.cards.yearly.noteLine2">
+                    платіж ₴3,360 стягується щороку
+                  </span>
                 </div>
                 <a
                   href="#"
-                  class="try-button btn btn-hover-transparent pricing-card-button"
+                  class="try-button btn-cl btn-hover-transparent pricing-card-button"
                   data-i18n="buttons.tryFree"
                 >
                   Спробувати безкоштовно
@@ -923,48 +1829,111 @@
         <div class="download-app-wrp section-wrp">
           <article class="download-app-card pc-cy shadow-custom">
             <div class="download-app-inner">
-              <div class="section-name" data-i18n="coach.downloadApp.sectionName">
+              <div
+                class="section-name"
+                data-i18n="coach.downloadApp.sectionName"
+              >
                 Завантажуйте додаток
               </div>
               <div class="download-app-headline">
-                <span data-i18n="coach.downloadApp.headline.line1">Почніть користуватись</span><br>
-                <span data-i18n="coach.downloadApp.headline.line2">StableFit вже сьогодні</span>
+                <span data-i18n="coach.downloadApp.headline.line1">
+                  Почніть користуватись
+                </span>
+                <br>
+                <span data-i18n="coach.downloadApp.headline.line2">
+                  StableFit вже сьогодні
+                </span>
               </div>
               <div class="section-description download-app-description">
-                <span data-i18n="coach.downloadApp.description.line1">Завантажте додаток для тренерів. Спробуйте безкоштовно.</span><br>
-                <span data-i18n="coach.downloadApp.description.line2">Весь ваш фітнес-процес в одному місці.</span>
+                <span data-i18n="coach.downloadApp.description.line1">
+                  Завантажте додаток для тренерів. Спробуйте безкоштовно.
+                </span>
+                <br>
+                <span data-i18n="coach.downloadApp.description.line2">
+                  Весь ваш фітнес-процес в одному місці.
+                </span>
               </div>
               <div class="card-wrp">
                 <div class="card shadow-custom">
                   <div class="cart-title">
                     <div class="card-icon">
-                      <img src="../assets/icons/apple_icon.svg" alt="apple">
-                      <span data-i18n="coach.hero.store.apple">App Store</span>
-                      <div class="card-arrow" aria-hidden="true"></div>
+                      <img
+                        loading="lazy"
+                        src="../assets/icons/apple_icon.svg"
+                        alt="apple"
+                        width="18"
+                        height="18"
+                      >
+                      <span data-i18n="coach.hero.store.apple">
+                        App Store
+                      </span>
+                      <div
+                        class="card-arrow"
+                        aria-hidden="true"
+                      ></div>
                     </div>
-                    <div class="card-device" data-i18n="coach.hero.store.ios">iOS</div>
+                    <div
+                      class="card-device"
+                      data-i18n="coach.hero.store.ios"
+                    >
+                      iOS
+                    </div>
                   </div>
                   <div class="card-image-container">
-                    <img src="../assets/images/appStore_download.svg" alt="appStore_download" class="card-image">
+                    <img
+                      loading="lazy"
+                      src="../assets/images/appStore_download.svg"
+                      alt="appStore_download"
+                      class="card-image"
+                      width="108"
+                      height="108"
+                    >
                   </div>
                   <div class="card-footer">
-                    <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                    <span data-i18n="card.footerScan">
+                      скануйте для завантаження
+                    </span>
                   </div>
                 </div>
                 <div class="card shadow-custom">
                   <div class="cart-title">
                     <div class="card-icon">
-                      <img src="../assets/icons/googlePlay_icon.svg" alt="googlePlay">
-                      <span data-i18n="coach.hero.store.google">Google Play</span>
-                      <div class="card-arrow" aria-hidden="true"></div>
+                      <img
+                        loading="lazy"
+                        src="../assets/icons/googlePlay_icon.svg"
+                        alt="googlePlay"
+                        width="12"
+                        height="13"
+                      >
+                      <span data-i18n="coach.hero.store.google">
+                        Google Play
+                      </span>
+                      <div
+                        class="card-arrow"
+                        aria-hidden="true"
+                      ></div>
                     </div>
-                    <div class="card-device" data-i18n="coach.hero.store.android">Android</div>
+                    <div
+                      class="card-device"
+                      data-i18n="coach.hero.store.android"
+                    >
+                      Android
+                    </div>
                   </div>
                   <div class="card-image-container">
-                    <img src="../assets/images/googlePlay_download.svg" alt="googlePlay_download" class="card-image">
+                    <img
+                      loading="lazy"
+                      src="../assets/images/googlePlay_download.svg"
+                      alt="googlePlay_download"
+                      class="card-image"
+                      width="108"
+                      height="108"
+                    >
                   </div>
                   <div class="card-footer">
-                    <span data-i18n="card.footerScan">скануйте для завантаження</span>
+                    <span data-i18n="card.footerScan">
+                      скануйте для завантаження
+                    </span>
                   </div>
                 </div>
               </div>
@@ -982,64 +1951,81 @@
           <div class="content-item">
             <div class="footer-title">
               <div class="logo">
-                <img src="../assets/images/Logo.svg" alt="logo" data-i18n-alt="meta.logoAlt">
+                <img
+                  loading="lazy"
+                  src="../assets/images/Logo.svg"
+                  alt="logo"
+                  data-i18n-alt="meta.logoAlt"
+                  width="57"
+                  height="28"
+                >
               </div>
-              <div class="title" data-i18n="meta.brand">
+              <div
+                class="title"
+                data-i18n="meta.brand"
+              >
                 StableFit
               </div>
             </div>
-              <p class="footer-list-item footer-description" data-i18n="footer.description">
-                Платформа, що об'єднує фітнес-тренерів та їхніх клієнтів для досягнення видатних результатів.
-              </p>
-              <div class="localisation footerlocalisation">
-                <div
-                  class="localisation-item is-active"
-                  data-lang="ua" role="button"
-                  tabindex="0"
-                  data-i18n-aria="aria.langUa"
-                >
-                  UA
-                </div>
-                <div
-                  class="localisation-item"
-                  data-lang="en"
-                  role="button"
-                  tabindex="0"
-                  data-i18n-aria="aria.langEn"
-                >
-                  EN
-                </div>
+            <p
+              class="footer-list-item footer-description"
+              data-i18n="footer.description"
+            >
+              Платформа, що об'єднує фітнес-тренерів та їхніх клієнтів для досягнення видатних результатів.
+            </p>
+            <div class="localisation footerlocalisation">
+              <div
+                class="localisation-item is-active"
+                data-lang="ua" role="button"
+                tabindex="0"
+                data-i18n-aria="aria.langUa"
+              >
+                UA
               </div>
+              <div
+                class="localisation-item"
+                data-lang="en"
+                role="button"
+                tabindex="0"
+                data-i18n-aria="aria.langEn"
+              >
+                EN
+              </div>
+            </div>
           </div>
           <div class="content-item">
-            <div class="footer-title" data-i18n="footer.platform">
+            <div
+              class="footer-title"
+              data-i18n="footer.platform"
+            >
               Платформа
             </div>
             <ul class="footer-list">
               <li class="footer-list-item">
-                <a href="/coach" 
-                  class="landing-link" 
-                  data-landing="coach" 
+                <a
+                  href="/coach"
+                  class="landing-link is-active"
+                  data-landing="coach"
                   data-i18n="nav.coaches"
                 >
                   Для тренерів
                 </a>
               </li>
               <li class="footer-list-item">
-                <a 
-                  href="/client" 
-                  class="landing-link is-active" 
-                  data-landing="client" 
+                <a
+                  href="/client"
+                  class="landing-link"
+                  data-landing="client"
                   data-i18n="nav.clients"
                 >
                   Для клієнтів
                 </a>
               </li>
               <li class="footer-list-item">
-                <a 
-                  href="/support" 
-                  class="landing-link" 
-                  data-landing="support" 
+                <a
+                  href="/support"
+                  class="landing-link"
+                  data-landing="support"
                   data-i18n="nav.support"
                 >
                   Підтримка
@@ -1048,38 +2034,98 @@
             </ul>
           </div>
           <div class="content-item">
-            <div class="footer-title" data-i18n="footer.contacts.title">
+            <div
+              class="footer-title"
+              data-i18n="footer.contacts.title"
+            >
               Контакти
             </div>
             <ul class="footer-list">
               <li class="footer-list-item">
-                <img src="../assets/icons/mail-icon.svg" alt="email_icon"><p data-i18n="footer.contacts.email">support@stable-fit.com</p>
+                <img
+                  loading="lazy"
+                  src="../assets/icons/mail-icon.svg"
+                  alt="email_icon"
+                  width="18"
+                  height="18"
+                >
+                <p data-i18n="footer.contacts.email">
+                  support@stable-fit.com
+                </p>
               </li>
               <li class="footer-list-item">
-                <img src="../assets/icons/tg-icon.svg" alt="telegram_icon"><p data-i18n="footer.contacts.telegram">t.me/stable_fit</p>
+                <img
+                  loading="lazy"
+                  src="../assets/icons/tg-icon.svg"
+                  alt="telegram_icon"
+                  width="18"
+                  height="18"
+                >
+                <p data-i18n="footer.contacts.telegram">
+                  t.me/stable_fit
+                </p>
               </li>
             </ul>
           </div>
           <div class="content-item">
-            <div class="footer-title" data-i18n="footer.company.title">
+            <div
+              class="footer-title"
+              data-i18n="footer.company.title"
+            >
               Деталі компанії
             </div>
             <ul class="footer-list">
-              <li class="footer-list-item" data-i18n="footer.company.name">SavvaDev - Ihor Savva</li>
-              <li class="footer-list-item" data-i18n="footer.company.address">ul. Bobrowiecka 10/6700-728 Warszawa, Poland</li>
-              <li class="footer-list-item" data-i18n="footer.company.nip">NIP: 5214103415</li>
-              <li class="footer-list-item" data-i18n="footer.company.regon">REGON: 540758121</li>
+              <li
+                class="footer-list-item"
+                data-i18n="footer.company.name"
+              >
+                SavvaDev - Ihor Savva
+              </li>
+              <li
+                class="footer-list-item"
+                data-i18n="footer.company.address"
+              >
+                ul. Bobrowiecka 10/6700-728 Warszawa, Poland
+              </li>
+              <li
+                class="footer-list-item"
+                data-i18n="footer.company.nip"
+              >
+                NIP: 5214103415
+              </li>
+              <li
+                class="footer-list-item"
+                data-i18n="footer.company.regon"
+              >
+                REGON: 540758121
+              </li>
             </ul>
           </div>
         </div>
         <div class="underfooter">
-          <div class="underfooter-item" data-i18n="footer.under.copy">© 2026 StableFit Technologies Ltd. Усі права захищені.</div>
+          <div
+            class="underfooter-item"
+            data-i18n="footer.under.copy"
+          >
+            © 2026 StableFit Technologies Ltd. Усі права захищені.
+          </div>
           <div class="underfooter-content">
-            <a href="../privacy-policy/" class="underfooter-item" data-i18n="footer.under.privacy">Політика конфіденційності</a>
-            <a href="../terms-and-conditions/" class="underfooter-item" data-i18n="footer.under.terms">Умови використання</a>
+            <a
+              href="../privacy-policy/"
+              class="underfooter-item"
+              data-i18n="footer.under.privacy"
+            >
+              Політика конфіденційності
+            </a>
+            <a
+              href="../terms-and-conditions/"
+              class="underfooter-item"
+              data-i18n="footer.under.terms"
+            >
+              Умови використання
+            </a>
           </div>
         </div>
-        
       </div>
     </div>
   </footer>

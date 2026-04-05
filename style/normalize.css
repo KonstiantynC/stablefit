@@ -1,3 +1,7 @@
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
@@ -12,7 +16,7 @@
   --color-card-border: #6341E138;
   --color-card-bg: #6341E1;
   --color-text-primary: #6A49E2;
-  --font-family-primary: 'Urbanist', sans-serif;
+  --font-family-primary: 'Urbanist', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --color-gradient-cl-1: #7926B6;
   --color-gradient-cl-2: #A241E9;
   --color-red: #9B3131;
@@ -39,6 +43,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
