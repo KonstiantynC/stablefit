@@ -1044,30 +1044,46 @@
 }
 
 .testimonials-marquee-track {
-  display: flex;
+  position: relative;
   width: max-content;
-  will-change: transform;
-  animation: testimonials-marquee var(--testimonials-marquee-duration, 45s) linear infinite;
 }
 
-@keyframes testimonials-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-1 * var(--testimonials-marquee-shift, 50%)));
-  }
+
+.testimonials-marquee.testimonials-marquee--loop-ready {
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+
+.testimonials-marquee-track.testimonials-marquee-track--raf {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonials-marquee-track {
-    animation: none;
+  .testimonials-marquee-track.testimonials-marquee-track--raf {
+    will-change: auto;
   }
+}
+
+.testimonials-marquee-chunk {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
 .testimonials-marquee-set {
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
   align-items: stretch;
   gap: 24px;
   padding: 16px;
