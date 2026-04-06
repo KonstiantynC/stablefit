@@ -605,4 +605,14 @@
     .catch(() => {
       refreshTestimonialsMarquee();
     });
+
+  if ("serviceWorker" in navigator) {
+    const swUrl = new URL("sw.js", scriptUrl);
+    const scopeUrl = new URL("../", scriptUrl).href;
+    navigator.serviceWorker
+      .register(swUrl, { scope: scopeUrl, updateViaCache: "none" })
+      .catch((err) => {
+        console.warn("[StableFit] service worker not registered:", err);
+      });
+  }
 })();
