@@ -572,7 +572,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     height: auto;
   }
 
-  /* Testimonials: 400px cards */
   .testimonial-card {
     width: min(400px, calc(100vw - 2 * var(--sf-header-pad-x)));
     max-width: min(400px, calc(100vw - 2 * var(--sf-header-pad-x)));
@@ -646,6 +645,8 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 44px;
   }
 
+
+
   .automatisation-card-content {
     width: 100%;
     max-width: 100%;
@@ -656,6 +657,8 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     width: 100%;
     max-width: 100%;
   }
+
+
 
   .automatisation-card-image .automation-efficiency-image {
     width: min(218px, 100%);
@@ -678,9 +681,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   f-slider: horizontal carousel (tablet / mobile / iPad)
-   ----------------------------------------------------------------------------- */
+
 @media (max-width: 1023px) {
   .f-slider-wrp {
     margin-top: 48px;
@@ -721,7 +722,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--sf-header-pad-x);
-    /* Свайп / scrollTo из JS сохраняются, полоса прокрутки скрыта */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -767,7 +767,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* Functionality: явно visible у ланцюгу, щоб sticky + scroll-синк у main.js не блокувались overflow на предках */
 @media (min-width: 1024px) {
   section.functionality .container,
   section.functionality .functionality-wrp,
@@ -777,9 +776,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Testimonials marquee & misc blocks
-   ----------------------------------------------------------------------------- */
+
 @media (max-width: 1023px) {
   .testimonials-marquee {
     margin-left: calc(-1 * var(--sf-header-pad-x));
@@ -794,9 +791,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Footer & download CTA
-   ----------------------------------------------------------------------------- */
 @media (max-width: 1023px) {
   .footer-container {
     flex-direction: column;
@@ -830,9 +824,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Legal / doc pages
-   ----------------------------------------------------------------------------- */
 @media (max-width: 1023px) {
   main {
     overflow: hidden;
@@ -861,13 +852,13 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Tablet / small laptop: 1024px–1360px — desktop row layouts from style.css;
-   container 980px; titles −8px / descriptions −4px; hero & functionality images −25%.
-   ----------------------------------------------------------------------------- */
 @media (min-width: 1024px) and (max-width: 1360px) {
   .container {
     max-width: 980px;
+  }
+
+  .progress-cart-description {
+    width: 300px !important;
   }
 
   .header-wrp {
@@ -875,7 +866,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     padding: 11px 20px;
   }
 
-  /* Base desktop: title 44px / description 16px → 36px / 12px */
   .section-title,
   .gradient-title,
   .gradient_cl-title {
@@ -947,7 +937,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     padding: 22px;
   }
 
-  /* Progress: дві колонки на ширину контейнера, компактні картки та типографіка */
   section.progress .progress-wrp > .progress-carts {
     display: flex;
     flex-direction: row;
@@ -1064,11 +1053,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   section.progress .progress-cart-image-text--after {
-    right: 84px;
+    right: 54px;
     bottom: 8px;
   }
 
-  /* How to start: три картки в один ряд на ширину контейнера */
   .how-to-start .how-to-start-cards {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -1122,6 +1110,8 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     max-width: none;
   }
 
+
+
   .pricing-cards {
     gap: 18px;
   }
@@ -1167,7 +1157,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 24px;
   }
 
-  /* Два рядки по 2 колонки (4 блоки) */
   .footer-content {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1210,7 +1199,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 48px;
   }
 
-  /* Functionality: slider images −25% від поточних обмежень цього діапазону */
   .f-slider-wrp .content-right-image-wrp:has(> img:only-child) img[alt="manage_clients_image"] {
     max-width: calc((100% - 21px) / 2 * 1.4);
   }
@@ -1219,7 +1207,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     max-width: calc((100% - 21px) / 2 * 0.85);
   }
 
-  /* Automatisation: одна колонка карток */
   .automatisation-carts {
     display: flex;
     flex-direction: column;
@@ -1252,12 +1239,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   .automatisation-card-frame {
-    width: min(500px, 100%);
     max-width: 100%;
   }
 }
 
-/* Progress: дві колонки — обмежити висоту таблиці, щоб вирівняти з лівою карткою */
 @media (min-width: 1024px) {
   section.progress .progress-cart-image img[alt="progress-table-img"] {
     max-height: clamp(148px, 18vw, 220px);
@@ -1269,9 +1254,6 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Laptop (MacBook-class): breathing room without mobile chrome
-   ----------------------------------------------------------------------------- */
 @media (max-width: 1440px) and (min-width: 1361px) {
   .header-wrp {
     width: min(761px, calc(100% - 48px));

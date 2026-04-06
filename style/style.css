@@ -1477,6 +1477,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  scroll-margin-top: calc(24px + 62px + 16px);
 }
 
 .download-app .container {

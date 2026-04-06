@@ -26,7 +26,6 @@ self.addEventListener("install", (event) => {
           try {
             await cache.add(url);
           } catch {
-            // offline or missing file during install
           }
         })
       );

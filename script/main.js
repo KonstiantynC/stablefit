@@ -364,6 +364,18 @@
     window.addEventListener("load", runInitialSync, { once: true });
   }
 
+  function initScrollToDownloadApp() {
+    const target = document.getElementById("download-app");
+    if (!target) return;
+
+    document.querySelectorAll("a.download-button, a.try-button").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
   function initMobileNav() {
     const burger = document.querySelector(".header-burger");
     const drawer = document.querySelector(".header-drawer");
@@ -610,6 +622,7 @@
 
   initFSliderAccordion();
   initFSliderScrollSync();
+  initScrollToDownloadApp();
   initMobileNav();
 
   setLanguage(currentLanguage)
