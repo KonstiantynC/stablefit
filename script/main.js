@@ -607,7 +607,9 @@
     });
 
   if ("serviceWorker" in navigator) {
-    const swUrl = new URL("sw.js", scriptUrl);
+    // sw.js must live at site root (/sw.js), not under /script/, so scope "/" is valid
+    // without Service-Worker-Allowed (required if worker script is in a subdirectory).
+    const swUrl = new URL("../sw.js", scriptUrl);
     const scopeUrl = new URL("../", scriptUrl).href;
     navigator.serviceWorker
       .register(swUrl, { scope: scopeUrl, updateViaCache: "none" })

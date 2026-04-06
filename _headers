@@ -1,0 +1,3 @@
+# Netlify / Cloudflare Pages: headers for service worker
+/sw.js
+  Cache-Control: no-cache
