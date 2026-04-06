@@ -358,6 +358,10 @@
     contentRight.addEventListener("scroll", requestCarouselSync, { passive: true });
     mq.addEventListener("change", runInitialSync);
 
+    requestAnimationFrame(() => {
+      runInitialSync();
+    });
+    window.addEventListener("load", runInitialSync, { once: true });
   }
 
   function initMobileNav() {
@@ -405,6 +409,8 @@
 
   function initTestimonialsMarquee() {
     const MARQUEE_CARD_GAP_PX = 24;
+    const MARQUEE_CARD_WIDTH_PX = 400;
+    const MARQUEE_MAX_SET_COPIES = 12;
     const marquees = Array.from(document.querySelectorAll(".testimonials-marquee"));
     if (!marquees.length) return () => {};
 
@@ -479,12 +485,20 @@
         `gap:${MARQUEE_CARD_GAP_PX}px;padding:0;box-sizing:border-box;`;
       seedCards.forEach((c) => measureRow.appendChild(c.cloneNode(true)));
       document.body.appendChild(measureRow);
-      const baseSetWidth = Math.max(measureRow.getBoundingClientRect().width, 1);
+      const measuredW = Math.max(
+        measureRow.getBoundingClientRect().width,
+        measureRow.scrollWidth
+      );
       document.body.removeChild(measureRow);
 
-      const copiesNeeded = Math.max(
-        2,
-        Math.ceil((viewportWidth + baseSetWidth) / baseSetWidth) + 1
+      const estimatedMinWidth =
+        seedCards.length * MARQUEE_CARD_WIDTH_PX +
+        Math.max(0, seedCards.length - 1) * MARQUEE_CARD_GAP_PX;
+      const baseSetWidth = Math.max(measuredW, estimatedMinWidth, 1);
+
+      const copiesNeeded = Math.min(
+        MARQUEE_MAX_SET_COPIES,
+        Math.max(2, Math.ceil((viewportWidth + baseSetWidth) / baseSetWidth) + 1)
       );
 
       const chunkA = document.createElement("div");

@@ -763,6 +763,16 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
+/* Functionality: явно visible у ланцюгу, щоб sticky + scroll-синк у main.js не блокувались overflow на предках */
+@media (min-width: 1024px) {
+  section.functionality .container,
+  section.functionality .functionality-wrp,
+  section.functionality .f-slider-wrp,
+  section.functionality .f-slider-item[data-f-slider-scroll-sync] {
+    overflow: visible;
+  }
+}
+
 /* ----------------------------------------------------------------------------- 
    Testimonials marquee & misc blocks
    ----------------------------------------------------------------------------- */
@@ -902,25 +912,27 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     padding-right: 71px;
   }
 
-  /* Hero: images −25% (scale поверх існуючого 0.95) */
+
   .hero .image-wrp {
     min-height: 465px;
   }
 
   .hero .image-wrp img[alt="inner_hero"] {
-    transform: translate(-50%, -50%) scale(calc(0.95 * 0.75));
+    transform: translate(-50%, -50%)
+      scale(
+        min(
+          0.95,
+          calc(0.7125 + (100vw - 1024px) / 256px * 0.2375)
+        )
+      );
   }
 
   .hero .image-wrp img[alt="inner_hero"]:first-child {
-    margin-left: 15px;
+    margin-left: calc(-25px + (100vw - 1024px) * 45 / 336);
   }
 
   .hero .image-wrp img[alt="inner_hero"]:last-child {
-    margin-left: 124px;
-  }
-
-  .content-left {
-    max-width: 360px;
+    margin-left: calc(84px + (100vw - 1024px) * 81 / 336);
   }
 
   .features-carts {
@@ -1139,10 +1151,51 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .footer-container {
     padding-left: var(--sf-header-pad-x);
     padding-right: var(--sf-header-pad-x);
+    box-sizing: border-box;
   }
 
+  .footer-wrp {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  /* Два рядки по 2 колонки (4 блоки) */
   .footer-content {
-    gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+    row-gap: 40px;
+    align-items: flex-start;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .footer-content .content-item {
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+  }
+
+  .footer-list {
+    align-items: center;
+  }
+
+  .underfooter {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .underfooter-content {
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
   .f-slider-wrp {
@@ -1159,16 +1212,39 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   .f-slider-wrp .content-right-image-wrp:has(> img:nth-child(2):last-child) img[alt="manage_clients_image"] {
-    max-width: calc((100% - 21px) / 2 * 0.675);
+    max-width: calc((100% - 21px) / 2 * 0.85);
   }
 
+  /* Automatisation: одна колонка карток */
   .automatisation-carts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
     gap: 28px;
+    width: 100%;
     padding-block: 20px 36px;
+    overflow-x: visible;
   }
 
-  .automatisation-card {
+  .automatisation-carts .automatisation-card {
+    flex: none;
+    width: 100%;
+    min-width: 0;
     gap: 24px;
+    margin-right: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+  }
+
+  .automatisation-carts .automatisation-card:not(:first-child) {
+    border-top: 1px solid #ffffff0d;
+    padding-top: 28px;
+  }
+
+  .automatisation-carts .automatisation-card:nth-child(2n) {
+    border-left: none;
   }
 
   .automatisation-card-frame {
