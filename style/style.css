@@ -616,6 +616,8 @@
 
 .progress-cart-image {
   position: relative;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .progress-cart-image-text {

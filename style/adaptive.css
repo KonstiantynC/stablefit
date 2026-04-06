@@ -531,6 +531,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     max-width: 100% !important;
   }
 
+  section.progress .progress-cart-image {
+    margin-inline: auto;
+  }
+
   /* How to start: cards were 380px fixed */
   .how-to-start-cards {
     flex-direction: column;
@@ -1060,7 +1064,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   section.progress .progress-cart-image-text--after {
-    right: 62px;
+    right: 84px;
     bottom: 8px;
   }
 
