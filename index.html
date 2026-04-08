@@ -182,11 +182,11 @@
       font-weight: 600;
       text-decoration: none;
       color: #fff;
-      border: 1px solid transparent;
+      border: none;
       cursor: pointer;
-      /* як .btn + .btn-hover-transparent у normalize.css */
-      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
-        box-shadow 0.25s ease, transform 0.2s ease;
+      /* як .btn + .btn-hover-transparent: обводка на hover через box-shadow */
+      transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease,
+        transform 0.2s ease;
       animation: sf-choice-in 0.45s ease backwards;
     }
 
@@ -200,8 +200,7 @@
     .sf-choice--coach:hover {
       background: transparent;
       color: var(--sf-choice-hover-accent);
-      border-color: var(--sf-choice-hover-accent);
-      box-shadow: none;
+      box-shadow: 0 0 0 1px var(--sf-choice-hover-accent);
     }
 
     .sf-choice--client {
@@ -214,8 +213,7 @@
     .sf-choice--client:hover {
       background: transparent;
       color: var(--sf-choice-hover-accent);
-      border-color: var(--sf-choice-hover-accent);
-      box-shadow: none;
+      box-shadow: 0 0 0 1px var(--sf-choice-hover-accent);
     }
 
     .sf-choice--coach:hover,

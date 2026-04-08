@@ -91,23 +91,13 @@
 <body class="page-coach">
   <header>
     <div class="header-wrp">
-      <div class="header-logo">
-        <div class="logo">
-          <img
-            loading="lazy"
-            src="../assets/images/Logo.svg"
-            alt="header logo"
-            data-i18n-alt="meta.logoAlt"
-            width="57"
-            height="28"
-          >
-        </div>
-        <div 
-          class="title" 
-          data-i18n="meta.brand"
+      <div class="header-logo-wrap">
+        <img
+          loading="lazy"
+          src="../assets/images/Logo.svg"
+          alt="header logo"
+          data-i18n-alt="meta.logoAlt"
         >
-          StableFit
-        </div>
       </div>
       <button
         type="button"
@@ -181,23 +171,13 @@
     >
       <div class="header-drawer-inner">
         <div class="header-drawer-top">
-          <div class="header-logo">
-            <div class="logo">
-              <img
-                loading="lazy"
-                src="../assets/images/Logo.svg"
-                alt=""
-                data-i18n-alt="meta.logoAlt"
-                width="57"
-                height="28"
-              >
-            </div>
-            <div
-              class="title"
-              data-i18n="meta.brand"
+          <div class="header-logo-wrap">
+            <img
+              loading="lazy"
+              src="../assets/images/Logo.svg"
+              alt=""
+              data-i18n-alt="meta.logoAlt"
             >
-              StableFit
-            </div>
           </div>
           <button
             type="button"
@@ -412,7 +392,7 @@
               class="section-name"
               data-i18n="coach.features.sectionName"
             >
-              Проблеми та Рішення
+              Проблеми та рішення
             </div>
             <div
               class="section-title"
@@ -1087,15 +1067,13 @@
                       Аналізуйте динаміку ваги
                     </div>
                   </div>
-                  <div class="progress-cart-image">
                     <img
                       loading="lazy"
-                      src="../assets/images/progress/table-img.png"
+                      src="../assets/images/progress/table-img.svg"
                       alt="progress-table-img"
-                      width="275"
-                      height="280"
+                      width="244"
+                      height="265"
                     >
-                  </div>
                 </div>
               </div>
               <div class="progress-cart shadow-custom">
@@ -1271,7 +1249,9 @@
                     data-i18n="coach.automatisation.cards.second.description"
                   >
                     Система допомагає фіксувати заміри та результати тренувань, формуючи наочний
-                    прогрес. Клієнти бачать зміни й <br>залишаються залученими без додаткових нагадувань.
+                    прогрес. Клієнти бачать зміни й
+                    <br>
+                    залишаються залученими без додаткових нагадувань.
                   </div>
                 </div>
                 <div class="automatisation-card-image">
@@ -1348,14 +1328,14 @@
                         class="automation-note-card-title"
                         data-i18n="coach.automatisation.cards.third.noteTitle"
                       >
-                        Нагадування активні
+                        Час додати заміри!
                       </div>
                     </div>
                     <div
                       class="automation-note-card-description"
                       data-i18n="coach.automatisation.cards.third.noteDescription"
                     >
-                      Система автоматично повідомляє клієнтів про заміри та контрольні точки прогресу.
+                      Онови показники, щоб бачити прогрес.
                     </div>
                   </div>
                 </div>
@@ -1381,7 +1361,7 @@
                 <div class="automatisation-card-image">
                   <img
                     loading="lazy"
-                    src="../assets/images/graf-result-img.png"
+                    src="../assets/images/graf-result-img.svg"
                     alt="automation-efficiency-image"
                     class="automation-efficiency-image"
                     width="218"
@@ -1738,7 +1718,7 @@
                   class="pricing-card-term pct-cd"
                   data-i18n="coach.pricing.cards.monthly.term"
                 >
-                  на місяць
+                  На місяць
                 </div>
                 <div class="pricing-card-price-row">
                   <span
@@ -1950,22 +1930,12 @@
         <div class="footer-content">
           <div class="content-item">
             <div class="footer-title">
-              <div class="logo">
-                <img
+              <img
                   loading="lazy"
                   src="../assets/images/Logo.svg"
                   alt="logo"
                   data-i18n-alt="meta.logoAlt"
-                  width="57"
-                  height="28"
-                >
-              </div>
-              <div
-                class="title"
-                data-i18n="meta.brand"
               >
-                StableFit
-              </div>
             </div>
             <p
               class="footer-list-item footer-description"
@@ -1993,7 +1963,8 @@
               </div>
             </div>
           </div>
-          <div class="content-item">
+          <div class="footer-content-group">
+            <div class="content-item">
             <div
               class="footer-title"
               data-i18n="footer.platform"
@@ -2004,7 +1975,7 @@
               <li class="footer-list-item">
                 <a
                   href="/coach"
-                  class="landing-link is-active"
+                  class="landing-link"
                   data-landing="coach"
                   data-i18n="nav.coaches"
                 >
@@ -2033,7 +2004,7 @@
               </li>
             </ul>
           </div>
-          <div class="content-item">
+            <div class="content-item">
             <div
               class="footer-title"
               data-i18n="footer.contacts.title"
@@ -2049,9 +2020,12 @@
                   width="18"
                   height="18"
                 >
-                <p data-i18n="footer.contacts.email">
+                <a
+                  href="mailto:support@stable-fit.com"
+                  data-i18n="footer.contacts.email"
+                >
                   support@stable-fit.com
-                </p>
+                </a>
               </li>
               <li class="footer-list-item">
                 <img
@@ -2061,45 +2035,51 @@
                   width="18"
                   height="18"
                 >
-                <p data-i18n="footer.contacts.telegram">
+                <a
+                  href="https://t.me/stable_fit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="footer.contacts.telegram"
+                >
                   t.me/stable_fit
-                </p>
+                </a>
               </li>
             </ul>
           </div>
-          <div class="content-item">
-            <div
-              class="footer-title"
-              data-i18n="footer.company.title"
-            >
-              Деталі компанії
+            <div class="content-item">
+              <div
+                class="footer-title"
+                data-i18n="footer.company.title"
+              >
+                Деталі компанії
+              </div>
+              <ul class="footer-list">
+                <li
+                  class="footer-list-item"
+                  data-i18n="footer.company.name"
+                >
+                  SavvaDev - Ihor Savva
+                </li>
+                <li
+                  class="footer-list-item"
+                  data-i18n="footer.company.address"
+                >
+                  ul. Bobrowiecka 10/6700-728 Warszawa, Poland
+                </li>
+                <li
+                  class="footer-list-item"
+                  data-i18n="footer.company.nip"
+                >
+                  NIP: 5214103415
+                </li>
+                <li
+                  class="footer-list-item"
+                  data-i18n="footer.company.regon"
+                >
+                  REGON: 540758121
+                </li>
+              </ul>
             </div>
-            <ul class="footer-list">
-              <li
-                class="footer-list-item"
-                data-i18n="footer.company.name"
-              >
-                SavvaDev - Ihor Savva
-              </li>
-              <li
-                class="footer-list-item"
-                data-i18n="footer.company.address"
-              >
-                ul. Bobrowiecka 10/6700-728 Warszawa, Poland
-              </li>
-              <li
-                class="footer-list-item"
-                data-i18n="footer.company.nip"
-              >
-                NIP: 5214103415
-              </li>
-              <li
-                class="footer-list-item"
-                data-i18n="footer.company.regon"
-              >
-                REGON: 540758121
-              </li>
-            </ul>
           </div>
         </div>
         <div class="underfooter">

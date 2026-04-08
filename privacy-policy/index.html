@@ -20,20 +20,13 @@
 <body class="page-doc">
   <header>
     <div class="header-wrp">
-      <div class="header-logo">
-        <div class="logo">
-          <img
-            loading="lazy"
-            src="../assets/images/Logo.svg"
-            alt="header logo"
-            data-i18n-alt="meta.logoAlt"
-            width="57"
-            height="28"
-          >
-        </div>
-        <div class="title" data-i18n="meta.brand">
-          StableFit
-        </div>
+      <div class="header-logo-wrap">
+        <img
+          loading="lazy"
+          src="../assets/images/Logo.svg"
+          alt="header logo"
+          data-i18n-alt="meta.logoAlt"
+        >
       </div>
       <button
         type="button"
@@ -106,23 +99,13 @@
     >
       <div class="header-drawer-inner">
         <div class="header-drawer-top">
-          <div class="header-logo">
-            <div class="logo">
-              <img
-                loading="lazy"
-                src="../assets/images/Logo.svg"
-                alt=""
-                data-i18n-alt="meta.logoAlt"
-                width="57"
-                height="28"
-              >
-            </div>
-            <div
-              class="title"
-              data-i18n="meta.brand"
+          <div class="header-logo-wrap">
+            <img
+              loading="lazy"
+              src="../assets/images/Logo.svg"
+              alt=""
+              data-i18n-alt="meta.logoAlt"
             >
-              StableFit
-            </div>
           </div>
           <button
             type="button"
@@ -292,22 +275,12 @@
         <div class="footer-content">
           <div class="content-item">
             <div class="footer-title">
-              <div class="logo">
-                <img
+              <img
                   loading="lazy"
                   src="../assets/images/Logo.svg"
                   alt="logo"
                   data-i18n-alt="meta.logoAlt"
-                  width="57"
-                  height="28"
-                >
-              </div>
-              <div
-                class="title"
-                data-i18n="meta.brand"
               >
-                StableFit
-              </div>
             </div>
             <p
               class="footer-list-item footer-description"
@@ -335,7 +308,8 @@
               </div>
             </div>
           </div>
-          <div class="content-item">
+          <div class="footer-content-group">
+            <div class="content-item">
             <div class="footer-title" data-i18n="footer.platform">
               Платформа
             </div>
@@ -372,7 +346,7 @@
               </li>
             </ul>
           </div>
-          <div class="content-item">
+            <div class="content-item">
             <div class="footer-title" data-i18n="footer.contacts.title">
               Контакти
             </div>
@@ -385,9 +359,12 @@
                   width="18"
                   height="18"
                 >
-                <p data-i18n="footer.contacts.email">
+                <a
+                  href="mailto:support@stable-fit.com"
+                  data-i18n="footer.contacts.email"
+                >
                   support@stable-fit.com
-                </p>
+                </a>
               </li>
               <li class="footer-list-item">
                 <img
@@ -397,13 +374,18 @@
                   width="18"
                   height="18"
                 >
-                <p data-i18n="footer.contacts.telegram">
+                <a
+                  href="https://t.me/stable_fit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="footer.contacts.telegram"
+                >
                   t.me/stable_fit
-                </p>
+                </a>
               </li>
             </ul>
           </div>
-          <div class="content-item">
+            <div class="content-item">
             <div
               class="footer-title"
               data-i18n="footer.company.title"
@@ -436,6 +418,7 @@
                 REGON: 540758121
               </li>
             </ul>
+          </div>
           </div>
         </div>
         <div class="underfooter">

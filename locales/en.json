@@ -182,7 +182,7 @@
         },
         "second": {
           "title": "Client motivation support",
-          "description": "The system helps track measurements and workout results, building clear progress visibility. Clients see changes and stay engaged without additional reminders.",
+          "description": "The system helps track measurements and workout results, building clear progress visibility.\nClients see changes and stay engaged without additional reminders.",
           "feature": {
             "title": "Workout completed!",
             "subtitle": "Shoulders, arms, abs",

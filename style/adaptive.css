@@ -305,10 +305,10 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     display: none;
   }
 
-  .header-wrp > .header-logo {
+  .header-wrp > .header-logo-wrap {
     flex: 1;
     min-width: 0;
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 
@@ -808,6 +808,14 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 40px;
   }
 
+  .footer-content-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+  }
+
   .footer-content .content-item {
     width: 100%;
     max-width: 400px;
@@ -890,6 +898,13 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   .f-slider-description-text {
     font-size: 12px;
     line-height: 22px;
+  }
+
+  section.functionality .content-left .f-slider-title-text,
+  section.functionality .content-left .f-slider-description-text,
+  section.functionality .content-left .cart-list-item,
+  section.functionality .content-left .f-slider-accordion-trigger {
+    font-size: 15px;
   }
 
   .section-content {
@@ -1142,6 +1157,11 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     line-height: 20px;
   }
 
+  section.functionality .content-left .cart-list-item {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
   .footer-container {
     padding-left: var(--sf-header-pad-x);
     padding-right: var(--sf-header-pad-x);
@@ -1158,19 +1178,42 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   .footer-content {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 32px;
-    row-gap: 40px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 0;
+    row-gap: 0;
+    gap: 173px;
     align-items: flex-start;
-    justify-items: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
   }
 
-  .footer-content .content-item {
-    width: 100%;
-    max-width: 400px;
-    align-items: center;
+  .footer-content > .content-item:first-child {
+    width: 338px;
+    flex: 0 0 338px;
+    max-width: 338px;
+    align-items: flex-start;
+  }
+
+  .footer-content-group {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 96px;
+    flex: 1 1 auto;
+  }
+
+  .footer-content-group .content-item {
+    width: 180px;
+    flex: 0 0 180px;
+    max-width: 180px;
+    align-items: flex-start;
+  }
+
+  .footer-content-group .content-item:last-child {
+    width: 163px;
+    flex: 0 0 163px;
+    max-width: 163px;
   }
 
   .footer-list {

@@ -2,7 +2,7 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
-  const LOCALE_CACHE_VERSION = "4";
+  const LOCALE_CACHE_VERSION = "1";
   const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');
@@ -78,12 +78,33 @@
     const isSupport = /\/support\/?$/i.test(path) || lastSegment === "support";
 
     document.querySelectorAll(".landing-link[data-landing]").forEach((link) => {
+      if (link.closest("footer")) {
+        link.classList.remove("is-active");
+        return;
+      }
+
       const landing = link.dataset.landing;
       const isActive =
         (landing === "coach" && isCoach) ||
         (landing === "client" && isClient) ||
         (landing === "support" && isSupport);
       link.classList.toggle("is-active", isActive);
+    });
+  }
+
+  function setI18nTextContent(node, text) {
+    if (typeof text !== "string") return;
+    if (!text.includes("\n")) {
+      node.textContent = text;
+      return;
+    }
+    node.textContent = "";
+    const parts = text.split("\n");
+    parts.forEach((part, index) => {
+      node.appendChild(document.createTextNode(part));
+      if (index < parts.length - 1) {
+        node.appendChild(document.createElement("br"));
+      }
     });
   }
 
@@ -101,7 +122,7 @@
         return;
       }
 
-      node.textContent = translatedText;
+      setI18nTextContent(node, translatedText);
     });
 
     document.querySelectorAll("[data-i18n-aria]").forEach((node) => {

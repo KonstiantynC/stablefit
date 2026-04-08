@@ -8,12 +8,11 @@
 
 .header-wrp {
   width: 761px;
-  height: 62px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 24px;
+  padding: 14px 16px;
   position: fixed;
   top: 24px;
   left: 50%;
@@ -21,36 +20,54 @@
   z-index: 100;
   border: 1px solid;
   border-color: var(--color-border);
-  border-radius: 24px;
+  border-radius: 100px;
   color: var(--color-white);
   background-color: rgba(10, 10, 10, 0.45);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
-.header-logo, .header-nav, .localisation {
+.header-nav, .localisation {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
 
 }
 
-.header-logo {
-  gap: 10px;
+.header-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-wrp .header-logo-wrap img,
+.header-drawer-top .header-logo-wrap img {
+  width: 128px;
+  height: 26px;
+  display: block;
 }
 
 .header-nav {
-  gap: 8px;
+  gap: 24px;
 }
 
 .nav-item {
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .landing-link {
   color: var(--color-gray-1);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 26px;
+  min-height: 26px;
 }
 
 .landing-link.is-active {
@@ -61,10 +78,19 @@
   gap: 16px;
 }
 
+/* Между UA/EN — 16px (gap). До кнопки «Завантажити» — 16 (gap) + 16 (margin) = 32px */
+.header-wrp .localisation .download-button {
+  margin-left: 16px;
+}
+
 .localisation-item {
   color: var(--color-gray-1);
   cursor: pointer;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 26px;
+  min-height: 26px;
 }
 
 .localisation-item.is-active {
@@ -107,7 +133,7 @@
   font-size: 16px;
   line-height: 26px;
   color: var(--color-gray-1);
-  margin: 20px 0 32px 0;
+  margin: 16px 0 32px 0;
   width: 100%;
 }
 
@@ -148,7 +174,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 18px;
   font-weight: 500;
 }
@@ -217,7 +243,7 @@
   font-size: 10px;
   line-height: 14px;
   text-transform: uppercase;
-  color: var(--color-gray-2);
+  color: var(--color-gray-3);
 }
 
 .image-wrp {
@@ -261,6 +287,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 64px;
 }
 
 
@@ -270,6 +297,7 @@
   justify-content: center;
   text-align: center;
   padding: 0 25px;
+  margin-bottom: 0 !important;
 }
 
 .features-carts, .progress-carts {
@@ -310,12 +338,18 @@
   font-size: 20px;
   line-height: 32px;
   font-weight: 700;
+  margin: 8px 0 12px 0;
 }
 
 .cart-list {
   color: var(--color-gray-1);
   list-style: none;
   padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .cart-list-item {
@@ -370,7 +404,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 79px;
 }
 
 .f-slider-item {
@@ -388,6 +421,13 @@
   top: 100px;
   align-self: flex-start;
   z-index: 1;
+}
+
+section.functionality .content-left .f-slider-title-text,
+section.functionality .content-left .f-slider-description-text,
+section.functionality .content-left .cart-list-item,
+section.functionality .content-left .f-slider-accordion-trigger {
+  font-size: 15px;
 }
 
 .content-right {
@@ -620,6 +660,21 @@
   max-width: 100%;
 }
 
+.progress-cart-image-wrp img[alt="progress-full-body-img"] {
+  width: 370px;
+  height: auto;
+}
+
+.progress-cart-image img[alt="progress-table-img"] {
+  width: 310px;
+  height: 100%;
+}
+
+.progress-cart-image img[alt="progress-photo-img"] {
+  width: 331px;
+  height: auto;
+}
+
 .progress-cart-image-text {
   position: absolute;
   display: inline-flex;
@@ -639,7 +694,7 @@
 }
 
 .progress-cart-image-text--after {
-  right: 84px;
+  right: 96px;
   bottom: 12px;
 }
 
@@ -714,6 +769,7 @@
 }
 
 .automatisation-card-image {
+  height: 100%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1024,13 +1080,11 @@
   margin-bottom: 80px;
 }
 
-.testimonials-wrp {
-  margin-bottom: 24px;
-}
 
 .description-testimonials {
   max-width: 532px;
   text-align: center;
+  margin-bottom: 0 !important;
 }
 
 .testimonials-content {
@@ -1359,7 +1413,7 @@
 }
 
 .pricing-cards {
-  width: 766.67px;
+  width: 780px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -1385,13 +1439,14 @@
 .pricing-card-badge {
   margin-top: 0;
   width: fit-content;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 3px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  font-size: 9.2px;
-  line-height: 100%;
+  justify-content: center;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 29px;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 .pricing-card-term {
@@ -1571,11 +1626,19 @@
 footer {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-top: 1px solid #FFFFFF0D;
   padding: 40px 0 24px 0;
+}
+
+.footer-wrp {
+  max-width: 1224px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-container {
@@ -1588,22 +1651,45 @@ footer {
 }
 
 .footer-content {
+  max-width: 1224px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 64px;
+  gap: 173px;
   border-bottom: 1px solid #FFFFFF0D;
   padding-bottom: 40px;
 }
 
 .content-item {
-  width: 258px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.footer-content > .content-item:first-child {
+  width: 338px;
+  flex: 0 0 338px;
+}
+
+.footer-content-group {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 96px;
+}
+
+.footer-content-group .content-item {
+  width: 180px;
+  flex: 0 0 180px;
+}
+
+.footer-content-group .content-item:last-child {
+  width: 163px;
+  flex: 0 0 163px;
 }
 .footer-logo {
   display: flex;
@@ -1624,6 +1710,11 @@ footer {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+}
+
+.footer-title img {
+  width: 126px;
+  height: 26px;
 }
 
 .footer-list {
@@ -1650,7 +1741,14 @@ footer {
   color: var(--color-gray-1);
 }
 
+.footer-list-item a {
+  color: inherit;
+  text-decoration: none;
+  line-height: 20px;
+}
+
 .underfooter {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
