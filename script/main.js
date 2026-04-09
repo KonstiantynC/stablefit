@@ -2,7 +2,7 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
-  const LOCALE_CACHE_VERSION = "1";
+  const LOCALE_CACHE_VERSION = "2";
   const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');

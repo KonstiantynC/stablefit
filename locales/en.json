@@ -451,6 +451,164 @@
   "card": {
     "footerScan": "scan to download"
   },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy — StableFit",
+      "description": "Privacy Policy for StableFit users.",
+      "ogTitle": "Privacy Policy — StableFit",
+      "ogDescription": "Privacy Policy for StableFit users."
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: 28 November 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "text": "StableFit respects your privacy. This Privacy Policy explains how we collect, use, and share information about you when you use our mobile application and website. Data Controller: Ihor Savva, operating in Poland. Contact: support@stable-fit.com"
+      },
+      "info": {
+        "title": "2. Information We Collect",
+        "items": {
+          "item1": "Account Data: Name, email address, role (Coach or Client).",
+          "item2": "Health & Biometric Data (Sensitive): If you choose to provide it, we collect body measurements (weight, volumes) and progress photos. Processing this data is necessary for the core functionality of the Service.",
+          "item3": "Usage Data: Logs, device information, and performance data."
+        }
+      },
+      "usage": {
+        "title": "3. How We Use Your Information",
+        "items": {
+          "item1": "To provide and maintain the Service.",
+          "item2": "To allow Coaches to view Client progress (only upon Client's assignment).",
+          "item3": "To monitor usage and fix technical issues.",
+          "item4": "We do NOT sell your personal data or photos to third parties."
+        }
+      },
+      "storage": {
+        "title": "4. Data Storage and Security",
+        "items": {
+          "item1": "Storage Provider: Your data (including photos) is stored securely using Supabase (a backend-as-a-service provider).",
+          "item2": "Access Control: Photos are technically accessible only to the authorized Client and their assigned Coach.",
+          "item3": "Data Location: EU (North)",
+          "item4": "Security: While we strive to use commercially acceptable means to protect your data, remember that no method of transmission over the internet is 100% secure."
+        }
+      },
+      "sharing": {
+        "title": "5. Sharing of Information",
+        "items": {
+          "item1": "With Your Coach: Your assigned Coach has access to your progress data and photos. Note: While our app does not have a \"Download\" button, Coaches accessing the service via a web browser may be able to save images using standard browser functions.",
+          "item2": "Legal Requirements: We may disclose your data if required to do so by Polish law or in response to valid requests by public authorities."
+        }
+      },
+      "rights": {
+        "title": "6. Your Rights (GDPR/RODO)",
+        "text": "Users in the European Union have the following rights:",
+        "items": {
+          "item1": "Access: Request a copy of the data we hold about you.",
+          "item2": "Correction: Fix inaccurate data.",
+          "item3": "Deletion: Request deletion of your account and all associated data (photos/measurements).",
+          "item4": "Withdraw Consent: You can stop sharing photos at any time by deleting them or not uploading new ones."
+        }
+      },
+      "retention": {
+        "title": "7. Data Retention",
+        "text": "We retain your personal data only for as long as is necessary for the purposes set out in this Privacy Policy. If you delete your account, your data (including photos) will be removed from our active databases."
+      }
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Service — StableFit",
+      "description": "Terms of Service for StableFit users.",
+      "ogTitle": "Terms of Service — StableFit",
+      "ogDescription": "Terms of Service for StableFit users."
+    },
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated: 28 November 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "text1": "Welcome to StableFit (\"we,\" \"our,\" or \"us\"). These Terms of Service (\"Terms\") govern your use of the StableFit mobile application and website (collectively, the \"Service\"). The Service is operated by Great Solution - Ihor Savva, a Sole Proprietorship registered in Poland.",
+        "text2": "By accessing or using the Service, you agree to be bound by these Terms. If you disagree with any part of the terms, you may not access the Service."
+      },
+      "age": {
+        "title": "2. Age Restriction (Important)",
+        "text": "The Service is intended solely for users who are 18 years of age or older. By accessing or using the Service, you represent and warrant that you are at least 18 years old. We do not knowingly collect information from anyone under the age of 18."
+      },
+      "description": {
+        "title": "3. Description of Service",
+        "text": "StableFit is a platform that facilitates communication and progress tracking between fitness coaches (\"Coaches\") and their clients (\"Clients\").",
+        "items": {
+          "item1": "We are a Tool Provider: StableFit provides the software infrastructure. We do not provide fitness advice, medical diagnosis, or employ the Coaches using our platform.",
+          "item2": "No Coach Verification: We do not verify the credentials, diplomas, or certifications of Coaches. Clients are solely responsible for vetting their Coaches before engaging in any training program."
+        }
+      },
+      "medical": {
+        "title": "4. Medical Disclaimer",
+        "text": "StableFit is not a medical application. The content, charts, and data within the Service are for informational purposes only.",
+        "items": {
+          "item1": "You should consult your physician or other health care practitioner before starting any exercise program.",
+          "item2": "StableFit is not responsible for any health problems, injuries, or damages that may result from training programs provided by Coaches or your use of the Service."
+        }
+      },
+      "content": {
+        "title": "5. User Content & Progress Photos",
+        "items": {
+          "item1": "Voluntary Upload: Clients may choose to upload photos (front, side, back) and body measurements to track progress. Uploading photos is entirely optional.",
+          "item2": "Ownership: You retain all rights to the photos and data you upload.",
+          "item3": "License to Us: By uploading content, you grant StableFit a limited license to store and display this content solely to you and your assigned Coach for the purpose of providing the Service.",
+          "item4": "Prohibited Content: You agree not to upload content that is illegal, pornographic (sexual acts), harassing, or violates any third-party rights. We reserve the right (but have no obligation) to remove such content."
+        }
+      },
+      "payments": {
+        "title": "6. Payments",
+        "items": {
+          "item1": "Service Fees: Currently, StableFit is free to use. We reserve the right to introduce subscription fees for Coaches in the future with prior notice.",
+          "item2": "Coach-Client Payments: Any financial transaction for coaching services is strictly between the Coach and the Client. StableFit is not a party to these transactions and is not responsible for refunds or disputes regarding coaching services."
+        }
+      },
+      "liability": {
+        "title": "7. Limitation of Liability",
+        "text1": "To the maximum extent permitted by applicable law (including Polish Consumer Law), StableFit shall not be liable for any indirect, incidental, special, or consequential damages, including but not limited to damages for loss of profits, data, or goodwill.",
+        "text2": "We explicitly disclaim liability for any actions or advice provided by Coaches to Clients."
+      },
+      "law": {
+        "title": "8. Governing Law",
+        "text": "These Terms shall be governed and construed in accordance with the laws of Poland, without regard to its conflict of law provisions."
+      },
+      "contact": {
+        "title": "9. Contact Us",
+        "text": "If you have any questions about these Terms, please contact us at: support@stable-fit.com"
+      }
+    }
+  },
+  "support": {
+    "meta": {
+      "title": "Support — StableFit",
+      "description": "StableFit support page.",
+      "ogTitle": "Support — StableFit",
+      "ogDescription": "Need help with StableFit? Contact us."
+    },
+    "title": "Support",
+    "lead": "Welcome! We are here to help you get the most out of StableFit — the app for tracking progress, transformation photos, and working with your coach.",
+    "cards": {
+      "how": {
+        "title": "How does StableFit work?",
+        "lead": "StableFit is a mobile app that allows you to:",
+        "items": {
+          "item1": "Record body measurements and track changes",
+          "item2": "Store progress photos and compare results",
+          "item3": "Receive forms and instructions from your coach",
+          "item4": "Receive push notifications about important updates"
+        },
+        "note": "Registration is available only via a personal invite link from your coach. If you have not received a link yet, contact your coach or write to us."
+      },
+      "contact": {
+        "title": "Need help",
+        "lead": "You can contact us with any question:",
+        "emailLabel": "Email",
+        "messageLabel": "Message"
+      }
+    }
+  },
   "footer": {
     "description": "A platform that unites fitness coaches and their clients to achieve outstanding results.",
     "platform": "Platform",

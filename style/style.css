@@ -27,26 +27,19 @@
   backdrop-filter: blur(12px);
 }
 
-.header-nav, .localisation {
+.header-logo, .header-nav, .localisation {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;  
-
 }
 
 .header-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  padding-top: 12px;
 }
 
-.header-wrp .header-logo-wrap img,
-.header-drawer-top .header-logo-wrap img {
-  width: 128px;
-  height: 26px;
-  display: block;
+.header-logo {
+  gap: 10px;
 }
 
 .header-nav {
@@ -62,12 +55,6 @@
 .landing-link {
   color: var(--color-gray-1);
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 26px;
-  min-height: 26px;
 }
 
 .landing-link.is-active {
@@ -78,8 +65,7 @@
   gap: 16px;
 }
 
-/* Между UA/EN — 16px (gap). До кнопки «Завантажити» — 16 (gap) + 16 (margin) = 32px */
-.header-wrp .localisation .download-button {
+.localisation > .download-button {
   margin-left: 16px;
 }
 
@@ -87,10 +73,6 @@
   color: var(--color-gray-1);
   cursor: pointer;
   user-select: none;
-  display: inline-flex;
-  align-items: center;
-  line-height: 26px;
-  min-height: 26px;
 }
 
 .localisation-item.is-active {
@@ -260,7 +242,7 @@
 }
 
 .image-wrp img[alt="inner_hero"]:first-child {
-  margin-left: 20px;
+  margin-left: 10px;
   z-index: 2;
 }
 
@@ -421,13 +403,6 @@
   top: 100px;
   align-self: flex-start;
   z-index: 1;
-}
-
-section.functionality .content-left .f-slider-title-text,
-section.functionality .content-left .f-slider-description-text,
-section.functionality .content-left .cart-list-item,
-section.functionality .content-left .f-slider-accordion-trigger {
-  font-size: 15px;
 }
 
 .content-right {
@@ -656,22 +631,22 @@ section.functionality .content-left .f-slider-accordion-trigger {
 
 .progress-cart-image {
   position: relative;
-  width: fit-content;
-  max-width: 100%;
 }
 
 .progress-cart-image-wrp img[alt="progress-full-body-img"] {
-  width: 370px;
+  width: 376px;
+  max-width: 100%;
   height: auto;
 }
 
-.progress-cart-image img[alt="progress-table-img"] {
-  width: 310px;
-  height: 100%;
+.progress-cart-wrp img[alt="progress-table-img"] {
+  width: 265px;
+  max-width: 100%;
+  height: auto;
 }
 
 .progress-cart-image img[alt="progress-photo-img"] {
-  width: 331px;
+  width: 328px;
   height: auto;
 }
 
@@ -694,7 +669,7 @@ section.functionality .content-left .f-slider-accordion-trigger {
 }
 
 .progress-cart-image-text--after {
-  right: 96px;
+  right: 112px;
   bottom: 12px;
 }
 
@@ -1484,6 +1459,8 @@ section.functionality .content-left .f-slider-accordion-trigger {
   display: inline-flex;
   justify-content: center;
   margin-bottom: 0;
+  border: 1px solid;
+  border-color: transparent;
 }
 
 .pc-cd {
@@ -1532,7 +1509,6 @@ section.functionality .content-left .f-slider-accordion-trigger {
   width: 100%;
   display: flex;
   justify-content: center;
-  scroll-margin-top: calc(24px + 62px + 16px);
 }
 
 .download-app .container {
@@ -1662,6 +1638,12 @@ footer {
   padding-bottom: 40px;
 }
 
+.footer-content-group {
+  display: flex;
+  flex-direction: row;
+  gap: 96px;
+}
+
 .content-item {
   width: 100%;
   display: flex;
@@ -1670,26 +1652,14 @@ footer {
   justify-content: flex-start;
 }
 
-.footer-content > .content-item:first-child {
+.footer-content > .content-item {
   width: 338px;
   flex: 0 0 338px;
 }
 
-.footer-content-group {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 96px;
-}
-
-.footer-content-group .content-item {
+.footer-content-group > .content-item {
   width: 180px;
   flex: 0 0 180px;
-}
-
-.footer-content-group .content-item:last-child {
-  width: 163px;
-  flex: 0 0 163px;
 }
 .footer-logo {
   display: flex;
@@ -1710,11 +1680,6 @@ footer {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-}
-
-.footer-title img {
-  width: 126px;
-  height: 26px;
 }
 
 .footer-list {
@@ -1742,9 +1707,7 @@ footer {
 }
 
 .footer-list-item a {
-  color: inherit;
-  text-decoration: none;
-  line-height: 20px;
+  color: var(--color-gray-1);
 }
 
 .underfooter {

@@ -48,10 +48,6 @@ html {
   box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
 
 body {
   font-family: var(--font-family-primary);
@@ -63,6 +59,8 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--color-white);
+  position: relative;
+  z-index: 0;
 }
 
 body > header,
@@ -72,6 +70,20 @@ body > footer {
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  position: relative;
+}
+
+body > header {
+  z-index: 2;
+}
+
+body > main,
+body > footer {
+  z-index: 1;
+}
+
+body > main {
+  isolation: isolate;
 }
 
 a {
@@ -97,14 +109,14 @@ ul, li {
 
 .hero::before {
   content: "";
-  position: absolute;
+  position: fixed;
   left: 50%;
-  top: -178px;
+  top: 0;
   width: 100vw;
   height: 738px;
   transform: translateX(-50%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
   background: radial-gradient(
     ellipse 1351px 738px at 50% 0%,
     #6341E161 0%,
