@@ -1,10 +1,7 @@
-const CACHE_NAME = "stablefit-static-v3";
+const CACHE_NAME = "stablefit-static-v1";
 
 const PRECACHE_PATHS = [
   "script/main.js",
-  "style/normalize.css",
-  "style/style.css",
-  "style/adaptive.css",
 ];
 
 function cacheBaseUrl() {
@@ -12,7 +9,7 @@ function cacheBaseUrl() {
 }
 
 function shouldHandlePathname(pathname) {
-  return pathname.includes("/script/") || pathname.includes("/style/");
+  return pathname.includes("/script/");
 }
 
 self.addEventListener("install", (event) => {
@@ -46,6 +43,20 @@ self.addEventListener("activate", (event) => {
           return Promise.resolve();
         })
       );
+
+      // Ensure styles are never served from SW cache.
+      const current = await caches.open(CACHE_NAME);
+      const requests = await current.keys();
+      await Promise.all(
+        requests.map((req) => {
+          const pathname = new URL(req.url).pathname;
+          if (pathname.includes("/style/")) {
+            return current.delete(req);
+          }
+          return Promise.resolve();
+        })
+      );
+
       await self.clients.claim();
     })()
   );
