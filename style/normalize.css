@@ -111,11 +111,11 @@ body.sf-landing {
   color: var(--sf-text);
   background: var(--sf-bg);
   position: relative;
-  /* як html: clip не підміняє overflow-y на auto (pair із visible), що ламає position:sticky */
+  
   overflow-x: clip;
 }
 
-/* body з align-items:center стискає flex-дочірні елементи — main має бути на всю ширину для sticky/grid */
+
 #sf-app-content {
   width: 100%;
   max-width: 100%;
@@ -366,7 +366,7 @@ body.sf-landing {
   }
 }
 
-/* Premium stagger animation (SS-only, scalable via --i) */
+
 .stagger-parent {
   --stagger-step: 90ms;
 }
@@ -382,7 +382,7 @@ body.sf-landing {
 
 .stagger-parent.is-visible .stagger-item {
   opacity: 1;
-  /* none — без матриці transform, інакше ламається position:sticky у нащадків */
+  
   transform: none;
 }
 
@@ -419,7 +419,7 @@ ul, li {
 
 .hero {
   position: relative;
-  /* не на весь main — інакше можна зламати sticky у наступних секціях; герой ::before лишається всередині цього контексту */
+  
   isolation: isolate;
 }
 
@@ -559,14 +559,14 @@ ul, li {
   color: var(--color-white);
 }
 
-/* Обводка через box-shadow вместо border — без каймы по краям градиента */
+
 .btn.btn-hover-transparent,
 .btn-cl.btn-hover-transparent {
   box-shadow: 0 0 0 1px transparent;
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Button hover like disabled state (only selected CTA buttons) */
+
 .download-button.btn.btn-hover-transparent,
 .download-button.btn-cl.btn-hover-transparent,
 .try-button.btn.btn-hover-transparent,

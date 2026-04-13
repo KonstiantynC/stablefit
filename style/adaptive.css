@@ -1,8 +1,4 @@
-/*
- * ≤1023px: phone layout (burger, stacked sections, f-slider carousel).
- * 1024px–1360px: desktop layout from style.css + optional tablet tweaks below.
- * ≥1361px: full desktop.
- */
+
 :root {
   --sf-header-break: 1023px;
   --sf-carousel-break: 1023px;
@@ -10,9 +6,7 @@
   --sf-header-pad-x: clamp(16px, 4vw, 24px);
 }
 
-/* ----------------------------------------------------------------------------- 
-   Global: fluid container & base tweaks
-   ----------------------------------------------------------------------------- */
+
 @media (max-width: 1280px) {
   .container {
     width: 100%;
@@ -23,7 +17,7 @@
   }
 }
 
-/* Phones / tablets: full-bleed layout (desktop body uses align-items: center) */
+
 
 @media (min-width: 1200px) {
   .progress-cart-wrp img[alt="progress-table-img"] {
@@ -130,9 +124,7 @@
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Header: desktop vs mobile (burger + full-screen drawer)
-   ----------------------------------------------------------------------------- */
+
 .header-burger {
   display: none;
   flex-direction: column;
@@ -336,9 +328,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 }
 
-/* ----------------------------------------------------------------------------- 
-   Hero
-   ----------------------------------------------------------------------------- */
+
 @media (max-width: 1023px) {
   .hero {
     margin: 100px 0 56px 0;
@@ -390,7 +380,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     margin: 16px 0 24px 0;
   }
 
-  /* Hero phones: larger + tighter — only ≤1023px; desktop stays in style.css */
+  
   .hero .image-wrp {
     min-height: auto;
     aspect-ratio: 4 / 5;
@@ -574,7 +564,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
 
-  /* Progress: desktop uses fixed 580×635px — must fluid on small screens */
+  
   .progress .progress-carts {
     gap: 20px;
   }
@@ -634,7 +624,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     margin-inline: auto;
   }
 
-  /* How to start: cards were 380px fixed */
+  
   .how-to-start-cards {
     flex-direction: column;
     align-items: stretch;
@@ -647,7 +637,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     box-sizing: border-box;
   }
 
-  /* Download CTA: 780×620 fixed */
+  
   .download-app-card {
     width: 100% !important;
     max-width: 100%;
@@ -1249,7 +1239,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     bottom: 8px;
   }
 
-  /* 3rd progress card (photo): fit image into card height and keep badges inside image bounds */
+  
   section.progress .progress-r .progress-cart:last-child .progress-cart-wrp {
     height: 100%;
     align-items: stretch;

@@ -44,7 +44,6 @@ self.addEventListener("activate", (event) => {
         })
       );
 
-      // Ensure styles are never served from SW cache.
       const current = await caches.open(CACHE_NAME);
       const requests = await current.keys();
       await Promise.all(

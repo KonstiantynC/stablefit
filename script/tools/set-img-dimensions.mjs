@@ -1,6 +1,3 @@
-/**
- * Adds width/height to <img> where missing (intrinsic CLS fix). Run: node script/tools/set-img-dimensions.mjs
- */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";

@@ -76,7 +76,7 @@
       /\/for-clients\.html$/i.test(path) ||
       /for-clients\.html$/i.test(window.location.pathname) ||
       lastSegment === "for-clients" ||
-      /\/client\/?$/i.test(path) || // backward compatibility
+      /\/client\/?$/i.test(path) ||
       /\/client\.html$/i.test(path) ||
       /client\.html$/i.test(window.location.pathname) ||
       lastSegment === "client";
@@ -373,7 +373,6 @@
 
       let bestIdx = computeActiveSlideIndex();
 
-      /* Поки перший слайд помітно у вікні — лише перший пункт відкритий; далі синк лише коли перший реально відійшов */
       const r0 = wraps[0].getBoundingClientRect();
       const h0 = r0.height > 0 ? visibleHeightInViewport(r0) / r0.height : 0;
       if (h0 > 0.38) {
@@ -843,8 +842,6 @@
   }
 
   if ("serviceWorker" in navigator) {
-    // sw.js must live at site root (/sw.js), not under /script/, so scope "/" is valid
-    // without Service-Worker-Allowed (required if worker script is in a subdirectory).
     const swUrl = new URL("../sw.js", scriptUrl);
     const scopeUrl = new URL("../", scriptUrl).href;
     navigator.serviceWorker

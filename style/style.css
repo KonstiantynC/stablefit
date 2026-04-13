@@ -1,6 +1,4 @@
-/* ============================== 
-            HEADER 
- ============================= */
+
 .header {
   margin: 0 auto;
 }
@@ -25,7 +23,7 @@
   background-color: rgba(10, 10, 10, 0.45);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  /* обрізає композитинг backdrop, без «ореолу» над контентом поруч */
+  
   overflow: hidden;
   isolation: isolate;
 }
@@ -87,9 +85,7 @@
 }
 
 
-/* ============================== 
-            HERO 
- ============================= */
+
 .hero {
   width: 100%;
   display: flex;
@@ -255,9 +251,7 @@
 }
 
 
-/* ============================== 
-            FEATURES 
- ============================= */
+
 .features {
   width: 100%;
   display: flex;
@@ -374,9 +368,7 @@
 
 
 
-/* ============================== 
-            FUNCTIONALITY 
- ============================= */
+
 
 .description-functionality {
   padding: 0 85px;
@@ -399,7 +391,7 @@
   justify-content: space-between;
 }
 
-/* Десктоп: ряд на всю висоту правої колонки — sticky липне в межах .f-slider-item; не тягнути ряд по центру cross-axis */
+
 @media (min-width: 1024px) {
   section.functionality .f-slider-wrp {
     align-items: flex-start;
@@ -563,7 +555,7 @@
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.35s ease;
-  overflow: hidden; /* prevents panel content from overlapping next headers during animation */
+  overflow: hidden; 
 }
 
 .f-slider-accordion-item.is-open .f-slider-accordion-panel {
@@ -598,9 +590,7 @@
 }
 
 
-/* ============================== 
-            PROGRESS 
- ============================= */
+
 
 
 .description-progress {
@@ -712,9 +702,7 @@
 
 
 
-/* ============================== 
-            AUTOMATISATION 
-============================= */
+
 
 .automatisation-carts {
   width: 100%;
@@ -827,9 +815,7 @@
 
 }
 
-/* ============================== 
-            HOW TO START
-============================= */
+
 
 .how-to-start-cards {
   width: 100%;
@@ -1081,9 +1067,7 @@
   transform: rotate(45deg);
 }
 
-/* ============================== 
-            TESTIMONIALS
-============================= */
+
 
 .testimonials {
   width: 100%;
@@ -1382,9 +1366,7 @@
   justify-content: center;
 }
 
-/* ==============================
-            PRICING
-============================= */
+
 
 .pricing {
   width: 100%;
@@ -1510,9 +1492,7 @@
   color: var(--color-gray-1);
 }
 
-/* ============================== 
-            DOWNLOAD APP
-============================= */
+
 
 .download-app {
   width: 100%;
@@ -1602,9 +1582,7 @@
   object-fit: contain;
 }
 
-/* ============================== 
-            FOOTER
-============================= */
+
 
 
 footer {
@@ -1765,9 +1743,7 @@ a.underfooter-item {
   padding: 8px;
 }
 
-/* ==============================
-       DOCUMENT PAGES (legal, support)
-   ============================= */
+
 
 .page-doc {
   align-items: stretch;
