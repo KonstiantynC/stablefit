@@ -231,14 +231,14 @@
 
   function initFSliderScrollSync() {
     const row = document.querySelector(".f-slider-item[data-f-slider-scroll-sync]");
-    if (!row) return;
+    if (!row) return () => {};
 
     const accordion = row.querySelector("[data-f-slider-accordion]");
     const leftContent = row.querySelector(".content-left");
     const contentRight = row.querySelector(".content-right");
     const wraps = row.querySelectorAll(".content-right-image-wrp");
     const accordionItems = accordion ? accordion.querySelectorAll(".f-slider-accordion-item") : [];
-    if (!accordion || !leftContent || !contentRight || wraps.length === 0) return;
+    if (!accordion || !leftContent || !contentRight || wraps.length === 0) return () => {};
 
     const mq = window.matchMedia("(max-width: 1023px)");
     let lastSyncedIndex = -1;
@@ -364,10 +364,11 @@
       else syncFromScrollDesktop();
     }
 
+    const accordionClickHandlers = [];
     accordionItems.forEach((item, itemIndex) => {
       const trigger = item.querySelector(".f-slider-accordion-trigger");
       if (!trigger) return;
-      trigger.addEventListener("click", () => {
+      const onTriggerClick = () => {
         queueMicrotask(() => {
           if (!item.classList.contains("is-open")) return;
           if (itemIndex >= wraps.length) return;
@@ -377,7 +378,9 @@
             scrollToImageForIndex(itemIndex);
           }
         });
-      });
+      };
+      trigger.addEventListener("click", onTriggerClick);
+      accordionClickHandlers.push([trigger, onTriggerClick]);
     });
 
     window.addEventListener("scroll", onWindowScroll, { passive: true });
@@ -389,18 +392,35 @@
       runInitialSync();
     });
     window.addEventListener("load", runInitialSync, { once: true });
+
+    return () => {
+      window.removeEventListener("scroll", onWindowScroll);
+      window.removeEventListener("resize", runInitialSync);
+      contentRight.removeEventListener("scroll", requestCarouselSync);
+      mq.removeEventListener("change", runInitialSync);
+      accordionClickHandlers.forEach(([trigger, handler]) => {
+        trigger.removeEventListener("click", handler);
+      });
+    };
   }
 
   function initScrollToDownloadApp() {
     const target = document.getElementById("download-app");
-    if (!target) return;
+    if (!target) return () => {};
 
+    const handlers = [];
     document.querySelectorAll("a.download-button, a.try-button").forEach((link) => {
-      link.addEventListener("click", (event) => {
+      const onClick = (event) => {
         event.preventDefault();
         target.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+      };
+      link.addEventListener("click", onClick);
+      handlers.push([link, onClick]);
     });
+
+    return () => {
+      handlers.forEach(([link, onClick]) => link.removeEventListener("click", onClick));
+    };
   }
 
   function initMobileNav() {
@@ -446,35 +466,6 @@
     });
   }
 
-  function initPageCascade() {
-    const root = document.documentElement;
-    const selectors = [
-      "header .header-wrp",
-      "main section",
-      "footer .container",
-    ];
-
-    const items = [];
-    selectors.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((el) => items.push(el));
-    });
-
-    if (!items.length) return;
-
-    items.forEach((el, index) => {
-      el.classList.add("cascade-item");
-      const delay = Math.min(index * 70, 560);
-      el.style.setProperty("--cascade-delay", `${delay}ms`);
-    });
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        root.classList.add("page-cascade-ready");
-      });
-    });
-  }
-
-
   function initTestimonialsMarquee() {
     const tracks = Array.from(document.querySelectorAll(".testimonials-marquee-track"));
     if (!tracks.length) return () => {};
@@ -496,16 +487,123 @@
     return () => {};
   }
 
+  let teardownMainModules = () => {};
+
+  function initMainModules() {
+    teardownMainModules();
+
+    const cleanups = [];
+    initFSliderAccordion();
+
+    const cleanupScrollSync = initFSliderScrollSync();
+    if (typeof cleanupScrollSync === "function") cleanups.push(cleanupScrollSync);
+
+    const cleanupScrollToDownload = initScrollToDownloadApp();
+    if (typeof cleanupScrollToDownload === "function") cleanups.push(cleanupScrollToDownload);
+
+    initTestimonialsMarquee();
+
+    teardownMainModules = () => {
+      cleanups.forEach((fn) => {
+        try {
+          fn();
+        } catch {
+        }
+      });
+    };
+  }
+
+  function getLandingFromPath(pathname) {
+    const path = pathname.replace(/\/index\.html$/i, "");
+    if (/\/for-clients\/?$/i.test(path)) return "client";
+    if (path === "" || path === "/" || /\/coach\/?$/i.test(path)) return "coach";
+    return null;
+  }
+
+  function syncBodyPageClass(doc) {
+    const body = document.body;
+    const incoming = doc.body;
+    if (!incoming) return;
+    body.classList.toggle("page-client", incoming.classList.contains("page-client"));
+    body.classList.toggle("page-coach", incoming.classList.contains("page-coach"));
+    body.classList.remove("nav-open");
+  }
+
+  async function swapLandingMain(url, { push = true } = {}) {
+    const response = await fetch(url, { credentials: "same-origin" });
+    if (!response.ok) throw new Error(`Failed to load ${url}`);
+    const html = await response.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const nextMain = doc.querySelector("main");
+    const currentMain = document.querySelector("main");
+    if (!nextMain || !currentMain) throw new Error("Main not found");
+
+    currentMain.replaceWith(nextMain);
+    syncBodyPageClass(doc);
+    if (doc.title) document.title = doc.title;
+
+    if (push) {
+      window.history.pushState({ sfLandingSwap: true }, "", url);
+    }
+
+    if (lastAppliedDictionary) applyTranslations(lastAppliedDictionary);
+    paintActiveLandingNav();
+    initMainModules();
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
+
+  function initLandingInstantNavigation() {
+    let isNavigating = false;
+
+    document.addEventListener("click", async (event) => {
+      const link = event.target.closest("a.landing-link[data-landing]");
+      if (!link || link.closest("footer")) return;
+
+      const landing = link.dataset.landing;
+      if (landing !== "coach" && landing !== "client") return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (link.target && link.target !== "_self") return;
+      if (isNavigating) return;
+      event.preventDefault();
+
+      const href = link.getAttribute("href");
+      if (!href) return;
+      const nextUrl = new URL(href, window.location.href);
+      const currentLanding = getLandingFromPath(window.location.pathname);
+      const nextLanding = getLandingFromPath(nextUrl.pathname);
+      if (!nextLanding || currentLanding === nextLanding) return;
+
+      isNavigating = true;
+      try {
+        await swapLandingMain(nextUrl.href, { push: true });
+      } catch {
+        window.location.href = nextUrl.href;
+      } finally {
+        isNavigating = false;
+      }
+    });
+
+    window.addEventListener("popstate", async () => {
+      const landing = getLandingFromPath(window.location.pathname);
+      if (!landing) return;
+      try {
+        await swapLandingMain(window.location.href, { push: false });
+      } catch {
+      }
+    });
+  }
+
   currentLanguage = detectInitialLanguage();
   applyCachedDictionaryIfAvailable(currentLanguage);
-  const refreshTestimonialsMarquee = initTestimonialsMarquee();
+  initMainModules();
+  initLandingInstantNavigation();
 
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsMarquee();
+        initTestimonialsMarquee();
       });
     });
 
@@ -515,23 +613,19 @@
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsMarquee();
+        initTestimonialsMarquee();
       });
     });
   });
 
-  initFSliderAccordion();
-  initFSliderScrollSync();
-  initScrollToDownloadApp();
   initMobileNav();
-  initPageCascade();
 
   setLanguage(currentLanguage)
     .then(() => {
-      refreshTestimonialsMarquee();
+      initTestimonialsMarquee();
     })
     .catch(() => {
-      refreshTestimonialsMarquee();
+      initTestimonialsMarquee();
     });
 
   if ("serviceWorker" in navigator) {
