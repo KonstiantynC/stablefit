@@ -25,6 +25,9 @@
   background-color: rgba(10, 10, 10, 0.45);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  /* обрізає композитинг backdrop, без «ореолу» над контентом поруч */
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .header-logo, .header-nav, .localisation {
@@ -394,6 +397,35 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+}
+
+/* Десктоп: ряд на всю висоту правої колонки — sticky липне в межах .f-slider-item; не тягнути ряд по центру cross-axis */
+@media (min-width: 1024px) {
+  section.functionality .f-slider-wrp {
+    align-items: flex-start;
+  }
+
+  .f-slider-item[data-f-slider-scroll-sync] {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: clamp(32px, 4vw, 56px);
+  }
+
+  .f-slider-item[data-f-slider-scroll-sync] .content-left {
+    flex: 0 0 auto;
+    width: min(100%, 480px);
+    max-width: 480px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 112px;
+    align-self: flex-start;
+    z-index: 2;
+  }
+
+  .f-slider-item[data-f-slider-scroll-sync] .content-right {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 }
 
 .content-left {

@@ -211,6 +211,9 @@
 
   function initFSliderAccordion() {
     document.querySelectorAll("[data-f-slider-accordion]").forEach((root) => {
+      if (root.dataset.sfAccordionBound === "1") return;
+      root.dataset.sfAccordionBound = "1";
+
       const items = root.querySelectorAll(".f-slider-accordion-item");
       items.forEach((item, itemIndex) => {
         const trigger = item.querySelector(".f-slider-accordion-trigger");
@@ -250,8 +253,46 @@
       const r = leftContent.getBoundingClientRect();
       const top = Math.max(0, r.top);
       const bottom = Math.min(window.innerHeight, r.bottom);
-      if (bottom <= top) return window.innerHeight / 2;
+      if (bottom <= top) return window.innerHeight * 0.45;
       return (top + bottom) / 2;
+    }
+
+    function computeActiveSlideIndex() {
+      const vh = window.innerHeight;
+      const bandMid = vh * 0.44;
+      const halfBand = Math.min(160, vh * 0.2);
+      const bandTop = bandMid - halfBand;
+      const bandBottom = bandMid + halfBand;
+
+      let bestIdx = 0;
+      let bestOverlap = -1;
+
+      wraps.forEach((wrap, i) => {
+        const r = wrap.getBoundingClientRect();
+        const overlap = Math.max(
+          0,
+          Math.min(r.bottom, bandBottom) - Math.max(r.top, bandTop)
+        );
+        if (overlap > bestOverlap) {
+          bestOverlap = overlap;
+          bestIdx = i;
+        }
+      });
+
+      if (bestOverlap <= 1) {
+        let bestDist = Infinity;
+        wraps.forEach((wrap, i) => {
+          const r = wrap.getBoundingClientRect();
+          const cy = (r.top + r.bottom) / 2;
+          const d = Math.abs(cy - bandMid);
+          if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+          }
+        });
+      }
+
+      return bestIdx;
     }
 
     function scrollToImageForIndex(index) {
@@ -311,19 +352,7 @@
       const rowRect = row.getBoundingClientRect();
       if (rowRect.bottom < 0 || rowRect.top > window.innerHeight) return;
 
-      const refY = getLeftColumnViewportCenterY();
-      let bestIdx = 0;
-      let bestDist = Infinity;
-
-      wraps.forEach((wrap, i) => {
-        const r = wrap.getBoundingClientRect();
-        const cy = r.top + r.height / 2;
-        const d = Math.abs(cy - refY);
-        if (d < bestDist) {
-          bestDist = d;
-          bestIdx = i;
-        }
-      });
+      const bestIdx = computeActiveSlideIndex();
 
       if (bestIdx === lastSyncedIndex) return;
       lastSyncedIndex = bestIdx;
@@ -383,7 +412,36 @@
       accordionClickHandlers.push([trigger, onTriggerClick]);
     });
 
+    let resizeObserver;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        requestDesktopSync();
+        requestCarouselSync();
+      });
+      resizeObserver.observe(row);
+    }
+
+    let slideIntersectionObserver;
+    if (typeof IntersectionObserver !== "undefined") {
+      const onIntersect = () => {
+        if (ignoreScrollSync || mq.matches) return;
+        requestDesktopSync();
+      };
+      slideIntersectionObserver = new IntersectionObserver(onIntersect, {
+        root: null,
+        threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1],
+        rootMargin: "-38% 0px -38% 0px",
+      });
+      wraps.forEach((wrap) => slideIntersectionObserver.observe(wrap));
+    }
+
+    function onScrollEndLike() {
+      if (!mq.matches) requestDesktopSync();
+      else requestCarouselSync();
+    }
+
     window.addEventListener("scroll", onWindowScroll, { passive: true });
+    window.addEventListener("scrollend", onScrollEndLike);
     window.addEventListener("resize", runInitialSync);
     contentRight.addEventListener("scroll", requestCarouselSync, { passive: true });
     mq.addEventListener("change", runInitialSync);
@@ -394,7 +452,10 @@
     window.addEventListener("load", runInitialSync, { once: true });
 
     return () => {
+      if (resizeObserver) resizeObserver.disconnect();
+      if (slideIntersectionObserver) slideIntersectionObserver.disconnect();
       window.removeEventListener("scroll", onWindowScroll);
+      window.removeEventListener("scrollend", onScrollEndLike);
       window.removeEventListener("resize", runInitialSync);
       contentRight.removeEventListener("scroll", requestCarouselSync);
       mq.removeEventListener("change", runInitialSync);
@@ -492,10 +553,10 @@
       return () => {};
     }
 
-    const parentSections = Array.from(document.querySelectorAll("main section"));
+    const parentSections = Array.from(document.querySelectorAll("main > section")).slice(0, 2);
     if (!parentSections.length) return () => {};
 
-    const revealSelector = [
+    const revealSelectorFirstSection = [
       ".section-name",
       ".section-title",
       ".gradient-title",
@@ -504,7 +565,6 @@
       ".content-text",
       ".card",
       ".features-cart",
-      ".f-slider-item",
       ".f-slider-mobile-item",
       ".progress-cart",
       ".how-to-start-card",
@@ -522,6 +582,14 @@
       ".download-app-card img",
     ].join(", ");
 
+    const revealSelectorSecondSectionTitlesOnly = [
+      ".section-name",
+      ".section-title",
+      ".gradient-title",
+      ".gradient_cl-title",
+      ".section-description",
+    ].join(", ");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -537,12 +605,19 @@
       }
     );
 
-    parentSections.forEach((section) => {
+    parentSections.forEach((section, sectionIndex) => {
       section.classList.add("stagger-parent");
-      const rawItems = Array.from(section.querySelectorAll(revealSelector));
+      const selector =
+        sectionIndex === 0 ? revealSelectorFirstSection : revealSelectorSecondSectionTitlesOnly;
+      const rawItems = Array.from(section.querySelectorAll(selector));
       const seen = new Set();
       const items = rawItems.filter((item) => {
         if (seen.has(item)) return false;
+        if (sectionIndex === 0) {
+          const inScrollSync = item.closest("[data-f-slider-scroll-sync]");
+          const inMobileStack = item.closest(".f-slider-mobile-layout");
+          if (inScrollSync && !inMobileStack) return false;
+        }
         seen.add(item);
         return true;
       });
@@ -551,6 +626,17 @@
         item.classList.add("stagger-item");
         item.style.setProperty("--i", String(index));
       });
+
+      if (sectionIndex === 0 && section.classList.contains("hero")) {
+        const heroTitle = section.querySelector(".section-title");
+        const heroImageWrp = section.querySelector(".image-wrp");
+        if (heroTitle && heroImageWrp) {
+          const titleIdx = items.indexOf(heroTitle);
+          if (titleIdx >= 0) {
+            heroImageWrp.style.setProperty("--i", String(titleIdx));
+          }
+        }
+      }
 
       observer.observe(section);
     });
@@ -677,40 +763,58 @@
     });
   }
 
+  function bootLandingInteractions() {
+    initMainModules();
+    initLandingInstantNavigation();
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const lang = button.dataset.lang;
+        if (!lang) return;
+        setLanguage(lang).then(() => {
+          initTestimonialsMarquee();
+        });
+      });
+
+      button.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        const lang = button.dataset.lang;
+        if (!lang) return;
+        setLanguage(lang).then(() => {
+          initTestimonialsMarquee();
+        });
+      });
+    });
+
+    initMobileNav();
+
+    setLanguage(currentLanguage)
+      .then(() => {
+        initTestimonialsMarquee();
+      })
+      .catch(() => {
+        initTestimonialsMarquee();
+      });
+  }
+
   currentLanguage = detectInitialLanguage();
   applyCachedDictionaryIfAvailable(currentLanguage);
-  initMainModules();
-  initLandingInstantNavigation();
 
-  languageButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const lang = button.dataset.lang;
-      if (!lang) return;
-      setLanguage(lang).then(() => {
-        initTestimonialsMarquee();
-      });
-    });
+  const appShell = document.getElementById("sf-app-content");
+  const deferLandingBoot = Boolean(appShell && appShell.hasAttribute("hidden"));
 
-    button.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      const lang = button.dataset.lang;
-      if (!lang) return;
-      setLanguage(lang).then(() => {
-        initTestimonialsMarquee();
-      });
-    });
-  });
-
-  initMobileNav();
-
-  setLanguage(currentLanguage)
-    .then(() => {
-      initTestimonialsMarquee();
-    })
-    .catch(() => {
-      initTestimonialsMarquee();
-    });
+  if (deferLandingBoot) {
+    window.addEventListener(
+      "sf:landing-content-reveal",
+      () => {
+        bootLandingInteractions();
+      },
+      { once: true }
+    );
+  } else {
+    bootLandingInteractions();
+  }
 
   if ("serviceWorker" in navigator) {
     // sw.js must live at site root (/sw.js), not under /script/, so scope "/" is valid

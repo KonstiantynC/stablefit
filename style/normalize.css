@@ -40,6 +40,17 @@ html {
   --color-orange: #FFA100;
   --color-orange-dark: #201B11;
   --color-orange-light: #C9BEA1;
+
+  --sf-bg: #0a0a0a;
+  --sf-border: rgba(255, 255, 255, 0.08);
+  --sf-text: #ffffff;
+  --sf-muted: #808289;
+  --sf-coach-1: #5037c8;
+  --sf-coach-2: #825bfc;
+  --sf-client-1: #7926b6;
+  --sf-client-2: #a241e9;
+  --sf-glow: #6341e161;
+  --sf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -87,7 +98,280 @@ body > main {
   isolation: isolate;
 }
 
-/* Premium stagger animation (CSS-only, scalable via --i) */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.sf-landing {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sf-font);
+  color: var(--sf-text);
+  background: var(--sf-bg);
+  position: relative;
+  /* як html: clip не підміняє overflow-y на auto (pair із visible), що ламає position:sticky */
+  overflow-x: clip;
+}
+
+/* body з align-items:center стискає flex-дочірні елементи — main має бути на всю ширину для sticky/grid */
+#sf-app-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+  position: relative;
+  /* над .sf-landing-bg (z-index:0), інакше герой ::before / секції «сидять» під шаром фону */
+  z-index: 1;
+}
+
+/* У coach-шеллі header/main не прямі діти body — дзеркалимо body > header/main для z-order та isolation */
+#sf-app-content > header,
+#sf-app-content > main,
+#sf-app-content > footer {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#sf-app-content > header {
+  z-index: 2;
+}
+
+#sf-app-content > main,
+#sf-app-content > footer {
+  z-index: 1;
+}
+
+/* Секції після hero — вище шару hero (у т.ч. fixed ::before), інакше картинки/блоки здаються «під» верхнім глоу / хромом */
+#sf-app-content main > section {
+  position: relative;
+}
+
+#sf-app-content main > section.hero {
+  z-index: 0;
+}
+
+#sf-app-content main > section:not(.hero) {
+  z-index: 1;
+}
+
+.sf-landing-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 1351px 738px at 50% 0%,
+    var(--sf-glow) 0%,
+    #6341e11f 42%,
+    transparent 70%
+  );
+}
+
+.sf-landing-bg::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 640px);
+  height: min(90vw, 640px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #6341e138 0%, transparent 65%);
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+.sf-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 10, 10, 0.65);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: sf-overlay-in 0.4s ease forwards;
+}
+
+.sf-modal-overlay[hidden] {
+  display: none !important;
+}
+
+@keyframes sf-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sf-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes sf-choice-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sf-modal {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  padding: 32px 28px 28px;
+  border-radius: 24px;
+  border: 1px solid var(--sf-border);
+  background: linear-gradient(
+    165deg,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(10, 10, 10, 0.92) 100%
+  );
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(99, 65, 225, 0.12) inset;
+  animation: sf-modal-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.sf-modal-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 auto 20px;
+  animation: sf-modal-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.sf-modal-title {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.sf-modal-lead {
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--sf-muted);
+  text-align: center;
+}
+
+.sf-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sf-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 13px 24px;
+  border-radius: 40px;
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.2s ease;
+  animation: sf-choice-in 0.45s ease backwards;
+}
+
+.sf-choice--coach {
+  background: linear-gradient(90deg, var(--sf-coach-1) 0%, var(--sf-coach-2) 100%);
+  --sf-choice-hover-accent: var(--sf-coach-1);
+  box-shadow: 0 8px 28px rgba(80, 55, 200, 0.35);
+  animation-delay: 0.12s;
+}
+
+.sf-choice--coach:hover {
+  background: transparent;
+  color: var(--sf-choice-hover-accent);
+  box-shadow: 0 0 0 1px var(--sf-choice-hover-accent);
+}
+
+.sf-choice--client {
+  background: linear-gradient(90deg, var(--sf-client-1) 0%, var(--sf-client-2) 100%);
+  --sf-choice-hover-accent: var(--sf-client-1);
+  box-shadow: 0 8px 28px rgba(121, 38, 182, 0.32);
+  animation-delay: 0.2s;
+}
+
+.sf-choice--client:hover {
+  background: transparent;
+  color: var(--sf-choice-hover-accent);
+  box-shadow: 0 0 0 1px var(--sf-choice-hover-accent);
+}
+
+.sf-choice--coach:hover,
+.sf-choice--client:hover {
+  transform: translateY(-2px);
+}
+
+.sf-choice:active {
+  transform: translateY(0);
+}
+
+.sf-choice:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+}
+
+.sf-fallback {
+  position: relative;
+  z-index: 5;
+  max-width: 420px;
+  margin: 48px auto;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--sf-muted);
+}
+
+.sf-fallback a {
+  color: var(--sf-coach-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-modal-overlay,
+  .sf-modal,
+  .sf-modal-logo,
+  .sf-choice {
+    animation: none !important;
+  }
+  .sf-choice {
+    transition: none;
+  }
+}
+
+/* Premium stagger animation (SS-only, scalable via --i) */
 .stagger-parent {
   --stagger-step: 90ms;
 }
@@ -103,7 +387,8 @@ body > main {
 
 .stagger-parent.is-visible .stagger-item {
   opacity: 1;
-  transform: translateY(0);
+  /* none — без матриці transform, інакше ламається position:sticky у нащадків */
+  transform: none;
 }
 
 @media (max-width: 1023px) {
@@ -139,6 +424,8 @@ ul, li {
 
 .hero {
   position: relative;
+  /* не на весь main — інакше можна зламати sticky у наступних секціях; герой ::before лишається всередині цього контексту */
+  isolation: isolate;
 }
 
 .hero::before {

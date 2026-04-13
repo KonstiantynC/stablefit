@@ -1,4 +1,4 @@
-const CACHE_NAME = "stablefit-static-v1";
+const CACHE_NAME = "stablefit-static-v2";
 
 const PRECACHE_PATHS = [
   "script/main.js",
