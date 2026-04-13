@@ -934,7 +934,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
 
 
 @media (max-width: 1023px) {
-  .testimonials-swiper {
+  .testimonials-marquee {
     margin-left: calc(-1 * var(--sf-header-pad-x));
     margin-right: calc(-1 * var(--sf-header-pad-x));
     width: calc(100% + 2 * var(--sf-header-pad-x));

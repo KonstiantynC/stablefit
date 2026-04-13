@@ -1069,7 +1069,7 @@
   overflow: hidden;
 }
 
-.testimonials-swiper {
+.testimonials-marquee {
   width: 100%;
   overflow: hidden;
   min-height: 260px;
@@ -1077,12 +1077,13 @@
   box-sizing: border-box;
 }
 
-.testimonials-swiper-wrapper {
+.testimonials-marquee-track {
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
   gap: 24px;
-  transition-timing-function: linear;
+  width: max-content;
+  animation: testimonials-scroll 36s linear infinite;
 }
 
 .testimonial-card {
@@ -1099,11 +1100,6 @@
     rgba(255, 255, 255, 0.02)
   );
   box-sizing: border-box;
-}
-
-.testimonials-swiper .swiper-slide {
-  width: 400px;
-  max-width: 400px;
 }
 
 .testimonial-card-inner {
@@ -1166,6 +1162,15 @@
   line-height: 24px;
   font-weight: 400;
   color: var(--color-gray-1);
+}
+
+@keyframes testimonials-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .automation-mini-card-info {

@@ -64,6 +64,8 @@
     const lastSegment = segments[segments.length - 1] || "";
 
     const isCoach =
+      path === "" ||
+      path === "/" ||
       /\/coach\/?$/i.test(path) ||
       /\/coach\.html$/i.test(path) ||
       /coach\.html$/i.test(window.location.pathname) ||
@@ -444,98 +446,37 @@
     });
   }
 
-  function initTestimonialsSwiper() {
-    const containers = Array.from(document.querySelectorAll(".testimonials-swiper.swiper"));
-    if (!containers.length) return () => {};
-    if (typeof window.Swiper !== "function") return () => {};
+  function initTestimonialsMarquee() {
+    const tracks = Array.from(document.querySelectorAll(".testimonials-marquee-track"));
+    if (!tracks.length) return () => {};
 
-    function ensureInfiniteSlides(container) {
-      const wrapper = container.querySelector(".swiper-wrapper");
-      if (!wrapper) return;
-      if (wrapper.dataset.infinitePrepared === "true") return;
+    tracks.forEach((track) => {
+      if (track.dataset.infinitePrepared === "true") return;
+      const cards = Array.from(track.children);
+      if (!cards.length) return;
 
-      const seedSlides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
-      if (!seedSlides.length) return;
-
-      const minSlidesForLoop = 10;
-      let i = 0;
-      while (wrapper.querySelectorAll(".swiper-slide").length < minSlidesForLoop) {
-        const source = seedSlides[i % seedSlides.length];
-        const clone = source.cloneNode(true);
+      cards.forEach((card) => {
+        const clone = card.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
-        wrapper.appendChild(clone);
-        i += 1;
-      }
-
-      wrapper.dataset.infinitePrepared = "true";
-    }
-
-    (() => {
-      const containers = document.querySelectorAll('.swiper');
-    
-      containers.forEach((container) => {
-        const wrapper = container.querySelector('.swiper-wrapper');
-    
-        if (!wrapper) return;
-    
-        // 🔁 Дублируем слайды (3 раза достаточно)
-        const slides = wrapper.innerHTML;
-        wrapper.innerHTML += slides + slides;
-    
-        // 🚀 Инициализация
-        new Swiper(container, {
-          loop: false, // ❗ отключаем loop
-          slidesPerView: 'auto',
-          spaceBetween: 24,
-          speed: 6000, // регулируешь скорость
-    
-          freeMode: true,
-          freeModeMomentum: false,
-    
-          allowTouchMove: false,
-    
-          autoplay: {
-            delay: 0,
-            disableOnInteraction: false,
-          },
-    
-          breakpoints: {
-            0: { spaceBetween: 16 },
-            768: { spaceBetween: 20 },
-            1024: { spaceBetween: 24 },
-          },
-        });
+        track.appendChild(clone);
       });
-    
-      // 🎯 Делаем движение линейным (иначе будут микролаги)
-      const style = document.createElement('style');
-      style.innerHTML = `
-        .swiper-wrapper {
-          transition-timing-function: linear !important;
-        }
-      `;
-      document.head.appendChild(style);
-    })();
 
-    const updateAll = () => {
-      instances.forEach((swiper) => {
-        swiper.update();
-      });
-    };
+      track.dataset.infinitePrepared = "true";
+    });
 
-    return updateAll;
+    return () => {};
   }
 
   currentLanguage = detectInitialLanguage();
   applyCachedDictionaryIfAvailable(currentLanguage);
-  const refreshTestimonialsSwiper = initTestimonialsSwiper();
+  const refreshTestimonialsMarquee = initTestimonialsMarquee();
 
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsSwiper();
+        refreshTestimonialsMarquee();
       });
     });
 
@@ -545,7 +486,7 @@
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsSwiper();
+        refreshTestimonialsMarquee();
       });
     });
   });
@@ -557,10 +498,10 @@
 
   setLanguage(currentLanguage)
     .then(() => {
-      refreshTestimonialsSwiper();
+      refreshTestimonialsMarquee();
     })
     .catch(() => {
-      refreshTestimonialsSwiper();
+      refreshTestimonialsMarquee();
     });
 
   if ("serviceWorker" in navigator) {
