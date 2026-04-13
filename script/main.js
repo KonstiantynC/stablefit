@@ -487,6 +487,77 @@
     return () => {};
   }
 
+  function initStaggerReveal() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => {};
+    }
+
+    const parentSections = Array.from(document.querySelectorAll("main section"));
+    if (!parentSections.length) return () => {};
+
+    const revealSelector = [
+      ".section-name",
+      ".section-title",
+      ".gradient-title",
+      ".gradient_cl-title",
+      ".section-description",
+      ".content-text",
+      ".card",
+      ".features-cart",
+      ".f-slider-item",
+      ".f-slider-mobile-item",
+      ".progress-cart",
+      ".how-to-start-card",
+      ".automatisation-card",
+      ".testimonial-card",
+      ".pricing-card",
+      ".download-app-card",
+      ".try-button",
+      ".download-button",
+      ".image-wrp",
+      ".content-right-image-wrp img",
+      ".progress-cart-image img",
+      ".automatisation-card-image img",
+      ".how-to-start-card img",
+      ".download-app-card img",
+    ].join(", ");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const parent = entry.target;
+          parent.classList.add("is-visible");
+          observer.unobserve(parent);
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px 35% 0px",
+      }
+    );
+
+    parentSections.forEach((section) => {
+      section.classList.add("stagger-parent");
+      const rawItems = Array.from(section.querySelectorAll(revealSelector));
+      const seen = new Set();
+      const items = rawItems.filter((item) => {
+        if (seen.has(item)) return false;
+        seen.add(item);
+        return true;
+      });
+
+      items.forEach((item, index) => {
+        item.classList.add("stagger-item");
+        item.style.setProperty("--i", String(index));
+      });
+
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }
+
   let teardownMainModules = () => {};
 
   function initMainModules() {
@@ -502,6 +573,8 @@
     if (typeof cleanupScrollToDownload === "function") cleanups.push(cleanupScrollToDownload);
 
     initTestimonialsMarquee();
+    const cleanupStagger = initStaggerReveal();
+    if (typeof cleanupStagger === "function") cleanups.push(cleanupStagger);
 
     teardownMainModules = () => {
       cleanups.forEach((fn) => {
@@ -529,6 +602,16 @@
     body.classList.remove("nav-open");
   }
 
+  function syncHeaderDownloadButtonTheme(doc) {
+    const incoming = doc.body;
+    if (!incoming) return;
+    const isClientTheme = incoming.classList.contains("page-client");
+    document.querySelectorAll("header .download-button").forEach((button) => {
+      button.classList.toggle("btn-cl", isClientTheme);
+      button.classList.toggle("btn", !isClientTheme);
+    });
+  }
+
   async function swapLandingMain(url, { push = true } = {}) {
     const response = await fetch(url, { credentials: "same-origin" });
     if (!response.ok) throw new Error(`Failed to load ${url}`);
@@ -540,6 +623,7 @@
 
     currentMain.replaceWith(nextMain);
     syncBodyPageClass(doc);
+    syncHeaderDownloadButtonTheme(doc);
     if (doc.title) document.title = doc.title;
 
     if (push) {

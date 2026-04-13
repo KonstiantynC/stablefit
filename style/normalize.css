@@ -87,6 +87,39 @@ body > main {
   isolation: isolate;
 }
 
+/* Premium stagger animation (CSS-only, scalable via --i) */
+.stagger-parent {
+  --stagger-step: 90ms;
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: calc(var(--i, 0) * var(--stagger-step, 90ms));
+}
+
+.stagger-parent.is-visible .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1023px) {
+  .stagger-parent {
+    --stagger-step: 70ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 a {
   text-decoration: none;
   color: var(--color-white);
