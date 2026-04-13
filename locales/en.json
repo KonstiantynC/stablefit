@@ -196,8 +196,8 @@
             "line1": "The app reminds clients about measurements at the right time.",
             "line2": "Automation reduces your manual control and helps clients track progress consistently."
           },
-          "noteTitle": "Reminders active",
-          "noteDescription": "The system automatically notifies clients about measurements and progress checkpoints."
+          "noteTitle": "Time to add measurements!",
+          "noteDescription": "Update your metrics to see progress."
         },
         "fourth": {
           "title": "Tools that make you a pro",

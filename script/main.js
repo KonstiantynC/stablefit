@@ -70,7 +70,11 @@
       lastSegment === "coach";
 
     const isClient =
-      /\/client\/?$/i.test(path) ||
+      /\/for-clients\/?$/i.test(path) ||
+      /\/for-clients\.html$/i.test(path) ||
+      /for-clients\.html$/i.test(window.location.pathname) ||
+      lastSegment === "for-clients" ||
+      /\/client\/?$/i.test(path) || // backward compatibility
       /\/client\.html$/i.test(path) ||
       /client\.html$/i.test(window.location.pathname) ||
       lastSegment === "client";

@@ -421,16 +421,13 @@
   gap: 21px;
 }
 
-/* Slider: manage_clients_image — одне 72%; два в рядку: половина слоту × 1.08 (було ×0.72, +50%) */
 .f-slider-wrp .content-right-image-wrp:has(> img:only-child) img[alt="manage_clients_image"] {
   max-width: 100%;
-  width: auto;
   height: auto;
 }
 
 .f-slider-wrp .content-right-image-wrp:has(> img:nth-child(2):last-child) img[alt="manage_clients_image"] {
   max-width: 100%;
-  width: auto;
   height: auto;
 }
 
@@ -468,6 +465,14 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.f-slider-mobile-stack {
+  display: none;
+}
+
+.f-slider-mobile-layout {
+  display: none;
 }
 
 .f-slider-accordion {
@@ -640,7 +645,6 @@
 }
 
 .progress-cart-wrp img[alt="progress-table-img"] {
-  width: 265px;
   max-width: 100%;
   height: auto;
 }
@@ -752,8 +756,6 @@
 }
 
 .automatisation-card-image img {
-  max-width: 14px;
-  width: 100%;
   height: auto;
 }
 
@@ -1203,6 +1205,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
+  gap: 9px;
 }
 
 .automation-mini-card-icon-wrap {
@@ -1212,7 +1216,6 @@
   justify-content: center;
   width: 35px;
   height: 35px;
-  flex: 0 0 35px;
   border-radius: 999px;
 }
 
@@ -1228,6 +1231,7 @@
 .automation-mini-card-icon-wrap--book {
   background-color: color-mix(in srgb, var(--color-orange) 10%, transparent);
 }
+
 
 .automation-mini-card-check {
   position: absolute;
@@ -1653,12 +1657,10 @@ footer {
 
 .footer-content > .content-item {
   width: 338px;
-  flex: 0 0 338px;
 }
 
 .footer-content-group > .content-item {
   width: 180px;
-  flex: 0 0 180px;
 }
 .footer-logo {
   display: flex;
