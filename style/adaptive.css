@@ -604,13 +604,11 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
     gap: 16px;
   }
 
-  .progress-cart-image-wrp img {
-    max-width: 302px !important;
-    max-height: 352px !important;
-    width: 100%;
+  .progress-cart-image-wrp img[alt="progress-full-body-img"] {
+    width: 85%;
     height: auto;
     display: block;
-    margin-top: 24px;
+    margin-top: 32px;
   }
 
   .progress-cart-image img[alt="progress-table-img"] {
@@ -1220,8 +1218,8 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
   }
 
   section.progress .progress-cart-image-wrp img[alt="progress-full-body-img"] {
-    width: 74%;
-    max-width: 74%;
+    width: 100%;
+    max-width: 50%;
     margin-top: 24px;
     margin-left: auto;
     margin-right: auto;

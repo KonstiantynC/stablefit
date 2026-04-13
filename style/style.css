@@ -639,9 +639,10 @@
 }
 
 .progress-cart-image-wrp img[alt="progress-full-body-img"] {
-  width: 376px;
+  width: 61.5%;
   max-width: 100%;
   height: auto;
+  transform: translateY(-3%);
 }
 
 .progress-cart-wrp img[alt="progress-table-img"] {
