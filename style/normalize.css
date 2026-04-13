@@ -63,6 +63,7 @@ body {
   z-index: 0;
 }
 
+
 body > header,
 body > main,
 body > footer {
@@ -84,6 +85,45 @@ body > footer {
 
 body > main {
   isolation: isolate;
+}
+
+.cascade-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
+  transition-delay: var(--cascade-delay, 0ms);
+}
+
+/* Keep fixed header centered: do not override its own translateX */
+.header-wrp.cascade-item {
+  transform: translateX(-50%);
+}
+
+/* .hero has ::before with position: fixed; transform on parent breaks fixed positioning */
+.hero.cascade-item {
+  transform: none;
+}
+
+html.page-cascade-ready .cascade-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.page-cascade-ready .header-wrp.cascade-item {
+  transform: translateX(-50%);
+}
+
+html.page-cascade-ready .hero.cascade-item {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cascade-item,
+  html.page-cascade-ready .cascade-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 a {

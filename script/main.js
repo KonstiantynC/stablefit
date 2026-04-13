@@ -446,6 +446,35 @@
     });
   }
 
+  function initPageCascade() {
+    const root = document.documentElement;
+    const selectors = [
+      "header .header-wrp",
+      "main section",
+      "footer .container",
+    ];
+
+    const items = [];
+    selectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((el) => items.push(el));
+    });
+
+    if (!items.length) return;
+
+    items.forEach((el, index) => {
+      el.classList.add("cascade-item");
+      const delay = Math.min(index * 70, 560);
+      el.style.setProperty("--cascade-delay", `${delay}ms`);
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        root.classList.add("page-cascade-ready");
+      });
+    });
+  }
+
+
   function initTestimonialsMarquee() {
     const tracks = Array.from(document.querySelectorAll(".testimonials-marquee-track"));
     if (!tracks.length) return () => {};
@@ -495,6 +524,7 @@
   initFSliderScrollSync();
   initScrollToDownloadApp();
   initMobileNav();
+  initPageCascade();
 
   setLanguage(currentLanguage)
     .then(() => {
