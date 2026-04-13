@@ -417,7 +417,7 @@
     max-width: 480px;
     position: -webkit-sticky;
     position: sticky;
-    top: 112px;
+    top: 140px;
     align-self: flex-start;
     z-index: 2;
   }

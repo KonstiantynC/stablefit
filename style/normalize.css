@@ -1,6 +1,5 @@
 html {
   scrollbar-gutter: stable;
-  /* clip hides horizontal overflow without the scroll containment that breaks position:sticky */
   overflow-x: clip;
 }
 
@@ -124,11 +123,9 @@ body.sf-landing {
   align-self: stretch;
   box-sizing: border-box;
   position: relative;
-  /* над .sf-landing-bg (z-index:0), інакше герой ::before / секції «сидять» під шаром фону */
   z-index: 1;
 }
 
-/* У coach-шеллі header/main не прямі діти body — дзеркалимо body > header/main для z-order та isolation */
 #sf-app-content > header,
 #sf-app-content > main,
 #sf-app-content > footer {
@@ -140,15 +137,13 @@ body.sf-landing {
 }
 
 #sf-app-content > header {
-  z-index: 2;
+  pointer-events: none;
 }
 
-#sf-app-content > main,
-#sf-app-content > footer {
-  z-index: 1;
+#sf-app-content > header * {
+  pointer-events: auto;
 }
 
-/* Секції після hero — вище шару hero (у т.ч. fixed ::before), інакше картинки/блоки здаються «під» верхнім глоу / хромом */
 #sf-app-content main > section {
   position: relative;
 }

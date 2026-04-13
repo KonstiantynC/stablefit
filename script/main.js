@@ -229,6 +229,8 @@
           }
         });
       });
+
+      setFSliderAccordionIndex(root, 0);
     });
   }
 
@@ -259,8 +261,9 @@
 
     function computeActiveSlideIndex() {
       const vh = window.innerHeight;
-      const bandMid = vh * 0.44;
-      const halfBand = Math.min(160, vh * 0.2);
+
+      const bandMid = vh * 0.3;
+      const halfBand = Math.min(120, vh * 0.11);
       const bandTop = bandMid - halfBand;
       const bandBottom = bandMid + halfBand;
 
@@ -290,6 +293,17 @@
             bestIdx = i;
           }
         });
+      }
+
+
+      const maxTopBeforeAdvance = vh * 0.3;
+      while (bestIdx > 0) {
+        const r = wraps[bestIdx].getBoundingClientRect();
+        if (r.top > maxTopBeforeAdvance) {
+          bestIdx -= 1;
+        } else {
+          break;
+        }
       }
 
       return bestIdx;
@@ -345,6 +359,11 @@
       return bestIdx;
     }
 
+    function visibleHeightInViewport(rect) {
+      const vh = window.innerHeight;
+      return Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
+    }
+
     function syncFromScrollDesktop() {
       desktopTicking = false;
       if (ignoreScrollSync || mq.matches) return;
@@ -352,7 +371,14 @@
       const rowRect = row.getBoundingClientRect();
       if (rowRect.bottom < 0 || rowRect.top > window.innerHeight) return;
 
-      const bestIdx = computeActiveSlideIndex();
+      let bestIdx = computeActiveSlideIndex();
+
+      /* Поки перший слайд помітно у вікні — лише перший пункт відкритий; далі синк лише коли перший реально відійшов */
+      const r0 = wraps[0].getBoundingClientRect();
+      const h0 = r0.height > 0 ? visibleHeightInViewport(r0) / r0.height : 0;
+      if (h0 > 0.38) {
+        bestIdx = 0;
+      }
 
       if (bestIdx === lastSyncedIndex) return;
       lastSyncedIndex = bestIdx;
