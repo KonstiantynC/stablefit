@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="../style/normalize.css">
   <link rel="stylesheet" href="../style/style.css">
   <link rel="stylesheet" href="../style/adaptive.css">
+  <link rel="stylesheet" href="../script/tools/swiper/swiper-bundle.min.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1264,13 +1265,12 @@
       </div>
       <div class="testimonials-content">
         <div 
-          class="testimonials-marquee" 
+          class="testimonials-swiper swiper" 
           role="region" 
           data-i18n-aria="client.testimonials.marqueeAria"
         >
-          <div class="testimonials-marquee-track">
-            <div class="testimonials-marquee-set">
-              <article class="testimonial-card shadow-custom">
+          <div class="testimonials-swiper-wrapper swiper-wrapper">
+              <article class="testimonial-card shadow-custom swiper-slide">
                 <div class="testimonial-card-inner">
                   <img 
                     loading="lazy" 
@@ -1313,7 +1313,7 @@
                   </div>
                 </div>
               </article>
-              <article class="testimonial-card shadow-custom">
+              <article class="testimonial-card shadow-custom swiper-slide">
                 <div class="testimonial-card-inner">
                   <img 
                     loading="lazy" 
@@ -1356,7 +1356,7 @@
                   </div>
                 </div>
               </article>
-              <article class="testimonial-card shadow-custom">
+              <article class="testimonial-card shadow-custom swiper-slide">
                 <div class="testimonial-card-inner">
                   <img 
                     loading="lazy" 
@@ -1399,7 +1399,7 @@
                   </div>
                 </div>
               </article>
-              <article class="testimonial-card shadow-custom">
+              <article class="testimonial-card shadow-custom swiper-slide">
                 <div class="testimonial-card-inner">
                   <img 
                     loading="lazy" 
@@ -1440,7 +1440,6 @@
                   </div>
                 </div>
               </article>
-            </div>
           </div>
         </div>
       </div>
@@ -1758,6 +1757,7 @@
       </div>
     </div>
   </footer>
+  <script src="../script/tools/swiper/swiper-bundle.min.js"></script>
   <script src="../script/main.js"></script>
 </body>
 </html>

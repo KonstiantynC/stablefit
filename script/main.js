@@ -444,193 +444,98 @@
     });
   }
 
-  function initTestimonialsMarquee() {
-    const MARQUEE_CARD_GAP_PX = 24;
-    const MARQUEE_CARD_WIDTH_PX = 400;
-    const MARQUEE_MAX_SET_COPIES = 12;
-    const marquees = Array.from(document.querySelectorAll(".testimonials-marquee"));
-    if (!marquees.length) return () => {};
+  function initTestimonialsSwiper() {
+    const containers = Array.from(document.querySelectorAll(".testimonials-swiper.swiper"));
+    if (!containers.length) return () => {};
+    if (typeof window.Swiper !== "function") return () => {};
 
-    const seedMarkupByMarquee = new Map();
-    const rafByMarquee = new WeakMap();
-    const resizeObserverByMarquee = new WeakMap();
+    function ensureInfiniteSlides(container) {
+      const wrapper = container.querySelector(".swiper-wrapper");
+      if (!wrapper) return;
+      if (wrapper.dataset.infinitePrepared === "true") return;
 
-    function flexGapPx(el) {
-      const s = getComputedStyle(el);
-      const raw = s.columnGap && s.columnGap !== "normal" ? s.columnGap : s.gap;
-      const n = parseFloat(raw);
-      return Number.isFinite(n) ? n : MARQUEE_CARD_GAP_PX;
+      const seedSlides = Array.from(wrapper.querySelectorAll(".swiper-slide"));
+      if (!seedSlides.length) return;
+
+      const minSlidesForLoop = 10;
+      let i = 0;
+      while (wrapper.querySelectorAll(".swiper-slide").length < minSlidesForLoop) {
+        const source = seedSlides[i % seedSlides.length];
+        const clone = source.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        wrapper.appendChild(clone);
+        i += 1;
+      }
+
+      wrapper.dataset.infinitePrepared = "true";
     }
 
-    marquees.forEach((marquee) => {
-      const seedSet = marquee.querySelector(".testimonials-marquee-set");
-      if (seedSet) {
-        seedMarkupByMarquee.set(marquee, seedSet.innerHTML);
-      }
-    });
-
-    function stopMarqueeRaf(marquee) {
-      const id = rafByMarquee.get(marquee);
-      if (id != null) {
-        cancelAnimationFrame(id);
-        rafByMarquee.delete(marquee);
-      }
-    }
-
-    const rebuildMarquee = (marquee) => {
-      stopMarqueeRaf(marquee);
-      const oldRo = resizeObserverByMarquee.get(marquee);
-      if (oldRo) {
-        oldRo.disconnect();
-        resizeObserverByMarquee.delete(marquee);
-      }
-
-      const track = marquee.querySelector(".testimonials-marquee-track");
-      if (!track) return;
-
-      track.style.transform = "";
-      track.classList.remove(
-        "testimonials-marquee-track--loop",
-        "testimonials-marquee-track--flat",
-        "testimonials-marquee-track--raf"
-      );
-
-      const liveFirstSet = track.querySelector(".testimonials-marquee-set");
-      const seedMarkup = liveFirstSet
-        ? liveFirstSet.innerHTML
-        : seedMarkupByMarquee.get(marquee);
-      if (!seedMarkup) return;
-
-      if (liveFirstSet) {
-        seedMarkupByMarquee.set(marquee, seedMarkup);
-      }
-
-      const seedSet = document.createElement("div");
-      seedSet.className = "testimonials-marquee-set";
-      seedSet.innerHTML = seedMarkup;
-
-      const seedCards = Array.from(seedSet.querySelectorAll(".testimonial-card"));
-      if (!seedCards.length) return;
-
-      const viewportWidth = marquee.clientWidth || window.innerWidth;
-
-      const measureRow = document.createElement("div");
-      measureRow.setAttribute("aria-hidden", "true");
-      measureRow.style.cssText =
-        "position:fixed;left:-10000px;top:0;visibility:hidden;pointer-events:none;" +
-        "display:flex;flex-direction:row;flex-wrap:nowrap;" +
-        `gap:${MARQUEE_CARD_GAP_PX}px;padding:0;box-sizing:border-box;`;
-      seedCards.forEach((c) => measureRow.appendChild(c.cloneNode(true)));
-      document.body.appendChild(measureRow);
-      const measuredW = Math.max(
-        measureRow.getBoundingClientRect().width,
-        measureRow.scrollWidth
-      );
-      document.body.removeChild(measureRow);
-
-      const estimatedMinWidth =
-        seedCards.length * MARQUEE_CARD_WIDTH_PX +
-        Math.max(0, seedCards.length - 1) * MARQUEE_CARD_GAP_PX;
-      const baseSetWidth = Math.max(measuredW, estimatedMinWidth, 1);
-
-      const copiesNeeded = Math.min(
-        MARQUEE_MAX_SET_COPIES,
-        Math.max(2, Math.ceil((viewportWidth + baseSetWidth) / baseSetWidth) + 1)
-      );
-
-      const chunkA = document.createElement("div");
-      chunkA.className = "testimonials-marquee-chunk";
-
-      for (let copyIndex = 0; copyIndex < copiesNeeded; copyIndex += 1) {
-        for (let cardIndex = 0; cardIndex < seedCards.length; cardIndex += 1) {
-          chunkA.appendChild(seedCards[cardIndex].cloneNode(true));
-        }
-      }
-
-      const chunkB = chunkA.cloneNode(true);
-      chunkB.setAttribute("aria-hidden", "true");
-
-      track.replaceChildren(chunkA, chunkB);
-      track.classList.add("testimonials-marquee-track--raf");
-      marquee.classList.add("testimonials-marquee--loop-ready");
-
-      const speedPxPerSec = 70;
-      const loopState = { repeatWidth: 1 };
-
-      const syncRepeatWidth = () => {
-        if (!track.isConnected || !chunkA.isConnected) return;
-        void track.offsetHeight;
-        const w = chunkA.getBoundingClientRect().width;
-        loopState.repeatWidth = Math.max(1, w + flexGapPx(track));
-      };
-
-      const startRaf = () => {
-        syncRepeatWidth();
-
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          track.style.transform = "translate3d(0, 0, 0)";
-          return;
-        }
-
-        const ro = new ResizeObserver(() => {
-          syncRepeatWidth();
+    (() => {
+      const containers = document.querySelectorAll('.swiper');
+    
+      containers.forEach((container) => {
+        const wrapper = container.querySelector('.swiper-wrapper');
+    
+        if (!wrapper) return;
+    
+        // 🔁 Дублируем слайды (3 раза достаточно)
+        const slides = wrapper.innerHTML;
+        wrapper.innerHTML += slides + slides;
+    
+        // 🚀 Инициализация
+        new Swiper(container, {
+          loop: false, // ❗ отключаем loop
+          slidesPerView: 'auto',
+          spaceBetween: 24,
+          speed: 6000, // регулируешь скорость
+    
+          freeMode: true,
+          freeModeMomentum: false,
+    
+          allowTouchMove: false,
+    
+          autoplay: {
+            delay: 0,
+            disableOnInteraction: false,
+          },
+    
+          breakpoints: {
+            0: { spaceBetween: 16 },
+            768: { spaceBetween: 20 },
+            1024: { spaceBetween: 24 },
+          },
         });
-        ro.observe(chunkA);
-        resizeObserverByMarquee.set(marquee, ro);
+      });
+    
+      // 🎯 Делаем движение линейным (иначе будут микролаги)
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .swiper-wrapper {
+          transition-timing-function: linear !important;
+        }
+      `;
+      document.head.appendChild(style);
+    })();
 
-        let pos = 0;
-        let lastTs = null;
-
-        const tick = (ts) => {
-          if (!track.isConnected) return;
-          if (lastTs == null) lastTs = ts;
-          const dt = Math.min((ts - lastTs) / 1000, 0.05);
-          lastTs = ts;
-
-          const rw = loopState.repeatWidth;
-          pos -= speedPxPerSec * dt;
-          while (pos <= -rw) {
-            pos += rw;
-          }
-
-          track.style.transform = `translate3d(${pos}px, 0, 0)`;
-          const nextId = requestAnimationFrame(tick);
-          rafByMarquee.set(marquee, nextId);
-        };
-
-        const firstId = requestAnimationFrame(tick);
-        rafByMarquee.set(marquee, firstId);
-      };
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(startRaf);
+    const updateAll = () => {
+      instances.forEach((swiper) => {
+        swiper.update();
       });
     };
 
-    const rebuildAll = () => {
-      marquees.forEach((marquee) => rebuildMarquee(marquee));
-    };
-
-    let resizeTimer = null;
-    const onResize = () => {
-      if (resizeTimer) window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(rebuildAll, 120);
-    };
-
-    window.addEventListener("resize", onResize);
-    return rebuildAll;
+    return updateAll;
   }
 
   currentLanguage = detectInitialLanguage();
   applyCachedDictionaryIfAvailable(currentLanguage);
-  const refreshTestimonialsMarquee = initTestimonialsMarquee();
+  const refreshTestimonialsSwiper = initTestimonialsSwiper();
 
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsMarquee();
+        refreshTestimonialsSwiper();
       });
     });
 
@@ -640,7 +545,7 @@
       const lang = button.dataset.lang;
       if (!lang) return;
       setLanguage(lang).then(() => {
-        refreshTestimonialsMarquee();
+        refreshTestimonialsSwiper();
       });
     });
   });
@@ -652,10 +557,10 @@
 
   setLanguage(currentLanguage)
     .then(() => {
-      refreshTestimonialsMarquee();
+      refreshTestimonialsSwiper();
     })
     .catch(() => {
-      refreshTestimonialsMarquee();
+      refreshTestimonialsSwiper();
     });
 
   if ("serviceWorker" in navigator) {

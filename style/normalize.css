@@ -250,10 +250,22 @@ ul, li {
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.btn-hover-transparent:hover {
-  background: transparent;
-  color: var(--btn-hover-color);
-  box-shadow: 0 0 0 1px var(--btn-hover-color);
+/* Button hover like disabled state (only selected CTA buttons) */
+.download-button.btn.btn-hover-transparent,
+.download-button.btn-cl.btn-hover-transparent,
+.try-button.btn.btn-hover-transparent,
+.try-button.btn-cl.btn-hover-transparent {
+  transition: opacity 0.2s ease;
+}
+
+.download-button.btn.btn-hover-transparent:hover,
+.download-button.btn-cl.btn-hover-transparent:hover,
+.try-button.btn.btn-hover-transparent:hover,
+.try-button.btn-cl.btn-hover-transparent:hover {
+  opacity: 0.5;
+  background: var(--btn-bg-gradient);
+  color: var(--color-white);
+  box-shadow: 0 0 0 1px transparent;
 }
 
 .btn-hover-swap {

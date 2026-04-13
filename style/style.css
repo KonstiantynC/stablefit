@@ -1067,60 +1067,22 @@
 .testimonials-content {
   width: 100%;
   overflow: hidden;
-  contain: layout style;
 }
 
-.testimonials-marquee {
+.testimonials-swiper {
   width: 100%;
   overflow: hidden;
   min-height: 260px;
-}
-
-.testimonials-marquee-track {
-  position: relative;
-  width: max-content;
-}
-
-
-.testimonials-marquee.testimonials-marquee--loop-ready {
   padding: 16px;
   box-sizing: border-box;
 }
 
-
-.testimonials-marquee-track.testimonials-marquee-track--raf {
+.testimonials-swiper-wrapper {
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
   gap: 24px;
-  width: max-content;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-marquee-track.testimonials-marquee-track--raf {
-    will-change: auto;
-  }
-}
-
-.testimonials-marquee-chunk {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  flex-shrink: 0;
-  align-items: stretch;
-  gap: 24px;
-  box-sizing: border-box;
-}
-
-.testimonials-marquee-set {
-  display: flex;
-  flex-direction: row;
-  flex-shrink: 0;
-  align-items: stretch;
-  gap: 24px;
-  padding: 16px;
-  box-sizing: border-box;
+  transition-timing-function: linear;
 }
 
 .testimonial-card {
@@ -1137,6 +1099,11 @@
     rgba(255, 255, 255, 0.02)
   );
   box-sizing: border-box;
+}
+
+.testimonials-swiper .swiper-slide {
+  width: 400px;
+  max-width: 400px;
 }
 
 .testimonial-card-inner {
