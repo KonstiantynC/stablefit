@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stable-fit.com/sitemap.xml
+Sitemap: https://stablefit.netlify.app/sitemap.xml
