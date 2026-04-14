@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://stable-fit.com/">
   <meta property="og:title" content="StableFit — для тренерів" data-i18n-content="coach.meta.ogTitle">
   <meta property="og:description" content="Платформа для фітнес-тренерів: клієнти, тренування, харчування та прогрес в одному місці." data-i18n-content="coach.meta.ogDescription">
-  <meta property="og:image" content="https://stable-fit.com/assets/images/preview.svg">
+  <meta property="og:image" content="https://stable-fit.com/assets/images/preview.png">
   <meta property="og:image:alt" content="StableFit" data-i18n-content="meta.brand">
   <meta property="og:locale" content="uk_UA">
   <meta property="og:locale:alternate" content="en_US">
@@ -104,6 +104,15 @@
         meta.setAttribute("http-equiv", "refresh");
         meta.setAttribute("content", "0;url=" + url);
         document.head.appendChild(meta);
+      }
+
+      function isBot() {
+        try {
+          var ua = (navigator.userAgent || "").toLowerCase();
+          return /(telegram|facebook|bot|crawler|spider)/i.test(ua);
+        } catch (e) {
+          return false;
+        }
       }
 
       function sameDocumentUrl(targetHref) {
@@ -277,7 +286,10 @@
               }
             } catch (e) {}
           } else {
-            redirectByMeta(auto);
+            // Keep OG/meta tags readable for social crawlers.
+            if (!isBot()) {
+              redirectByMeta(auto);
+            }
           }
         } else {
           openModal();
