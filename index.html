@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+      var base = document.createElement("base");
+      base.href = isGitHubPages ? "/stablefit/" : "/";
+      document.head.appendChild(base);
+    })();
+  </script>
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
@@ -96,7 +104,7 @@
         return document.URL.indexOf("file:") === 0;
       }
 
-      var coachUrl = isFileProtocol() ? "index.html" : "/";
+      var coachUrl = "index.html";
       var clientUrl = isFileProtocol() ? "for-clients/index.html" : "for-clients/";
 
       function redirectTo(url) {
@@ -273,7 +281,7 @@
         <div class="header-nav">
           <div class="nav-item">
             <a
-              href="/"
+              href="./"
               class="landing-link is-active"
               data-landing="coach"
               data-i18n="nav.coaches"
@@ -351,7 +359,7 @@
           aria-label="Навігація"
         >
           <a
-            href="/"
+            href="./"
             class="landing-link is-active"
             data-landing="coach"
             data-i18n="nav.coaches"
@@ -2338,7 +2346,7 @@
             <ul class="footer-list">
               <li class="footer-list-item">
                 <a
-                  href="/"
+                  href="./"
                   class="landing-link"
                   data-landing="coach"
                   data-i18n="nav.coaches"
@@ -2348,7 +2356,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/for-clients"
+                  href="for-clients/"
                   class="landing-link"
                   data-landing="client"
                   data-i18n="nav.clients"
@@ -2358,7 +2366,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/support"
+                  href="support/"
                   class="landing-link"
                   data-landing="support"
                   data-i18n="nav.support"
@@ -2478,7 +2486,7 @@
     <p class="sf-fallback">
       Увімкніть JavaScript або перейдіть: /
       <span lang="en">Enable JavaScript or open:</span>
-      <a href="/">для тренерів</a> · <span lang="en">for coaches</span>
+      <a href="./">для тренерів</a> · <span lang="en">for coaches</span>
       —
       <a href="for-clients/">для клієнтів</a> · <span lang="en">for clients</span>
     </p>

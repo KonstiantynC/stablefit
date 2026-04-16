@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+      var base = document.createElement("base");
+      base.href = isGitHubPages ? "/stablefit/" : "/";
+      document.head.appendChild(base);
+    })();
+  </script>
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
@@ -115,7 +123,7 @@
         <div class="header-nav">
           <div class="nav-item">
             <a
-              href="/"
+              href="./"
               class="landing-link"
               data-landing="coach"
               data-i18n="nav.coaches"
@@ -192,7 +200,7 @@
           aria-label="Навігація"
         >
           <a
-            href="/"
+            href="./"
             class="landing-link"
             data-landing="coach"
             data-i18n="nav.coaches"
@@ -1846,7 +1854,7 @@
             <ul class="footer-list">
               <li class="footer-list-item">
                 <a
-                  href="/"
+                  href="./"
                   class="landing-link"
                   data-landing="coach"
                   data-i18n="nav.coaches"
@@ -1856,7 +1864,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/for-clients"
+                  href="for-clients/"
                   class="landing-link"
                   data-landing="client"
                   data-i18n="nav.clients"
@@ -1866,7 +1874,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/support"
+                  href="support/"
                   class="landing-link"
                   data-landing="support"
                   data-i18n="nav.support"

@@ -11,13 +11,13 @@
       try {
         location.replace(new URL("index.html", location.href).href);
       } catch (e) {
-        location.href = "/";
+        location.href = new URL("../", location.href).href;
       }
     })();
   </script>
   <meta http-equiv="refresh" content="0;url=/">
 </head>
 <body>
-  <p><a href="/">До головної StableFit</a></p>
+  <p><a href="../">До головної StableFit</a></p>
 </body>
 </html>

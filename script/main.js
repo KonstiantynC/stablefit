@@ -5,7 +5,7 @@
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');
   const scriptUrl = scriptEl ? new URL(scriptEl.src, window.location.href) : new URL(window.location.href);
-  const siteBaseUrl = new URL("./", window.location.origin);
+  const siteBaseUrl = new URL("../", scriptUrl);
 
   const languageButtons = Array.from(document.querySelectorAll(".localisation-item[data-lang]"));
   const htmlNode = document.documentElement;

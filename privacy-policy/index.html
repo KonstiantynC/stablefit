@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+      var base = document.createElement("base");
+      base.href = isGitHubPages ? "/stablefit/" : "/";
+      document.head.appendChild(base);
+    })();
+  </script>
   <meta name="description" content="Політика конфіденційності користувачів StableFit." data-i18n-content="privacy.meta.description">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="./">
@@ -43,7 +51,7 @@
         <div class="header-nav">
           <div class="nav-item">
             <a 
-              href="/" 
+              href="./"
               class="landing-link" 
               data-landing="coach" 
               data-i18n="nav.coaches"
@@ -81,7 +89,7 @@
             EN
           </div>
           <a
-            href="/#download-app"
+            href="index.html#download-app"
             class="download-button btn btn-hover-transparent"
             data-i18n="buttons.download"
           >
@@ -120,7 +128,7 @@
           aria-label="Навігація"
         >
           <a
-            href="/"
+            href="./"
             class="landing-link"
             data-landing="coach"
             data-i18n="nav.coaches"
@@ -164,7 +172,7 @@
           </div>
         </div>
         <a
-          href="/#download-app"
+          href="index.html#download-app"
           class="download-button header-drawer-cta btn btn-hover-transparent"
           data-i18n="buttons.download"
         >
@@ -315,7 +323,7 @@
             <ul class="footer-list">
               <li class="footer-list-item">
                 <a
-                  href="/"
+                  href="./"
                   class="landing-link"
                   data-landing="coach"
                   data-i18n="nav.coaches"
@@ -325,7 +333,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/for-clients"
+                  href="for-clients/"
                   class="landing-link"
                   data-landing="client"
                   data-i18n="nav.clients"
@@ -335,7 +343,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="/support"
+                  href="support/"
                   class="landing-link"
                   data-landing="support"
                   data-i18n="nav.support"
