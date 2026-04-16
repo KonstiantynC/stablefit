@@ -1098,9 +1098,21 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: 24px;
+  gap: 0;
   width: max-content;
   animation: testimonials-scroll 36s linear infinite;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+.testimonials-marquee-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 24px;
+  width: max-content;
+  padding-right: 24px;
+  flex: 0 0 auto;
 }
 
 .testimonial-card {

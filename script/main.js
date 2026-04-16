@@ -558,14 +558,32 @@
 
     tracks.forEach((track) => {
       if (track.dataset.infinitePrepared === "true") return;
-      const cards = Array.from(track.children);
-      if (!cards.length) return;
+      const marquee = track.closest(".testimonials-marquee");
+      const originalCards = Array.from(track.children);
+      if (!originalCards.length) return;
 
-      cards.forEach((card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        track.appendChild(clone);
-      });
+      const group = document.createElement("div");
+      group.className = "testimonials-marquee-group";
+      originalCards.forEach((card) => group.appendChild(card));
+      track.appendChild(group);
+
+      const marqueeWidth = marquee?.clientWidth ?? 0;
+      if (marqueeWidth > 0) {
+        const baseCards = Array.from(group.children);
+        let safety = 0;
+        while (group.scrollWidth < marqueeWidth && safety < 50) {
+          baseCards.forEach((card) => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            group.appendChild(clone);
+          });
+          safety += 1;
+        }
+      }
+
+      const groupClone = group.cloneNode(true);
+      groupClone.setAttribute("aria-hidden", "true");
+      track.appendChild(groupClone);
 
       track.dataset.infinitePrepared = "true";
     });
