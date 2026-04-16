@@ -2,8 +2,6 @@
   const DEFAULT_LANG = "ua";
   const SUPPORTED_LANGS = ["ua", "en"];
   const LANGUAGE_STORAGE_KEY = "stablefit-language";
-  const LOCALE_CACHE_VERSION = "2";
-  const localeCacheKey = (lang) => `stablefit-locale-v${LOCALE_CACHE_VERSION}-${lang}`;
 
   const scriptEl = document.currentScript || document.querySelector('script[src*="main.js"]');
   const scriptUrl = scriptEl ? new URL(scriptEl.src, window.location.href) : new URL(window.location.href);
@@ -20,23 +18,6 @@
     return keyPath.split(".").reduce((acc, key) => (acc && key in acc ? acc[key] : undefined), object);
   }
 
-  function readDictionaryFromCache(lang) {
-    try {
-      const raw = localStorage.getItem(localeCacheKey(lang));
-      if (!raw) return null;
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-
-  function writeDictionaryToCache(lang, data) {
-    try {
-      localStorage.setItem(localeCacheKey(lang), JSON.stringify(data));
-    } catch {
-    }
-  }
-
   async function loadDictionary(lang) {
     if (dictionaries[lang]) return dictionaries[lang];
 
@@ -47,7 +28,6 @@
 
     const data = await response.json();
     dictionaries[lang] = data;
-    writeDictionaryToCache(lang, data);
     return data;
   }
 
@@ -185,19 +165,6 @@
     return SUPPORTED_LANGS.includes(browserLang) ? browserLang : DEFAULT_LANG;
   }
 
-
-  function applyCachedDictionaryIfAvailable(lang) {
-    const normalizedLang = SUPPORTED_LANGS.includes(lang) ? lang : DEFAULT_LANG;
-    const cached = readDictionaryFromCache(normalizedLang);
-    if (!cached || typeof cached !== "object") return;
-
-    dictionaries[normalizedLang] = cached;
-    lastAppliedDictionary = cached;
-    applyTranslations(cached);
-    paintActiveLanguage(normalizedLang);
-    paintActiveLandingNav();
-    htmlNode.setAttribute("lang", normalizedLang);
-  }
 
   function setFSliderAccordionIndex(root, activeIndex) {
     const items = root.querySelectorAll(".f-slider-accordion-item");
@@ -842,30 +809,5 @@
   }
 
   currentLanguage = detectInitialLanguage();
-  applyCachedDictionaryIfAvailable(currentLanguage);
-
-  const appShell = document.getElementById("sf-app-content");
-  const deferLandingBoot = Boolean(appShell && appShell.hasAttribute("hidden"));
-
-  if (deferLandingBoot) {
-    window.addEventListener(
-      "sf:landing-content-reveal",
-      () => {
-        bootLandingInteractions();
-      },
-      { once: true }
-    );
-  } else {
-    bootLandingInteractions();
-  }
-
-  if ("serviceWorker" in navigator) {
-    const swUrl = new URL("../sw.js", scriptUrl);
-    const scopeUrl = new URL("../", scriptUrl).href;
-    navigator.serviceWorker
-      .register(swUrl, { scope: scopeUrl, updateViaCache: "none" })
-      .catch((err) => {
-        console.warn("[StableFit] service worker not registered:", err);
-      });
-  }
+  bootLandingInteractions();
 })();

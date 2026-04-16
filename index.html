@@ -162,20 +162,6 @@
         }, obj);
       }
 
-      function applyModalI18n(dict) {
-        if (!dict) return;
-        document.querySelectorAll("#sf-modal-overlay [data-i18n]").forEach(function (el) {
-          var key = el.getAttribute("data-i18n");
-          var v = getNested(dict, key);
-          if (typeof v === "string") el.textContent = v;
-        });
-        document.querySelectorAll("#sf-modal-overlay [data-i18n-alt]").forEach(function (el) {
-          var key = el.getAttribute("data-i18n-alt");
-          var v = getNested(dict, key);
-          if (typeof v === "string") el.setAttribute("alt", v);
-        });
-      }
-
       function loadLocaleJson(lang) {
         var url = new URL("locales/" + lang + ".json", window.location.href);
         return fetch(url.href).then(function (res) {
@@ -225,56 +211,10 @@
         return null;
       }
 
-      function openModal() {
-        var el = document.getElementById("sf-modal-overlay");
-        if (el) el.removeAttribute("hidden");
-      }
-
-      function closeModal() {
-        var el = document.getElementById("sf-modal-overlay");
-        if (el) el.setAttribute("hidden", "");
-      }
-
-      function wireLinks() {
-        var aCoach = document.getElementById("sf-choice-coach");
-        var aClient = document.getElementById("sf-choice-client");
-        if (aCoach) {
-          aCoach.setAttribute("href", coachUrl);
-          aCoach.addEventListener("click", function (e) {
-            save("coach");
-            if (sameDocumentUrl(coachUrl)) {
-              e.preventDefault();
-              revealAppShellIfNeeded();
-              closeModal();
-            }
-          });
-        }
-        if (aClient) {
-          aClient.setAttribute("href", clientUrl);
-          aClient.addEventListener("click", function () {
-            save("client");
-          });
-        }
-      }
-
-      function revealAppShellIfNeeded() {
-        var shell = document.getElementById("sf-app-content");
-        if (!shell) return;
-        var wasHidden = shell.hasAttribute("hidden");
-        shell.removeAttribute("hidden");
-        if (wasHidden) {
-          window.dispatchEvent(new CustomEvent("sf:landing-content-reveal"));
-        }
-      }
-
       function runAfterLocale(dict) {
-        applyModalI18n(dict);
-        wireLinks();
         var auto = resolveAuto();
         if (auto) {
           if (sameDocumentUrl(auto)) {
-            closeModal();
-            revealAppShellIfNeeded();
             try {
               if (window.location.search && /(^|&)role=/.test(window.location.search)) {
                 var u = new URL(window.location.href);
@@ -288,8 +228,6 @@
               redirectTo(auto);
             }
           }
-        } else {
-          openModal();
         }
       }
 
@@ -309,70 +247,6 @@
 </head>
 <body class="sf-landing page-coach">
   <div class="sf-landing-bg" aria-hidden="true"></div>
-
-  <div
-    id="sf-modal-overlay"
-    class="sf-modal-overlay"
-    hidden
-    role="presentation"
-  >
-    <div
-      class="sf-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="sf-modal-title"
-    >
-      <img
-        loading="lazy"
-        class="sf-modal-logo"
-        src="assets/images/Logo.svg"
-        width="120"
-        height="60"
-        alt="StableFit"
-        data-i18n-alt="meta.logoAlt"
-      >
-      <h1 
-        class="sf-modal-title" 
-        id="sf-modal-title" 
-        data-i18n="root.modal.title"
-      >
-        Оберіть свій формат
-      </h1>
-      <p 
-        class="sf-modal-lead" 
-        data-i18n="root.modal.lead"
-      >
-        Платформа для тренерів і клієнтів. Куди перейти далі?
-      </p>
-      <div class="sf-modal-actions">
-        <a class="sf-choice sf-choice--coach" id="sf-choice-coach" href="#" data-i18n="root.modal.coachBtn">
-          Для тренерів
-        </a>
-        <a class="sf-choice sf-choice--client" id="sf-choice-client" href="#" data-i18n="root.modal.clientBtn">
-          Для клієнтів
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div id="sf-app-content" hidden>
-  <script>
-    (function () {
-      try {
-        var r = localStorage.getItem("sf_role");
-        if (r === "coach") {
-          document.getElementById("sf-app-content").removeAttribute("hidden");
-          return;
-        }
-      } catch (e) {}
-      try {
-        var rp = (new URLSearchParams(location.search).get("role") || "").toLowerCase();
-        if (rp === "coach" || rp === "trainer") {
-          document.getElementById("sf-app-content").removeAttribute("hidden");
-        }
-      } catch (e) {}
-    })();
-  </script>
 
   <header>
     <div class="header-wrp">
@@ -2599,7 +2473,6 @@
       </div>
     </div>
   </footer>
-  </div>
 
   <noscript>
     <p class="sf-fallback">

@@ -912,7 +912,7 @@ body.nav-open .header-burger .header-burger-line:nth-child(3) {
 }
 
 @media (min-width: 1024px) {
-  #sf-app-content main,
+  main,
   section.functionality,
   section.functionality .container,
   section.functionality .functionality-wrp,
