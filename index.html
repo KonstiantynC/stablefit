@@ -3,14 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    (function () {
-      var isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
-      var base = document.createElement("base");
-      base.href = isGitHubPages ? "/stablefit/" : "/";
-      document.head.appendChild(base);
-    })();
-  </script>
   <meta name="theme-color" content="#0A0A0A">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
@@ -96,162 +88,6 @@
     ]
   }
   </script>
-  <script>
-    (function () {
-      var LANGUAGE_STORAGE_KEY = "stablefit-language";
-
-      function isFileProtocol() {
-        return document.URL.indexOf("file:") === 0;
-      }
-
-      var coachUrl = "index.html";
-      var clientUrl = isFileProtocol() ? "for-clients/index.html" : "for-clients/";
-
-      function redirectTo(url) {
-        window.location.assign(url);
-      }
-
-      function isBot() {
-        try {
-          var ua = (navigator.userAgent || "").toLowerCase();
-          return /(telegram|facebook|bot|crawler|spider)/i.test(ua);
-        } catch (e) {
-          return false;
-        }
-      }
-
-      function sameDocumentUrl(targetHref) {
-        try {
-          var target = new URL(targetHref, window.location.href);
-          var cur = new URL(window.location.href);
-          if (target.origin !== cur.origin) return false;
-          var norm = function (p) {
-            p = p.replace(/\/index\.html$/i, "/");
-            if (p === "" || p === "/") return "/";
-            return p.replace(/\/+$/, "") || "/";
-          };
-          return norm(target.pathname) === norm(cur.pathname);
-        } catch (e) {
-          return false;
-        }
-      }
-
-      function getParam(name) {
-        var q = document.URL.indexOf("?") === -1 ? "" : document.URL.slice(document.URL.indexOf("?") + 1);
-        return new URLSearchParams(q).get(name);
-      }
-
-      function save(role) {
-        try {
-          localStorage.setItem("sf_role", role);
-        } catch (e) {}
-      }
-
-      function loadRole() {
-        try {
-          return localStorage.getItem("sf_role");
-        } catch (e) {
-          return null;
-        }
-      }
-
-      function detectLang() {
-        try {
-          var s = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-          if (s === "en" || s === "ua") return s;
-        } catch (e) {}
-        var nav = (navigator.language || "").slice(0, 2).toLowerCase();
-        return nav === "en" ? "en" : "ua";
-      }
-
-      function getNested(obj, path) {
-        return path.split(".").reduce(function (acc, key) {
-          return acc && acc[key] !== undefined ? acc[key] : undefined;
-        }, obj);
-      }
-
-      function loadLocaleJson(lang) {
-        var url = new URL("locales/" + lang + ".json", window.location.href);
-        return fetch(url.href).then(function (res) {
-          if (!res.ok) throw new Error("locale");
-          return res.json();
-        });
-      }
-
-      function getLandingFromCurrentPath() {
-        var path = window.location.pathname.replace(/\/index\.html$/i, "");
-        if (/\/for-clients\/?$/i.test(path)) return "client";
-        if (path === "" || path === "/" || /\/coach\/?$/i.test(path)) return "coach";
-        return null;
-      }
-
-      function resolveAuto() {
-        var r = (getParam("role") || "").toLowerCase();
-        if (r === "coach" || r === "trainer") {
-          save("coach");
-          return coachUrl;
-        }
-        if (r === "client") {
-          save("client");
-          return clientUrl;
-        }
-
-        var currentLanding = getLandingFromCurrentPath();
-        var stored = loadRole();
-
-        if (currentLanding === "client") {
-          save("client");
-          return clientUrl;
-        }
-
-        if (currentLanding === "coach") {
-          if (stored === "client") {
-            save("coach");
-          }
-          if (stored === "coach" || stored === "client") {
-            return coachUrl;
-          }
-          return null;
-        }
-
-        if (stored === "coach") return coachUrl;
-        if (stored === "client") return clientUrl;
-        return null;
-      }
-
-      function runAfterLocale(dict) {
-        var auto = resolveAuto();
-        if (auto) {
-          if (sameDocumentUrl(auto)) {
-            try {
-              if (window.location.search && /(^|&)role=/.test(window.location.search)) {
-                var u = new URL(window.location.href);
-                u.searchParams.delete("role");
-                window.history.replaceState({}, "", u.pathname + u.search + u.hash);
-              }
-            } catch (e) {}
-          } else {
-            // Keep OG/meta tags readable for social crawlers.
-            if (!isBot()) {
-              redirectTo(auto);
-            }
-          }
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        var lang = detectLang();
-        document.documentElement.lang = lang === "en" ? "en" : "uk";
-        loadLocaleJson(lang)
-          .then(function (dict) {
-            runAfterLocale(dict);
-          })
-          .catch(function () {
-            runAfterLocale(null);
-          });
-      });
-    })();
-  </script>
 </head>
 <body class="sf-landing page-coach">
   <div class="sf-landing-bg" aria-hidden="true"></div>
@@ -281,7 +117,7 @@
         <div class="header-nav">
           <div class="nav-item">
             <a
-              href="./"
+              href="/"
               class="landing-link is-active"
               data-landing="coach"
               data-i18n="nav.coaches"
@@ -359,7 +195,7 @@
           aria-label="Навігація"
         >
           <a
-            href="./"
+            href="/"
             class="landing-link is-active"
             data-landing="coach"
             data-i18n="nav.coaches"
@@ -2346,7 +2182,7 @@
             <ul class="footer-list">
               <li class="footer-list-item">
                 <a
-                  href="./"
+                  href="/"
                   class="landing-link"
                   data-landing="coach"
                   data-i18n="nav.coaches"
@@ -2356,7 +2192,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="for-clients/"
+                  href="/for-clients"
                   class="landing-link"
                   data-landing="client"
                   data-i18n="nav.clients"
@@ -2366,7 +2202,7 @@
               </li>
               <li class="footer-list-item">
                 <a
-                  href="support/"
+                  href="/support"
                   class="landing-link"
                   data-landing="support"
                   data-i18n="nav.support"
@@ -2486,7 +2322,7 @@
     <p class="sf-fallback">
       Увімкніть JavaScript або перейдіть: /
       <span lang="en">Enable JavaScript or open:</span>
-      <a href="./">для тренерів</a> · <span lang="en">for coaches</span>
+      <a href="/">для тренерів</a> · <span lang="en">for coaches</span>
       —
       <a href="for-clients/">для клієнтів</a> · <span lang="en">for clients</span>
     </p>
