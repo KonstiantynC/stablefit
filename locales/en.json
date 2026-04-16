@@ -620,12 +620,12 @@
     "company": {
       "title": "Company details",
       "name": "SavvaDev - Ihor Savva",
-      "address": "ul. Bobrowiecka 10/6\n00-728 Warszawa, Poland",
+      "address": "ul. Bobrowiecka 10/67\n00-728 Warszawa, Poland",
       "nip": "NIP: 5214103415",
       "regon": "REGON: 540758121"
     },
     "under": {
-      "copy": "(c) 2025 SavvaDev - Ihor Savva",
+      "copy": "© 2025 SavvaDev - Ihor Savva",
       "privacy": "Privacy Policy",
       "terms": "Terms of Use"
     }
